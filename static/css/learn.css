@@ -1,0 +1,123 @@
+.dcol {
+    padding: 2% 2%;
+}
+
+.section-intro1 {
+    margin-top: 125px;
+    padding: 4% 1%;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px 1px rgb(235, 233, 233);
+}
+
+.avc {
+    display: none;
+}
+
+.section-intro2 {
+    padding: 4% 1%;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px 1px rgb(235, 233, 233);
+}
+
+.courses {
+    display: none;
+}
+
+.course {
+    margin: 10px 0;
+    box-shadow: 1px 1px 2px 1px rgb(235, 233, 233);
+}
+
+.course .head {
+    border-radius: 5px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 1px 1px 2px 1px rgb(235, 233, 233);
+}
+
+.course .head .banner {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 1%;
+    border: 1px solid rgb(219, 219, 219);
+}
+
+.course .head .title {
+    width: 85%;
+}
+
+.course .foot {
+    position: relative;
+    height: 150px;
+    display: none;
+    border-radius: 5px;
+    background-color: rgb(235, 233, 233);
+}
+
+.course .foot .enrolment-btn {
+    position: absolute;
+    bottom: 0;
+}
+
+.enrolled-courses {}
+
+.enrolled-course {
+    padding: 2% 0;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.enrolled-course .head {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+}
+
+.enrolled-course .head .cbanner {
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
+}
+
+.enrolled-course .head .ctitle {
+    width: 75%;
+}
+
+@media screen and (min-width: 1024px) {
+    .dcol:nth-child(1) {
+        padding-top: 110px;
+        padding: 1%;
+    }
+    .section-intro1 {
+        margin-top: 0;
+        display: none;
+    }
+    .dcol:nth-child(2) {
+        padding: 1% 5%;
+        padding-top: 110px;
+    }
+    .avc {
+        display: block;
+    }
+    .mere-con {
+        position: fixed;
+        top: 100px;
+        background-color: white;
+        width: 23%;
+        padding: 1%;
+    }
+    .courses {
+        display: block;
+        padding: 0;
+    }
+    .courses .course {
+        padding: 0.2%;
+    }
+}

@@ -1,0 +1,33 @@
+.course-obj {
+    position: relative;
+}
+
+.course-obj .price {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+@media screen and (min-width: 768px) {
+    .courses-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .course-obj {
+        width: 40%;
+        margin: 2% 5%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .courses-container {}
+    .course-obj {
+        width: 20%;
+        margin: 1% 2%;
+    }
+    .course-obj .card-img-top {
+        height: 230px;
+    }
+}

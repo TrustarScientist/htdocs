@@ -1,0 +1,43 @@
+.drow-a {
+    padding-top: 115px;
+}
+
+.course-sections .csection {
+    margin-bottom: 20px;
+}
+
+.csection .cs-head {
+    color: white;
+    padding: 2% 1%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.csection .cs-head .cs-title {
+    width: 85%;
+}
+
+.cs-content-con {
+    display: none;
+}
+
+.cs-content-con .cs-mt {
+    margin: 10px 0;
+    padding: 1%;
+    border-radius: 5px;
+}
+
+.cs-content-con .cs-mt .desc {
+    display: block;
+    font-size: 0.9rem;
+    color: grey;
+}
+
+@media screen and (min-width:1024px) {
+    .drow-a {
+        padding-top: 90px;
+    }
+}

@@ -1,0 +1,158 @@
+nav {
+    z-index: 3456;
+}
+
+.dcol {
+    padding: 2%;
+}
+
+.details {
+    padding-top: 110px;
+}
+
+.details .stats {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgb(235, 233, 233);
+}
+
+.details .stats p {
+    margin: 0 2px;
+    font-size: 0.8rem;
+}
+
+.details .stats p span {
+    color: grey;
+    font-size: 0.8rem;
+}
+
+.details .content {
+    padding: 1% 0;
+}
+
+.details .tags {
+    margin: 10px 1px;
+}
+
+.details .tags a {
+    padding: 1% 2%;
+    border: 0;
+    margin-bottom: 10px;
+}
+
+.details .choices {
+    padding: 2% 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: blue;
+    border-top: 1px solid rgb(235, 233, 233);
+    border-bottom: 1px solid rgb(235, 233, 233);
+}
+
+.details .comment-form {
+    margin: 20px 0;
+    display: none;
+}
+
+.details .comment-form textarea {
+    display: blocks;
+    margin-bottom: 10px;
+}
+
+.comment-list {
+    margin-top: 10px;
+}
+
+.comment-list .comment-box {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 20px 0;
+}
+
+.comment-list .comment-box .image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 2px;
+    margin-right: 5px;
+    border: 1px solid rgb(235, 233, 233);
+}
+
+.comment-list .comment-box .more {
+    padding: 1%;
+    width: 84%;
+    margin-right: 0;
+    border-radius: 5px;
+    padding-bottom: 10px;
+}
+
+.comment-list .comment-box .more .metadata {
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgb(235, 233, 233);
+    margin-bottom: 3px;
+}
+
+.comment-list .comment-box .more .metadata .user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comment-list .comment-box .more .metadata .user-info .date {
+    font-size: 0.8rem;
+}
+
+.comment-list .comment-box .more .metadata .user-info a {
+    text-decoration: none;
+}
+
+.comment-list .comment-box .more .metadata .user-info .follow-btn {
+    padding: 1%;
+    font-size: 0.8rem;
+}
+
+.comment-list .comment-box .more .metadata .intro {
+    font-size: 0.8rem;
+    color: grey;
+}
+
+.comment-list .comment-box .more .cstats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 2px;
+    border-bottom: 1px solid rgb(235, 233, 233);
+}
+
+.comment-list .comment-box .more .cstats .reply-count {
+    color: rgb(212, 18, 18);
+}
+
+.r-container {
+    display: none;
+    width: 85%;
+    margin-left: 15%;
+}
+
+.r-container .reply-con {
+    margin-bottom: 10px;
+}
+
+.comment-reply {
+    padding: 1%;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.comment-reply .replyer {
+    margin: 2px;
+}
+
+.comment-reply .date {
+    font-size: 0.7rem;
+}
