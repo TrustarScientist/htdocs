@@ -1,9 +1,5 @@
 .site-nav {
-    z-index: 876556;
-}
-
-.drow-one {
-    padding-top: 70px;
+    z-index: 2000;
 }
 
 body {
@@ -19,39 +15,45 @@ a:visited {
     color: black;
 }
 
-.msg-form {
-    display: none;
+.drow-one {
+    padding-top: 50px;
 }
 
-.msg-form textarea:focus {
-    border-color: rgb(224, 223, 223);
-    box-shadow: 1px 1px 3px 3px rgb(229, 245, 238);
+.dcol {
+    padding: 2%;
 }
 
-.profile-con {
-    margin: 5px auto;
+.ads-container {
+    position: relative;
 }
 
-.profile-con img {
-    margin: 1px auto;
-    display: block;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    padding: 1%;
+.ads-container img {
     border: 1px solid rgb(240, 240, 240);
 }
 
-.intro {
-    text-align: center;
+.ads-container #cancel-icon {
+    position: absolute;
+    top: 10px;
+    right: 2px;
+    padding: 2%;
+    border-radius: 50%;
+    background-color: #fff;
 }
 
-.connection-con {
-    text-align: center;
+.post-types {
+    width: 100%;
+    overflow-x: scroll;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    padding-bottom: 0.5%;
 }
 
-.connection-con .btn {
-    margin: 0 7px;
+.post-types .scroller {
+    width: 240%;
+}
+
+.post-types .scroller .btn {
+    border: 1px solid rgb(240, 240, 240);
+    margin-right: 5px;
 }
 
 .userposts {}
@@ -64,10 +66,8 @@ a:visited {
 }
 
 .userpost .head {
+    border-bottom: 1px solid rgb(240, 240, 240);
     font-style: italic;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .userpost .head .dot {
@@ -76,12 +76,10 @@ a:visited {
     display: inline-block;
     background-color: black;
     border-radius: 50%;
-    visibility: hidden;
 }
 
 .userpost .head .author {
     margin-right: 5px;
-    visibility: hidden;
 }
 
 .userpost .thumbnail-con img {
@@ -152,4 +150,17 @@ a:visited {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.more-posts-btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2% 0;
+    border-top: 1px solid rgb(240, 240, 240);
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+@media screen and (min-width:1024px) {
+    .userpost {}
 }

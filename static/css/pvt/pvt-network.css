@@ -1,0 +1,168 @@
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:focus {
+    color: black;
+}
+
+.npaths-container {
+    overflow-x: scroll;
+}
+
+.npaths-container .scroller {
+    margin-top: 12px;
+    width: 185%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    padding: 1% 0;
+}
+
+.npaths-container .scroller h6:nth-child(1) {
+    padding: 1% 2%;
+    color: rgb(13, 139, 77);
+}
+
+.people-display-con {
+    margin-top: 10px;
+    margin-bottom: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.people-display-con .person {
+    position: relative;
+    text-align: center;
+    padding: 1%;
+    width: 48%;
+    margin-bottom: 5px;
+    border: 1px solid rgb(240, 240, 240);
+}
+
+.people-display-con .person .bi-check2-all {
+    border-radius: 50%;
+    background-color: white;
+}
+
+.people-display-con .person .image {
+    border-radius: 5px;
+    max-width: 100%;
+    height: 130px;
+    padding: 1px;
+}
+
+.people-display-con .person .acct-menu {
+    position: absolute;
+    top: 4%;
+    right: 4%;
+}
+
+.people-display-con .person .more .name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 5px 0;
+}
+
+.people-display-con .person .more .btn {
+    padding: 1%;
+}
+
+.niche-display-con,
+.rpeople-display-con,
+.rniche-display-con {
+    display: none;
+}
+
+.niche-display-con {
+    padding-top: 10px;
+}
+
+.niche-display-con .nichex {
+    padding: 1%;
+    margin: 5px 0;
+    border: 1px solid rgb(240, 240, 240);
+}
+
+.niche-display-con .nichex .more {
+    padding: 1%;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgb(240, 240, 240);
+    color: grey;
+}
+
+.niche-display-con .nichex .more .btn {
+    padding: 1% 2%;
+}
+
+.people-display-con {
+    margin-top: 10px;
+    margin-bottom: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.rpeople-display-con .person {
+    position: relative;
+    text-align: center;
+    padding: 1%;
+    width: 48%;
+    margin-bottom: 5px;
+    border: 1px solid rgb(240, 240, 240);
+}
+
+.rpeople-display-con .person .bi-check2-all {
+    border-radius: 50%;
+    background-color: white;
+}
+
+.rpeople-display-con .person .image {
+    border-radius: 5px;
+    max-width: 100%;
+    height: 130px;
+    padding: 1px;
+}
+
+.rpeople-display-con .person .more a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 5px 0;
+    display: block;
+}
+
+.rpeople-display-con .person .btn {
+    padding: 1%;
+}
+
+.rniche-display-con {
+    padding-top: 10px;
+}
+
+.rniche-display-con .nichex {
+    padding: 1%;
+    margin: 5px 0;
+    border: 1px solid rgb(240, 240, 240);
+}
+
+.rniche-display-con .nichex .more {
+    padding: 1%;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgb(240, 240, 240);
+    color: grey;
+}
+
+.rniche-display-con .nichex .more .btn {
+    padding: 1% 2%;
+}

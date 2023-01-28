@@ -1,0 +1,175 @@
+.pvt-nav {
+    padding: 0;
+    z-index: 2000;
+}
+
+.pvt-nav input:focus,
+button:focus,
+textarea:focus {
+    border-color: rgb(224, 223, 223);
+    box-shadow: 1px 1px 3px 3px rgb(229, 245, 238);
+}
+
+.pvt-nav .head {
+    padding: 2%;
+    height: 60px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pvt-nav .head .brand {
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.pvt-nav .head .brand img {
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+.pvt-nav .head .brand .name {
+    margin-top: 7px;
+}
+
+.pvt-nav .head form {
+    display: none;
+    width: 90%;
+}
+
+.pvt-nav .commons {
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.pvt-nav .commons svg {
+    fill: rgb(57, 57, 57);
+}
+
+.pvt-nav .commons svg:hover,
+.pvt-nav .foot svg:hover {
+    fill: rgb(13, 139, 77);
+}
+
+.pvt-nav .commons a svg:nth-child(1) {
+    margin-right: 20%;
+    display: block;
+}
+
+.pvt-nav .foot {
+    text-align: center;
+    padding: 2%;
+    height: 50px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    border-top: 1px solid rgb(240, 240, 240);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pvt-nav .foot svg {
+    width: 25px;
+    height: 25px;
+    fill: rgb(57, 57, 57);
+}
+
+.pvt-nav .foot a {
+    display: block;
+}
+
+.pvt-nav .foot p {
+    display: none;
+}
+
+@media screen and (min-width:576px) {
+    .pvt-nav .head,
+    .pvt-nav .foot {
+        padding: 2% 10%;
+    }
+}
+
+@media screen and (min-width:768px) {
+    .pvt-nav .foot {
+        padding: 2% 4%;
+        top: 50px;
+        bottom: auto;
+        border-top: 0;
+    }
+    .pvt-nav .foot a {
+        padding-top: 20px;
+        display: block;
+        width: 20%;
+        font-size: 1.2rem;
+        color: gray;
+        text-align: center;
+        text-decoration: none;
+    }
+    .pvt-nav .foot svg {
+        display: none;
+    }
+    .pvt-nav .foot .dropdown svg {
+        display: block;
+    }
+    .pvt-nav .foot p {
+        display: block;
+    }
+}
+
+@media screen and (min-width:992px) {
+    .pvt-nav {
+        width: 100%;
+        height: 70px;
+        position: fixed;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .pvt-nav .head,
+    .pvt-nav .foot {
+        padding: 2%;
+        position: relative;
+        top: auto;
+        bottom: auto;
+        height: 100%;
+    }
+    .pvt-nav .head {
+        padding-right: 0;
+        width: 75%;
+    }
+    .pvt-nav .head form {
+        display: block;
+        width: 50%;
+        margin-right: 4%;
+    }
+    .pvt-nav .head .commons {
+        width: 10%;
+    }
+    .pvt-nav .head .commons .bi-search {
+        display: none;
+    }
+    .pvt-nav .foot {
+        width: 25%;
+    }
+    .pvt-nav .foot a {
+        padding-top: 0;
+    }
+    .pvt-nav .foot svg {
+        display: block;
+    }
+    .pvt-nav .foot p {
+        display: none;
+    }
+}

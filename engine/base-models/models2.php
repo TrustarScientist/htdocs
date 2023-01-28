@@ -9,7 +9,7 @@
     require_once "engine/settings.php";
 
     
-    class GnkDb{
+    class xDb{
         public $connected = false;
         public $connector = NULL; 
         public $table = "";
@@ -32,6 +32,66 @@
                 }
             }
         }
+        public static function getCount($table, $what="*", $cond_exp="0"){
+            $db  = new xDb();
+            if(!empty($cond_exp)){
+                if($db->connected){
+                    $smt = ($db->connector)->prepare("SELECT * FROM $table where $cond_exp ");
+                    $smt->execute();
+                    $ct = 0;
+                    while ($result = $smt->fetch()) {
+                            $ct += 1;
+                    }
+                    return $ct;
+                }
+                else{
+                    return  null;
+                }
+            }
+            else{
+                if($db->connected){
+                    $smt = ($db->connector)->prepare("SELECT * FROM $table ");
+                    $smt->execute();
+                    $ct = 0;
+                    while ($result = $smt->fetch()) {
+                            $ct += 1;
+                    }
+                    return $ct;
+                }
+                else{
+                    return  null;
+                }
+            }
+        }
+        public static function get($table, $col, $value){
+            $db  = new xDb();
+            if($db->connected){
+                $smt = ($db->connector)->prepare("SELECT * FROM $table where $col = $value ");
+                $smt->execute();
+                $result = $smt->fetch();
+                return $result;
+            }
+            else{
+                return  null;
+            }
+        }
+        public static function findLatest($table, $starting="2", $amt="2"){
+            $db  = new xDb();
+            if($db->connected){
+                $smt = ($db->connector)->prepare("SELECT * FROM $table limit $starting, $amt");
+                $smt->execute();
+                $dataset = array();
+                $ct = 0;
+                while($result = $smt->fetch()){
+                    $dataset[$ct] = $result;
+                    $ct += 1;
+                }
+                return $dataset;
+            }
+            else{
+                return  null;
+            }
+        }
         
     }
     class Data{
@@ -51,7 +111,7 @@
             }
         }
         public static function createUser($postData){
-            $db =  new GnkDb();
+            $db =  new xDb();
             if($db->connected){
                 $username = "";
                 $email = "";
@@ -90,7 +150,7 @@
         }
 
         public static function login($idToken, $idType, $password){
-            $database = new GnkDb();
+            $database = new xDb();
             if($database->connected){
                 // check whether the user is already logged in
                 if(isset($_SESSION["user"])){
@@ -168,9 +228,9 @@
     }
     class UserAcct{
         public static function get($col, $value){
-            $db  = new GnkDb();
+            $db  = new xDb();
             if($db->connected){
-                $smt = ($db->connector)->prepare("SELECT * FROM acct where $col = $value");
+                $smt = ($db->connector)->prepare("SELECT * FROM acct where $col = $value ");
                 $smt->execute();
                 $result = $smt->fetch();
                 return $result;
@@ -180,7 +240,7 @@
             }
         }
         public static function update($col, $value, $cond, $condVal){
-            $db  = new GnkDb();
+            $db  = new xDb();
             if($db->connected){
                 $smt = ($db->connector)->prepare("UPDATE acct SET wallet_amt = '$value' WHERE $cond = '$condVal'");
                 $result = $smt->execute();
@@ -190,6 +250,7 @@
                 return  null;
             }
         }
+        
     }
 
 

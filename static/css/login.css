@@ -1,0 +1,26 @@
+a {
+    text-decoration: none;
+    color: rgb(13, 139, 77);
+}
+
+.regform input:focus,
+button:focus,
+.regform select:focus,
+.regform textarea:focus {
+    border-color: rgb(224, 223, 223);
+    box-shadow: 1px 1px 3px 3px rgb(229, 245, 238);
+}
+
+.regform input[type="checkbox"] {
+    border: 0;
+}
+
+.site-nav svg {
+    visibility: hidden;
+}
+
+.info {
+    text-align: center;
+    text-shadow: 2px 3px 3px rgb(94, 207, 158);
+    margin-bottom: 10px;
+}

@@ -71,7 +71,9 @@
                 $Result=$Query->fetch();
                 $password_hash=$Result['pswd'];
                 if(password_verify($data['password'], $password_hash)){
-                    $_SESSION["user"]=$data['id'];
+                    $username = $data["username"];
+                    $userid  = (UserAcct::get("username", "$username"))->id;
+                    $_SESSION["user"]= $userid;
                     return TRUE;
                 }
                 else

@@ -1,0 +1,72 @@
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.drow-one {
+    padding: 0;
+    padding-top: 60px;
+}
+
+.dcol {
+    padding: 1%;
+}
+
+.msg-section {}
+
+.msg-con {}
+
+.msg {
+    padding: 2% 1%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    box-shadow: 1px 1px 6px rgb(240, 240, 240);
+}
+
+.msg .body {
+    width: 85%;
+}
+
+.msg .photo {
+    margin-right: 5px;
+    padding: 0.5%;
+    border-radius: 50%;
+    border: 1px solid rgb(240, 240, 240);
+}
+
+.msg .metadata {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+.msg .metadata .name {
+    font-style: italic;
+}
+
+.msg .metadata .date {
+    font-size: 0.8rem;
+    color: rgb(13, 139, 77);
+}
+
+.msg .content {
+    font-size: 0.9rem;
+}
+
+@media screen and (min-width:1024px) {
+    .drow-one {
+        padding-top: 80px;
+    }
+    .msg-section {
+        overflow-y: scroll;
+    }
+    .msg {
+        font-size: 1.2rem;
+    }
+    .msg .content {
+        font-size: 1rem;
+    }
+}

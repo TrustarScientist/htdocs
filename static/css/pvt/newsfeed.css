@@ -1,0 +1,167 @@
+.site-nav {
+    z-index: 2000;
+}
+
+.pvt-nav {
+    z-index: 3000;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:focus,
+a:focus {
+    color: rgb(13, 139, 77);
+}
+
+a:visited {
+    color: black;
+}
+
+.drow-one {
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+
+.dcol {
+    padding: 1% 2%;
+}
+
+.rp-container {
+    overflow-x: scroll;
+}
+
+.rp-container .scroller {
+    width: 190%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgb(240, 240, 240);
+    border-bottom: 1px solid rgb(240, 240, 240);
+    padding: 3% 0;
+}
+
+.scroller .person {
+    position: relative;
+    text-align: center;
+    padding: 1% 7px;
+    width: 18%;
+    border: 1px solid rgb(240, 240, 240);
+}
+
+.scroller .person .userlink {
+    position: absolute;
+    right: 5%;
+}
+
+.scroller .person .image {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    padding: 2px;
+    border: 1px solid rgb(240, 240, 240);
+}
+
+.scroller .person .name {
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.pp-intro {
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+.userposts {}
+
+.userposts .userpost {
+    margin: 5px 0;
+    padding: 0;
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+.userpost .thumbnail-con img {
+    width: 100%;
+}
+
+.userpost .content-con {}
+
+.userpost .content-con img {
+    width: 100%;
+}
+
+.userpost .content-con .title {
+    display: block;
+    font-weight: 500;
+    margin-top: 5px;
+    display: block;
+    font-size: 0.9rem;
+}
+
+.userpost .content-con .title:focus {
+    color: rgb(13, 139, 77);
+}
+
+.userpost .content-con .post-type {
+    margin: 5px 0;
+    padding: 1% 2%;
+    border-radius: 10px;
+}
+
+.userpost .metadata {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+}
+
+.userpost .metadata .user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userpost .metadata .user-info img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    border-radius: 50%;
+}
+
+.userpost .metadata .user-info .ud .date {
+    font-size: 0.7rem;
+    color: gray;
+}
+
+.userpost .metadata .stats {
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userpost .metadata .stats div {
+    margin: 0 7px;
+}
+
+.userpost .metadata .stats .count {
+    font-size: 0.7rem;
+    color: grey;
+}
+
+.userpost .metadata .alias-con {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.more-posts-btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2% 0;
+    border-top: 1px solid rgb(240, 240, 240);
+    border-bottom: 1px solid rgb(240, 240, 240);
+}

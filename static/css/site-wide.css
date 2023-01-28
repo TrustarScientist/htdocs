@@ -1,0 +1,158 @@
+* a:hover {
+    color: rgb(13, 139, 77);
+}
+
+.site-nav {
+    width: 100%;
+    position: fixed;
+    top: 0;
+}
+
+.site-nav input:focus,
+button:focus,
+textarea:focus {
+    border-color: rgb(224, 223, 223);
+    box-shadow: 1px 1px 3px 3px rgb(229, 245, 238);
+}
+
+.site-nav .head {
+    height: 60px;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1% 2%;
+}
+
+.site-nav .head .fancy-menu {
+    height: 60px;
+    width: 85%;
+    position: absolute;
+    top: 0px;
+    left: 15%;
+    padding: 2%;
+    display: none;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.site-nav .head .fancy-menu div {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    padding-top: 10px;
+}
+
+.site-nav .head .fancy-menu a {
+    color: rgb(13, 139, 77);
+    margin: 0 2px;
+}
+
+.site-nav .head .bi-filter-left {
+    width: 35px;
+    height: 35px;
+}
+
+.site-nav .identity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+}
+
+.site-nav .identity #logo {
+    height: 30px;
+    width: 30px;
+    margin-right: 5px;
+}
+
+.site-nav .identity .name {
+    margin-top: 5px;
+}
+
+.site-nav .head form {
+    display: none;
+}
+
+.site-nav .head .bi-search {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+.site-nav .foot {
+    display: none;
+}
+
+@media screen and (min-width:768px) {
+    .site-nav .head {
+        height: 90px;
+    }
+    .site-nav .head .bi-filter-left {
+        width: 55px;
+        height: 55px;
+    }
+    .site-nav .identity #logo {
+        height: 45px;
+        width: 45px;
+        margin: 5px;
+        border-radius: 5px;
+    }
+    .site-nav .head form {
+        display: none;
+    }
+    .site-nav .head .bi-search {
+        width: 35px;
+        height: 35px;
+    }
+    .site-nav .head .fancy-menu {
+        height: 90px;
+    }
+}
+
+@media screen and (min-width:1024px) {
+    .site-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 60px;
+        border-bottom: 1px solid rgb(240, 240, 240);
+    }
+    .site-nav .head {
+        padding-right: 0;
+        width: 70%;
+        height: 100%;
+        border-bottom: 0;
+    }
+    .site-nav .head .fancy-menu {
+        display: none;
+    }
+    .site-nav .head .identity #logo {
+        width: 35px;
+        height: 35px;
+    }
+    .site-nav .head .identity .name {
+        color: white;
+    }
+    .site-nav .head .bi-filter-left {
+        display: none;
+    }
+    .site-nav .head .bi-search {
+        display: none;
+    }
+    .site-nav .head form {
+        display: block;
+        width: 50%;
+        margin-right: 5%;
+    }
+    .site-nav .foot {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 30%;
+        padding-right: 2%;
+        padding-left: 2%;
+    }
+    .site-nav .foot button {}
+}

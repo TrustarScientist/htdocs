@@ -29,7 +29,21 @@ a:hover {
     width: 100%;
 }
 
-.content {}
+.details-paths {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    text-align: center;
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+.details-paths b {
+    width: 50%;
+}
+
+.details-paths b:nth-child(1) {
+    border-bottom: 2px solid rgb(13, 139, 77);
+}
 
 .post-stats {
     display: flex;
@@ -98,7 +112,15 @@ a:hover {
     flex-wrap: wrap;
 }
 
-.related-posts-section .comments-con {
+.related-posts-con .post-chain-posts a {
+    border-radius: 5px;
+}
+
+.comment-section .comment-form {
+    display: none;
+}
+
+.comments-con {
     padding: 2% 0;
 }
 
@@ -106,8 +128,7 @@ a:hover {
     position: relative;
     padding: 1%;
     font-size: 0.9rem;
-    margin: 10px 0;
-    border: 1px solid rgb(224, 223, 223);
+    margin: 5px 0;
 }
 
 .comments-con .comment .meta {
@@ -142,30 +163,18 @@ a:hover {
     border-radius: 5px;
 }
 
-.userposts {}
 
-.userposts .userpost {
+/** related posts duplicate code */
+
+.related-posts-section {
+    padding-top: 1px;
+}
+
+.userpost {
     position: relative;
-    margin: 10px 0;
-    padding: 2% 1%;
+    margin: 5px 0;
+    padding: 0;
     padding-bottom: 0;
-}
-
-.userpost .head {
-    border-bottom: 1px solid rgb(240, 240, 240);
-    font-style: italic;
-}
-
-.userpost .head .dot {
-    padding: 2px;
-    margin: 1px 5px;
-    display: inline-block;
-    background-color: black;
-    border-radius: 50%;
-}
-
-.userpost .head .author {
-    margin-right: 5px;
 }
 
 .userpost .thumbnail-con img {
@@ -186,9 +195,7 @@ a:hover {
 
 .userpost .content-con .title {
     display: block;
-    font-weight: 555;
-    font-size: 1rem;
-    padding: 10px 0;
+    font-weight: 500;
 }
 
 .userpost .date {
@@ -220,7 +227,7 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 45%;
+    width: 50%;
 }
 
 .userpost .metadata .stats div {
@@ -236,4 +243,38 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.people {
+    border: 1px solid red;
+}
+
+.people .person {
+    margin: 5px 0;
+    padding: 2% 1%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.people .person .info {
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.people .person .info img {
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.people .person .info .user .fullname {
+    font-size: 0.8rem;
+    display: block;
+    color: grey;
+}
+
+.people .person .btn {
+    padding: 1% 2%;
 }

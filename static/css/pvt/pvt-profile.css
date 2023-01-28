@@ -1,9 +1,9 @@
-.site-nav {
-    z-index: 876556;
-}
-
 .drow-one {
     padding-top: 70px;
+}
+
+.pvt-nav .foot {
+    z-index: 334567;
 }
 
 body {
@@ -16,7 +16,7 @@ a {
 }
 
 a:visited {
-    color: black;
+    color: rgb(13, 139, 77);
 }
 
 .msg-form {
@@ -54,34 +54,100 @@ a:visited {
     margin: 0 7px;
 }
 
-.userposts {}
-
-.userposts .userpost {
-    position: relative;
-    margin: 10px 0;
-    padding: 2% 1%;
-    padding-bottom: 0;
+.profile-paths {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    text-align: center;
 }
 
-.userpost .head {
-    font-style: italic;
+.profile-paths b {
+    padding-bottom: 3px;
+    width: 25%;
+}
+
+.profile-paths .bio {
+    border-bottom: 2px solid rgb(13, 139, 77);
+}
+
+.network-section,
+.posts-section,
+.niches-section {
+    display: none;
+}
+
+.profile-niche {
+    margin-bottom: 5px;
+}
+
+.profile-niche .info {
+    margin-top: 10px;
+    border-top: 1px solid rgb(240, 240, 240);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.profile-niche .niche-name {
+    padding-bottom: 20px;
+    display: block;
+    color: black;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.profile-niche .info span {
+    color: grey;
+    font-size: 0.8rem;
+}
+
+
+/**  duplicate  person code */
+
+.people {}
+
+.people .person {
+    margin: 5px 0;
+    padding: 2% 1%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.userpost .head .dot {
-    padding: 2px;
-    margin: 1px 5px;
-    display: inline-block;
-    background-color: black;
-    border-radius: 50%;
-    visibility: hidden;
+.people .person .info {
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
-.userpost .head .author {
+.people .person .info img {
+    border-radius: 50%;
     margin-right: 5px;
-    visibility: hidden;
+}
+
+.people .person .info .user .fullname {
+    font-size: 0.8rem;
+    display: block;
+    color: grey;
+}
+
+.people .person .btn {
+    padding: 1% 2%;
+}
+
+
+/** user posts  duplicate code */
+
+.userposts {}
+
+.userposts .userpost {
+    position: relative;
+    margin: 5px 0;
+    padding: 2% 1%;
+    padding-bottom: 0;
 }
 
 .userpost .thumbnail-con img {
@@ -102,9 +168,7 @@ a:visited {
 
 .userpost .content-con .title {
     display: block;
-    font-weight: 555;
-    font-size: 1rem;
-    padding: 10px 0;
+    font-weight: 500;
 }
 
 .userpost .date {
@@ -136,7 +200,7 @@ a:visited {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 45%;
+    width: 50%;
 }
 
 .userpost .metadata .stats div {
