@@ -29,13 +29,16 @@ a:visited {
 
 .ads-container img {
     border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
 }
 
 .ads-container #cancel-icon {
     position: absolute;
     top: 10px;
-    right: 2px;
-    padding: 2%;
+    right: 10px;
+    padding: 1%;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background-color: #fff;
 }
@@ -63,6 +66,8 @@ a:visited {
     margin: 10px 0;
     padding: 2% 1%;
     padding-bottom: 0;
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
 }
 
 .userpost .head {
@@ -74,12 +79,17 @@ a:visited {
     padding: 2px;
     margin: 1px 5px;
     display: inline-block;
-    background-color: black;
+    background-color: rgb(233, 14, 131);
     border-radius: 50%;
 }
 
 .userpost .head .author {
     margin-right: 5px;
+}
+
+.userpost .head .date {
+    font-size: 0.7rem;
+    color: grey;
 }
 
 .userpost .thumbnail-con img {
@@ -100,9 +110,11 @@ a:visited {
 
 .userpost .content-con .title {
     display: block;
-    font-weight: 555;
+    font-weight: 550;
     font-size: 1rem;
-    padding: 10px 0;
+    padding: 10px 1px;
+    text-align: start;
+    width: 70%;
 }
 
 .userpost .date {
@@ -152,14 +164,7 @@ a:visited {
     align-items: center;
 }
 
-.more-posts-btns {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2% 0;
-    border-top: 1px solid rgb(240, 240, 240);
-    border-bottom: 1px solid rgb(240, 240, 240);
-}
+.more-posts-btns {}
 
 @media screen and (min-width:1024px) {
     .userpost {}

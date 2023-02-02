@@ -1,3 +1,16 @@
+.drow-one {
+    padding-top: 50px;
+}
+
+.dcol {
+    padding: 2%;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
 .qs input:focus,
 .qs select:focus,
 button:focus,
@@ -26,4 +39,109 @@ textarea:focus {
 
 .qs .main input {
     margin-right: 5px;
+}
+
+.userposts {}
+
+.userposts .userpost {
+    position: relative;
+    margin: 10px 0;
+    padding: 2% 1%;
+    padding-bottom: 0;
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
+}
+
+.userpost .head {
+    border-bottom: 1px solid rgb(240, 240, 240);
+    font-style: italic;
+}
+
+.userpost .head .dot {
+    padding: 2px;
+    margin: 1px 5px;
+    display: inline-block;
+    background-color: rgb(233, 14, 131);
+    border-radius: 50%;
+}
+
+.userpost .head .author {
+    margin-right: 5px;
+}
+
+.userpost .head .date {
+    font-size: 0.7rem;
+    color: grey;
+}
+
+.userpost .thumbnail-con img {
+    width: 100%;
+}
+
+.userpost .content-con {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userpost .content-con img {
+    width: 30%;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.userpost .content-con .title {
+    display: block;
+    font-weight: 550;
+    font-size: 1rem;
+    padding: 10px 1px;
+    text-align: start;
+    width: 70%;
+}
+
+.userpost .date {
+    font-size: 0.8rem;
+    color: gray;
+}
+
+.userpost .metadata {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    border-top: 1px solid rgb(240, 240, 240);
+}
+
+.userpost .metadata .niche-info {
+    width: 40%;
+}
+
+.userpost .metadata .niche-info .btn {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    color: white;
+}
+
+.userpost .metadata .stats {
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 45%;
+}
+
+.userpost .metadata .stats div {
+    margin: 0 7px;
+}
+
+.userpost .metadata .stats .count {
+    font-size: 0.7rem;
+    color: grey;
+}
+
+.userpost .metadata .alias-con {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

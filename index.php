@@ -17,7 +17,7 @@
     //regex to get controller code :: "/^\/(\w+)\/([@*\w.+&^$=%-]*)(\?[@*\w.+&^$?=%-]*)?$/"
 
 
-    if((preg_match("/^\/(\w*)(\?[@*\w.+&^$?=%-]*)?$/", $request->uri, $matches))){
+    if((preg_match("/^\/(\w*)(\?[_@*\w.+&^$?=%-]*)?$/", $request->uri, $matches))){
         
         $defaultUrl = $matches[1];
         
@@ -44,7 +44,7 @@
             }
         }
     }
-    else if((preg_match("/^\/(\w+)\/([@*\w.+&\/^$=%-]*)(\?[@*\w.+&^$?=%-]*)?$/", $request->uri, $matches2))){
+    else if((preg_match("/^\/(\w+)\/([_@*\w.+&\/^$=%-]*)(\?[@*\w.+&^$?=%-]*)?$/", $request->uri, $matches2))){
         $appUrl = $matches2[1];
         $appSubUrl = $matches2[2];
         $app2use = null;

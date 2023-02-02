@@ -61,27 +61,36 @@ a:visited {
     margin: 10px 0;
     padding: 2% 1%;
     padding-bottom: 0;
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
 }
 
 .userpost .head {
+    border-bottom: 1px solid rgb(240, 240, 240);
     font-style: italic;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-end;
+}
+
+.userpost .head .username {
+    display: none;
 }
 
 .userpost .head .dot {
     padding: 2px;
     margin: 1px 5px;
-    display: inline-block;
-    background-color: black;
+    display: none;
+    background-color: rgb(233, 14, 131);
     border-radius: 50%;
-    visibility: hidden;
 }
 
 .userpost .head .author {
     margin-right: 5px;
-    visibility: hidden;
+}
+
+.userpost .head .date {
+    font-size: 0.7rem;
+    color: grey;
 }
 
 .userpost .thumbnail-con img {
@@ -102,9 +111,11 @@ a:visited {
 
 .userpost .content-con .title {
     display: block;
-    font-weight: 555;
+    font-weight: 550;
     font-size: 1rem;
-    padding: 10px 0;
+    padding: 10px 1px;
+    text-align: start;
+    width: 70%;
 }
 
 .userpost .date {

@@ -9,6 +9,9 @@
    $login = function($request){
         echo "<h1> You little...";
    };
+   $searchEngine = function($request){
+        render($request, "search.html");
+   };
    $fourZeroFour = function(){
        require_once "templates/404.html";
    };

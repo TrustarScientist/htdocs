@@ -11,6 +11,10 @@
 
     // installed apps[sub-project codes]
     $installedApps = [
-        "post_mgr" => "posts",
+        "post_mgr" => "post",
+        "media_mgr" => "storage",
+        "acct_mgr" => "user",
+        "niche_mgr" => "niche",
+        
       ];
 ?>

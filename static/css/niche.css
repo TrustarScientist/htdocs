@@ -63,17 +63,26 @@ a:visited {
     margin: 10px 0;
     padding: 2% 1%;
     padding-bottom: 0;
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
 }
 
 .userpost .head {
+    border-bottom: 1px solid rgb(240, 240, 240);
     font-style: italic;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.userpost .head .username {
+    display: none;
 }
 
 .userpost .head .dot {
     padding: 2px;
     margin: 1px 5px;
-    display: inline-block;
-    background-color: black;
+    display: none;
+    background-color: rgb(233, 14, 131);
     border-radius: 50%;
 }
 
@@ -81,8 +90,16 @@ a:visited {
     margin-right: 5px;
 }
 
+.userpost .head .date {
+    font-size: 0.7rem;
+    color: grey;
+    padding: 1%;
+    padding-right: 3%;
+}
+
 .userpost .thumbnail-con img {
     width: 100%;
+    margin-left: 5px;
 }
 
 .userpost .content-con {
@@ -94,14 +111,17 @@ a:visited {
 .userpost .content-con img {
     width: 30%;
     margin-right: 10px;
+    margin-left: 1%;
     border-radius: 5px;
 }
 
 .userpost .content-con .title {
     display: block;
-    font-weight: 555;
+    font-weight: 550;
     font-size: 1rem;
-    padding: 10px 0;
+    padding: 10px 1px;
+    text-align: start;
+    width: 70%;
 }
 
 .userpost .date {
@@ -115,6 +135,7 @@ a:visited {
     align-items: center;
     flex-wrap: wrap;
     font-size: 0.9rem;
+    padding: 1%;
     border-top: 1px solid rgb(240, 240, 240);
 }
 
@@ -125,10 +146,6 @@ a:visited {
 .userpost .metadata .niche-info .btn {
     padding-top: 2%;
     padding-bottom: 2%;
-    color: white;
-}
-
-.userpost .metadata .niche-info a {
     color: white;
 }
 
@@ -153,40 +170,4 @@ a:visited {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.people {}
-
-.people .person {
-    margin: 5px 0;
-    padding: 2% 1%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.people .person .info {
-    width: 80%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.people .person .info img {
-    border-radius: 50%;
-    margin-right: 5px;
-}
-
-.people .person .info .user .fullname {
-    font-size: 0.8rem;
-    display: block;
-    color: grey;
-}
-
-.people .person .btn {
-    padding: 1% 2%;
-}
-
-.niche-members-section {
-    display: none;
 }

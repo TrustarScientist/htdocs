@@ -2,20 +2,53 @@
    require_once "engine/base-controllers/core.php";
     require_once "engine/base-models/models2.php";
     
-  $media = function($request){
-    echo "<h1> POst Media</h1>";
+  $profile = function($request, $profilePosts){
+    // store acct to see on GET request after verifying that it is real and the profile page is loaded
+    if($request->method == "GET"){
+      $data4later = $profilePosts[1];
+      $userObject = xDb::get("user", "username", $data4later, "id, username");
+      if(!empty($userObject)){
+        $_SESSION["profile"] = $userObject->id;
+        // profile page
+        render($request, "profile.html");
+        
+      }
+      else{
+        // respond with 404
+        header("Location:/404#profilenotfound");
+      }
+      
+    }
+    else{
+      // load from session if on POST request
+      $profileId = $_SESSION["profile"];
+      $userObject = xDb::get(
+        "user",  
+        "id",
+        $profileId,
+        "id, username, first_name, last_name, intro, date_registered"
+      );
+      echo json_encode($userObject);
+    }
+    
   };
-   $latest = function($request){
-       if($request->method == "POST"){
-            // starting point & amount values are assumed
-            $starting = $request->POST["starting"];
-            $amount = $request->POST["amount"];
-            $dataset = xDb::trending("post", "views", $starting, $amount);
-            $responseData =  array();
+
+  $userPosts = function($request){
+    // profile gotten from POST request body
+    $profileId = 0;
+    $starting = 0;
+    $amount = 1;
+    if((isset($request->POST["profile_id"])) && (isset($request->POST["amount"])) && (isset($request->POST["starting"]))){
+      $profileId = $request->POST["profile_id"];
+      $starting = $request->POST["starting"];
+      $amount = $request->POST["amount"];
+    }
+    $profilePosts = xDb::find("post", "*", "where poster = '$profileId'", "ORDER BY date_updated DESC", "limit $starting, $amount");
+    $responseData =  array();
             $ct = 0;
             $post = array();
-            if(!empty($dataset)){
-                foreach ($dataset as $data) {
+            if(!empty($profilePosts)){
+                foreach ($profilePosts as $data) {
                     # code...
                     $post["postid"] = $data->id;
                     $post["title"] = $data->title;
@@ -55,13 +88,9 @@
                 }
                 echo json_encode($responseData);
             }
-            else{
-                echo json_encode(array());
-            }
-            
-       }
-   };
-   
-
-    
+    else{
+      echo json_encode($responseData);
+    }
+  };
+     
 ?>

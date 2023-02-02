@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/css/site-wide.css">
-    <link rel="stylesheet" href="static/css/home.css">
-    <script src="static/bootstrap/js/bootstrap.bundle.js"></script>
-    <script defer src="static/js/jQuery.min.js"></script>
-    <script defer src="static/js/custom/site-wide.js"></script>
-    <script defer src="static/js/custom/home.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/site-wide.css">
+    <link rel="stylesheet" href="/static/css/niche.css">
+    <script src="/static/bootstrap/js/bootstrap.bundle.js"></script>
+    <script defer src="/static/js/jQuery.min.js"></script>
+    <script defer src="/static/js/custom/site-wide.js"></script>
+    <script defer src="/static/js/custom/niche.js"></script>
     <title>Home Page</title>
 </head>
 
@@ -32,7 +32,7 @@
                 <img src="/static/images/location-fg.png" id="logo" alt="Company Logo">
                 <h1 class="name text-success">Ksharer</h1>
             </a>
-            <form action="/search" method="GET">
+            <form action="search.html" method="GET">
                 <input class="form-control" type="search" name="query" id="q" placeholder="What do you wanna know?">
             </form>
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -58,37 +58,41 @@
 
             </div>
             <div class="dcol col-lg-6">
-                <header class="ads-container">
-                    <a href="rrr" target="_blank">
-                        <img src="/static/images/images (1).jpg" alt="ads banner" width="100%">
+                <section class="niche-meta">
+                    <h5 class="niche-name">WEBSITE AND WEB APP DEVELOPMENT (FRONTEND & BACKEND)</h5>
+
+                </section>
+                <section class="ads-banner">
+                    <a href="r2" target="_blank">
+                        <img src="/static/images/pexels-felix-mittermeier-956999.jpg" alt="ads banner">
                     </a>
-                    <svg id="cancel-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                      </svg>
-                </header>
-                <div class="post-types mt-2">
-                    <article class="scroller mt-1 mb-2">
-                        <a href="/search?ct=1" class="btn btn-outline-secondary">News</a>
-                        <a href="/search?ct=2" class="btn btn-outline-secondary">Tutorial</a>
-                        <a href="/search.html" class="btn btn-outline-secondary">Encyclopedia</a>
-                        <a href="/search.html" class="btn btn-outline-secondary">Question</a>
-                        <a href="/search.html?pt=expression" class="btn btn-outline-secondary">Humor</a>
-                        <a href="/search.html?pt=entertainment" class="btn btn-outline-secondary">Personal</a>
-                        <a href="/search.html?pt=question" class="btn btn-outline-secondary">Review</a>
-                    </article>
-                </div>
-                <h1 class="trending mt-3 mb-2">Trending 12s...</h1>
-                <section class="userposts">
-                    <!--
-                        <div class="userpost bg-light">
+                </section>
+                <section class="about-con">
+                    <b class="about">About</b>
+                    <a class="btn btn-success text-light" href="/login">Log in to do more in this niche...</a>
+                </section>
+                <section class="about-details-con bg-light">
+                    <p>This is a niche template section that shows its essence</p>
+                    <b>Related niches...</b>
+                    <div class="related-niches">
+                        <a href="niche.html" class="btn text-success">@niche1</a>
+                        <a href="niche.html" class="btn text-success">@niche2</a>
+                        <a href="niche.html" ton class="btn text-success">@niche2</a>
+                    </div>
+                </section>
+
+                <hr>
+                <section class="niche-posts-section">
+
+                    <div class="userpost bg-light">
                         <header class="head mb-1">
-                            <a href="profile.html">TrustarScientist</a>
+                            <a class="username" href="profile.html">TrustarScientist</a>
                             <span class="dot"></span>
                             <span class="date">2023-01-22</span>
                         </header>
                         <article class="content-con">
                             <img src="/static/images/eni.jpg" alt="">
-                            <a href="post-details.html" class="title">
+                            <a href="/post/details" class="title">
                                 Tinubu is likely going to win,  at least as far as the Nigerian Law is concerned.
                             </a>
                         </article>
@@ -96,7 +100,7 @@
 
                         <footer class="metadata mt-1 pt-1">
                             <section class="niche-info">
-                                <a href="niche.html" class="btn btn-success">@politics</a>
+                                <a href="/user/TrustarScientist" class="btn btn-success">TrustarScientist</a>
                             </section>
                             <section class="stats">
                                 <div class="following-con">
@@ -123,19 +127,12 @@
                         </footer>
 
                     </div>
-                    -->
+                    <footer class="d-grid">
+                        <button class="btn btn-light mt-2 mb-4">See more posts in this niche...</button>
+                    </footer>
                 </section>
-                <div class="d-grid more-posts-btns mt-2 bg-light ps-1 pe-1">
-                    <button class="btn btn-light next" data-next="0">See more posts...</button>
-                </div>
-            </div>
-            <div class="dcol col-lg-3">
 
-            </div>
-        </section>
     </main>
-
-
 </body>
 
 </html>

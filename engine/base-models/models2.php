@@ -32,11 +32,10 @@
                 }
             }
         }
-        public static function getCount($table, $what="*", $cond_exp="0"){
+        public static function getCount($table, $what="*", $col="post",  $val){
             $db  = new xDb();
-            if(!empty($cond_exp)){
                 if($db->connected){
-                    $smt = ($db->connector)->prepare("SELECT * FROM $table where $cond_exp ");
+                    $smt = ($db->connector)->prepare("SELECT $what FROM $table where $col = $val ");
                     $smt->execute();
                     $ct = 0;
                     while ($result = $smt->fetch()) {
@@ -47,26 +46,12 @@
                 else{
                     return  null;
                 }
-            }
-            else{
-                if($db->connected){
-                    $smt = ($db->connector)->prepare("SELECT * FROM $table ");
-                    $smt->execute();
-                    $ct = 0;
-                    while ($result = $smt->fetch()) {
-                            $ct += 1;
-                    }
-                    return $ct;
-                }
-                else{
-                    return  null;
-                }
-            }
+            
         }
-        public static function get($table, $col, $value){
+        public static function get($table, $col, $value, $scope="*"){
             $db  = new xDb();
             if($db->connected){
-                $smt = ($db->connector)->prepare("SELECT * FROM $table where $col = $value ");
+                $smt = ($db->connector)->prepare("SELECT $scope FROM $table where $col = '$value' ");
                 $smt->execute();
                 $result = $smt->fetch();
                 return $result;
@@ -75,10 +60,27 @@
                 return  null;
             }
         }
-        public static function findLatest($table, $starting="2", $amt="2"){
+        public static function trending($table, $orderCode="views", $starting="0", $amt="2"){
             $db  = new xDb();
             if($db->connected){
-                $smt = ($db->connector)->prepare("SELECT * FROM $table limit $starting, $amt");
+                $smt = ($db->connector)->prepare("SELECT * FROM $table order by $orderCode DESC limit $starting, $amt");
+                $smt->execute();
+                $dataset = array();
+                $ct = 0;
+                while($result = $smt->fetch()){
+                    $dataset[$ct] = $result;
+                    $ct += 1;
+                }
+                return $dataset;
+            }
+            else{
+                return  null;
+            }
+        }
+        public static function find($table, $scope="*", $cond_exp="", $orderCode="", $extras=""){
+            $db  = new xDb();
+            if($db->connected){
+                $smt = ($db->connector)->prepare("SELECT $scope FROM $table $cond_exp $orderCode $extras");
                 $smt->execute();
                 $dataset = array();
                 $ct = 0;
