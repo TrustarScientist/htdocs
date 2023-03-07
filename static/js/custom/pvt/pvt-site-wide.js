@@ -20,3 +20,31 @@ $(".pvt-nav .head .commons #search-icon").click(function() {
         navStateVar = 0;
     }
 });
+// events menu toggle code
+$(".pvt-nav .head .bi-pen").click(function() {
+    $(".pvt-nav .head .events-menu").fadeToggle("slow");
+});
+/**
+ *  code to fetch current user's info such as username, id, photo e.t.c
+ */
+$.post("/user/profile/self", {}, function(data, status) {
+    let selfObject = JSON.parse(data);
+    let photo = document.querySelector(".pvt-nav .foot #current_user_photo");
+    photo.src = `/storage/profile/${selfObject.photo}`;
+    photo.parentNode.href = `/user/${selfObject.username}`;
+    let nameCon = document.querySelector(".pvt-nav .foot   #third")
+    nameCon.textContent = selfObject.username;
+});
+// events details toggle & fetching code
+$(".events-menu .notifications").click(function() {
+    $(".events-menu .n-d").slideToggle("slow");
+})
+$(".events-menu .messages").click(function() {
+    $(".events-menu .m-d").slideToggle("slow");
+})
+$(".events-menu .frequests").click(function() {
+        $(".events-menu .f-d").slideToggle("slow");
+    })
+    /**
+     *  start other codes here...
+     */

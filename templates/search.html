@@ -12,7 +12,7 @@
     <script defer src="/static/js/jQuery.min.js"></script>
     <script defer src="/static/js/custom/site-wide.js"></script>
     <script defer src="/static/js/custom/search.js"></script>
-    <title>Home Page</title>
+    <title>Search Results Page</title>
 </head>
 
 <body>
@@ -23,16 +23,16 @@
               </svg>
             <aside class="fancy-menu bg-light">
                 <div>
-                    <a href="login.html">Login</a>
-                    <a href="register.html">Register</a>
-                    <a href="about.html">About App</a>
+                    <a href="/login">Login</a>
+                    <a href="/register">Register</a>
+                    <a href="/about">About App</a>
                 </div>
             </aside>
             <a href="/" class="identity">
-                <img src="/static/images/location-fg.png" id="logo" alt="Company Logo">
-                <h1 class="name text-success">Ksharer</h1>
+                <img src="/static/images/banner-right-image.png" id="logo" alt="Company Logo">
+                <h1 class="name text-success">FreeQuest</h1>
             </a>
-            <form action="search.html" method="GET">
+            <form action="/search" method="GET">
                 <input class="form-control" type="search" name="query" id="q" placeholder="What do you wanna know?">
             </form>
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -40,15 +40,15 @@
               </svg>
         </header>
         <div class="foot bg-light">
-            <a href="login.html" class="btn btn-success text-light me-3">Login</a>
-            <a href="about" class="btn btn-success me-3">About</a>
+            <a href="/login" class="btn btn-success text-light me-3">Login</a>
+            <a href="/about" class="btn btn-success me-3">About</a>
             <button type="button" class="btn btn-success me-3 dropdown-toggle" data-bs-toggle="dropdown">
               More
             </button>
             <ul class="dropdown-menu mt-3">
-                <li><a class="dropdown-item" href="about.html">About Us</a></li>
-                <li><a class="dropdown-item" href="contact.html">Contact Us</a></li>
-                <li><a class="dropdown-item" href="Terms  & Policies">Niches</a></li>
+                <li><a class="dropdown-item" href="/about">About Us</a></li>
+                <li><a class="dropdown-item" href="/contact">Contact Us</a></li>
+                <li><a class="dropdown-item" href="/legal">Legal Statements</a></li>
             </ul>
         </div>
     </nav>
@@ -60,43 +60,13 @@
             <div class="dcol col-lg-6">
                 <form action="" class="qs" method="get">
 
-                    <div class="scope">
-                        <select class="form-select" name="posttype" id="pt">
-                            <option value="1">@www</option>
-                            <option value="1">@waec</option>
-                            <option value="1" selected="selected">@softdev</option>
-                            <option value="1">@webdev</option>
-                            <option value="1">@drake</option>
-                            <option value="1">@ee</option>
-                            <option value="1">@med</option>
-                            <option value="1">@rat</option>
-                            
-                        </select>
-                        <select class="form-select" name="posttype" id="pt">
-                            <option value="1">All</option>
-                            <option value="1">Breaking News</option>
-                            <option value="1" selected="selected">Humors</option>
-                            <option value="1">How-to's</option>
-                            <option value="1">Self</option>
-                            <option value="1">Reviews</option>
-                            <option value="1">Encyclopedia</option>
-                            <option value="1">Q%A</option>
-                            
-                        </select>
-                    </div>
-                    <div class="main">
-                        <input type="search" name="query" id="" class="form-control" placeholder="search terms here...">
-                        <button type="submit" class="btn btn-success">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" width="20" height="20">
-                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                          </svg>
-                    </button>
-                    </div>
+                    <input type="search" name="query" id="alt-search-box" class="form-control form-control-lg" placeholder="search terms here...">
+
                 </form>
                 <h3 class="mt-2">Search Results...</h3>
                 <section class="post-results">
                     <div class="userposts">
-                        <section class="userpost bg-light">
+                        <!-- <section class="userpost bg-light">
                             <header class="head mb-1">
                                 <a href="profile.html">TrustarScientist</a>
                                 <span class="dot"></span>
@@ -138,10 +108,10 @@
 
                             </footer>
 
-                        </section>
+                        </section> -->
                     </div>
                     <footer class="d-grid">
-                        <button class="btn btn-light">See more results...</button>
+                        <button class="btn btn-light more-results-btn" data-next="0">See more results...</button>
                     </footer>
                 </section>
             </div>

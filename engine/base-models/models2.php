@@ -35,7 +35,7 @@
         public static function getCount($table, $what="*", $col="post",  $val){
             $db  = new xDb();
                 if($db->connected){
-                    $smt = ($db->connector)->prepare("SELECT $what FROM $table where $col = $val ");
+                    $smt = ($db->connector)->prepare("SELECT $what FROM $table where $col = '$val' ");
                     $smt->execute();
                     $ct = 0;
                     while ($result = $smt->fetch()) {
@@ -77,6 +77,75 @@
                 return  null;
             }
         }
+        public static function postSearch($table, $col, $query, $starting="0", $amt="7"){
+            // split query into tokens by the spacing between them
+            $qTokens = explode(" ",$query);
+            // build search scopes
+            $scope = "SELECT * FROM $table WHERE ";    
+            
+            foreach ($qTokens as $word) {
+                # code...
+                $scope .= "$col LIKE '%$word%' OR ";
+                
+            }
+            $finalScope = substr($scope, 0, (strlen($scope)-3)); 
+         
+            $db  = new xDb();
+            if($db->connected){
+                $smt = ($db->connector)->prepare($finalScope."ORDER BY date_updated DESC LIMIT $starting, $amt");
+                $smt->execute();
+                $dataset = array();
+                $ct = 0;
+                while($result = $smt->fetch()){
+                    $dataset[$ct] = $result;
+                    $ct += 1;
+                }
+                return $dataset;
+            }
+            else{
+                return  null;
+            }
+        }
+        public static function create($table, $col_val_array=array(), $show_error=false){
+            $sql  = "INSERT INTO $table ";
+            $bit1 = "( ";
+            $bit2 = "  VALUES( ";
+            if(!empty($col_val_array)){
+                foreach ($col_val_array as $col_name => $col_val) {
+                        $bit1.= "$col_name, ";
+                        $bit2.= "'$col_val', ";
+                }
+                $bit1 = substr($bit1, 0, (strlen($bit1)-2));
+                $bit2 = substr($bit2, 0, (strlen($bit2)-2));
+                $bit1.= " )";
+                $bit2.= " )";
+                // sum up all the bits
+                $sql.=$bit1;
+                $sql.=$bit2;
+                // attempt storage
+                try {
+                    //code...
+                    $db = new xDb();
+                    if($db->connected){
+                        $smt = ($db->connector)->prepare($sql);
+                        $result = $smt->execute();
+                        return $result;
+                    }
+                    else{
+                        return  null;
+                    }
+                } catch (\Throwable $th) {
+                    //throw $th;
+                    if($show_error){
+                        print_r($th);
+                    }
+                    else{
+                        return null;
+                    }
+                }
+            }
+
+        }
         public static function find($table, $scope="*", $cond_exp="", $orderCode="", $extras=""){
             $db  = new xDb();
             if($db->connected){
@@ -94,6 +163,95 @@
                 return  null;
             }
         }
+        public static function update($table, $col_val_array=array(), $cond_exp=""){
+            $sql = "UPDATE $table SET ";
+            if(!empty($col_val_array)){
+                foreach ($col_val_array as $col => $value) {
+                    # code...
+                    $sql.= "$col = '$value' , ";
+                    
+                }
+                $sql = substr($sql, 0, (strlen($sql)-2));
+                $sql.= $cond_exp;
+                
+                // start db query uploading...
+                $db  = new xDb();
+                if($db->connected){
+                    try {
+                        //code...
+                        $smt = ($db->connector)->prepare($sql);
+                        $smt->execute();
+                        return 1;
+                    } catch (\Throwable $th) {
+                        //throw $th;
+                        return 0;
+                    }
+                }
+                
+            }
+            
+        }
+        public static function delete($table, $cond="", $extras=""){
+            $db  = new xDb();
+            if($db->connected){
+                $smt = ($db->connector)->prepare("DELETE FROM $table $cond $extras ");
+                $result = $smt->execute();
+                
+                return $result;
+            }
+            else{
+                return  null;
+            }
+        }
+        public static function save($postData){
+            
+            $db =  new xDb();
+            if($db->connected){
+                $username = "";
+                $email = "";
+                $password = "";
+                $phone = "";
+                $gender = "";
+                
+                if(isset($postData["username"])){
+                    $username = htmlentities($postData["username"], ENT_QUOTES);
+                }
+
+                if(isset($postData["email"])){
+                    $email = htmlentities($postData["email"], ENT_QUOTES);
+                }
+                if(isset($postData["password"])){
+                    $password = htmlentities($postData["password"], ENT_QUOTES);
+                }
+                $hash = password_hash($password, PASSWORD_DEFAULT);
+                $phone_number = "";
+                if(isset($postData["phoneNumber"])){
+                    $phone_number = htmlentities($postData["phoneNumber"], ENT_QUOTES);
+                }
+                if(isset($postData["gender"])){
+                    $gender = htmlentities($postData["gender"], ENT_QUOTES);
+                }
+                try {
+                    //code...
+                  
+                    $statement = ($db->connector)->prepare("INSERT INTO 
+                    user(id, username, email, password, phone_number, gender)
+                    VALUES(null, '$username', '$email', '$hash', '$phone_number', '$gender'); 
+                    ");
+                    $resultant = $statement->execute();
+                    return 1;
+
+                } catch (\Throwable $th) {
+                    //throw $th;
+                    return null;
+                }
+                 
+            }
+            else{
+                return null;
+            }
+        }
+
         
     }
     class Data{
@@ -118,31 +276,39 @@
                 $username = "";
                 $email = "";
                 $password = "";
-                $date = date("Y-m-d");
+                $phone = "";
+                $gender = "";
+                
                 if(isset($postData["usn"])){
                     $username = htmlentities($postData["usn"], ENT_QUOTES);
                 }
 
-                if(isset($postData["eml"])){
-                    $email = htmlentities($postData["eml"], ENT_QUOTES);
+                if(isset($postData["email"])){
+                    $email = htmlentities($postData["email"], ENT_QUOTES);
                 }
                 if(isset($postData["pswd"])){
                     $password = htmlentities($postData["pswd"]);
                 }
                 $hash = password_hash($password, ENT_QUOTES);
+                if(isset($postData["no"])){
+                    $phone = htmlentities($postData["no"]);
+                }
+                if(isset($postData["gender"])){
+                    $gender = htmlentities($postData["gender"]);
+                }
                 try {
                     //code...
                   
                     $statement = ($db->connector)->prepare("INSERT INTO 
-                    user(id, username, email, pswd, date_registered)
-                    VALUES(null, '$username', '$email', '$hash', $date); 
+                    user(id, username, email, password, phone_number, gender)
+                    VALUES(null, '$username', '$email', '$hash', $phone, $gender); 
                     ");
                     $resultant = $statement->execute();
                     return 1;
 
                 } catch (\Throwable $th) {
                     //throw $th;
-                    return $th;
+                    return null;
                 }
                  
             }
@@ -150,7 +316,7 @@
                 return null;
             }
         }
-
+        
         public static function login($idToken, $idType, $password){
             $database = new xDb();
             if($database->connected){

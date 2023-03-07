@@ -1,3 +1,31 @@
+/* width */
+
+::-webkit-scrollbar {
+    height: 3px;
+    width: 3px;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: rgb(240, 240, 240);
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: #555;
+}
+
+
+/* Handle on hover */
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: rgb(13, 139, 77);
+}
+
 .pvt-nav {
     padding: 0;
     z-index: 2000;
@@ -27,6 +55,7 @@ textarea:focus {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    margin-left: 3px;
 }
 
 .pvt-nav .head .brand img {
@@ -54,6 +83,13 @@ textarea:focus {
 
 .pvt-nav .commons svg {
     fill: rgb(57, 57, 57);
+    margin-right: 3px;
+}
+
+.pvt-nav .foot #current_user_photo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
 }
 
 .pvt-nav .commons svg:hover,
@@ -66,9 +102,56 @@ textarea:focus {
     display: block;
 }
 
+.pvt-nav .head .n-sub-page {
+    background-color: white;
+    z-index: 455;
+    position: fixed;
+    width: 99%;
+    left: 0.5%;
+    height: 90%;
+    bottom: 0;
+    overflow-y: scroll;
+    display: none;
+}
+
+.pvt-nav .head .events-menu {
+    height: 81.5%;
+    background-color: white;
+    position: fixed;
+    top: 60px;
+    width: 100%;
+    padding: 0.5%;
+    margin-left: -2%;
+    overflow-y: scroll;
+    border-radius: 5px;
+    display: none;
+}
+
+.pvt-nav .head .events-menu .path {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgb(240, 240, 240);
+    padding: 2%;
+    font-size: large;
+    border-radius: 5px;
+    margin-top: 1%;
+}
+
+.pvt-nav .head .events-menu .path-details {
+    border: 1px solid rgb(240, 240, 240);
+    display: none;
+    width: 98%;
+    margin: 0 auto;
+    border-radius: 0 0 5px 5px;
+    padding: 1%;
+}
+
+.pvt-nav .head .events-menu .path:hover {}
+
 .pvt-nav .foot {
     text-align: center;
-    padding: 2%;
+    padding: 2% 3%;
     height: 50px;
     width: 100%;
     position: fixed;
@@ -93,19 +176,59 @@ textarea:focus {
     display: none;
 }
 
+.pvt-nav .foot p:hover {
+    color: rgb(13, 139, 77);
+    border-bottom: 2px solid rgb(13, 139, 77);
+}
+
 @media screen and (min-width:576px) {
     .pvt-nav .head,
     .pvt-nav .foot {
         padding: 2% 10%;
     }
+    .pvt-nav .head .events-menu {
+        height: 81.5%;
+        border: 1px solid rgb(240, 240, 240);
+        background-color: white;
+        position: fixed;
+        top: 60px;
+        width: 80.5%;
+        margin-left: 0%;
+    }
 }
 
 @media screen and (min-width:768px) {
+    .pvt-nav .head {
+        padding: 2% 1%;
+        border-bottom: 0;
+    }
+    .pvt-nav .head #form {
+        display: block;
+    }
+    .pvt-nav .head .commons {
+        display: none;
+    }
+    .pvt-nav .head .brand img {
+        width: 40px;
+        height: 40px;
+    }
+    .pvt-nav .head .events-menu {
+        z-index: 0;
+        height: 78%;
+        border: 1px solid rgb(240, 240, 240);
+        background-color: white;
+        position: fixed;
+        top: 115px;
+        width: 32%;
+        margin-left: 0%;
+        display: block;
+    }
     .pvt-nav .foot {
-        padding: 2% 4%;
+        padding: 2% 1%;
         top: 50px;
         bottom: auto;
         border-top: 0;
+        padding-left: 0;
     }
     .pvt-nav .foot a {
         padding-top: 20px;
@@ -116,7 +239,8 @@ textarea:focus {
         text-align: center;
         text-decoration: none;
     }
-    .pvt-nav .foot svg {
+    .pvt-nav .foot svg,
+    .pvt-nav .foot img {
         display: none;
     }
     .pvt-nav .foot .dropdown svg {
@@ -124,6 +248,8 @@ textarea:focus {
     }
     .pvt-nav .foot p {
         display: block;
+        margin: 0;
+        background-color: ghostwhite;
     }
 }
 
@@ -139,7 +265,7 @@ textarea:focus {
     }
     .pvt-nav .head,
     .pvt-nav .foot {
-        padding: 2%;
+        padding: 2% 1%;
         position: relative;
         top: auto;
         bottom: auto;
@@ -152,24 +278,48 @@ textarea:focus {
     .pvt-nav .head form {
         display: block;
         width: 50%;
-        margin-right: 4%;
+        margin-right: 10%;
     }
     .pvt-nav .head .commons {
         width: 10%;
     }
+    .pvt-nav .head .brand img {
+        width: 50px;
+        height: 50px;
+    }
     .pvt-nav .head .commons .bi-search {
         display: none;
     }
+    /** events menu code */
+    .pvt-nav .head .events-menu {
+        height: 84%;
+        border: 1px solid rgb(240, 240, 240);
+        background-color: white;
+        position: fixed;
+        top: 84px;
+        width: 23%;
+        margin-left: 0%;
+        display: block;
+    }
     .pvt-nav .foot {
-        width: 25%;
+        width: 29%;
     }
     .pvt-nav .foot a {
-        padding-top: 0;
+        padding-top: 1%;
     }
     .pvt-nav .foot svg {
         display: block;
+        margin-left: 30%;
+    }
+    .pvt-nav .foot #current_user_photo {
+        display: block;
+        width: 25px;
+        height: 25px;
+        margin-left: 30%;
+        margin-bottom: 0;
     }
     .pvt-nav .foot p {
-        display: none;
+        display: inline-block;
+        font-size: 0.7rem;
     }
 }

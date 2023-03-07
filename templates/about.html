@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/site-wide.css">
+    <link rel="stylesheet" href="/static/css/home.css">
+    <script src="/static/bootstrap/js/bootstrap.bundle.js"></script>
+    <script defer src="/static/js/jQuery.min.js"></script>
+    <script defer src="/static/js/custom/site-wide.js"></script>
+    <script defer src="/static/js/custom/home.js"></script>
+    <title>Home Page</title>
+</head>
+
+<body>
+    <nav class="site-nav bg-light">
+        <header class="head bg-light">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-filter-left" viewBox="0 0 16 16">
+                <path d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+              </svg>
+            <aside class="fancy-menu bg-light">
+                <div>
+                    <a href="/login">Login</a>
+                    <a href="/register">Register</a>
+                    <a href="/about">About App</a>
+                </div>
+            </aside>
+            <a href="/" class="identity">
+                <img src="/static/images/banner-right-image.png" id="logo" alt="Company Logo">
+                <h1 class="name text-success">FreeQuest</h1>
+            </a>
+            <form action="/search" method="GET">
+                <input class="form-control" type="search" name="query" id="q" placeholder="What do you wanna know?">
+            </form>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+              </svg>
+        </header>
+        <div class="foot bg-light">
+            <a href="/login" class="btn btn-success text-light me-3">Login</a>
+            <a href="/register" class="btn btn-success text-light me-3">Register</a>
+            <button type="button" class="btn btn-success me-3 dropdown-toggle" data-bs-toggle="dropdown">
+              More
+            </button>
+            <ul class="dropdown-menu mt-3">
+                <li><a class="dropdown-item" href="/about">About Us</a></li>
+                <li><a class="dropdown-item" href="/contact">Contact</a></li>
+                <li><a class="dropdown-item" href="/legal">Legal Statements</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main class="container" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+        <section class="drow-one row">
+            <div class="dcol col-lg-3">
+                <h3 class="mt-3 text-success">WHAT IS THIS WEBSITE ALL ABOUT EXACTLY?</h3>
+                <P>This website is a platform designed to source, organize and distribute world's knowledge base as meaningfully as possible...for the benefit of mankind. It iss regarded as a Knowledge-Sharing App (contrary to typical Photo or Video-sharing
+                    Platforms). The platform is geared towards factual information and social journalism.</P>
+                <h3 class="text-success">HOW IT WORKS</h3>
+                <p>You can think of this website like this: imagine a really really remote, but extremely beautiful and technologically advanced island...like no other. People find their way to the island to share their findings; find & commune with other
+                    people that matter to their lives; and add to their personal knowledge base.</p>
+                <p>Every information is organized into NICHES. Every niche is a virtual 'room' having a public 'dicussion table' ; Members, Private Conversation Centers and Library of High Quality Resources</p>
+                <p>A user of this platform essentially interracts with three things: Network of friends, Comunities of people (Niches) and Knowledge Cards (in the form of posts).</p>
+            </div>
+            <div class="dcol col-lg-6">
+
+            </div>
+            <div class="dcol col-lg-3">
+
+            </div>
+        </section>
+    </main>
+
+
+</body>
+
+</html>

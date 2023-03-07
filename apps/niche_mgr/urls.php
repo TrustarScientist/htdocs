@@ -1,7 +1,11 @@
 <?php
   include_once "views.php";
     $urlpatterns = [
-        "/^(@\w+)$/" => $niche,
+      "/^toprank$/" => $topRank,
+      "/^join-or-leave$/" => $joinOrLeave,
+      "/^posts$/" => $nichePosts,
+      "/^(@\w+)$/" => $niche,
+        
     ];
 
 ?>

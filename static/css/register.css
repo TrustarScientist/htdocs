@@ -2,6 +2,10 @@ a {
     text-decoration: none;
 }
 
+.site-nav {
+    z-index: 56578;
+}
+
 .regform input:focus,
 button:focus,
 .regform select:focus,
@@ -16,6 +20,12 @@ button:focus,
 
 .site-nav svg {
     visibility: hidden;
+}
+
+#gender option:focus {
+    border-color: rgb(224, 223, 223);
+    box-shadow: 1px 1px 3px 3px rgb(229, 245, 238);
+    background-color: rebeccapurple;
 }
 
 .info {

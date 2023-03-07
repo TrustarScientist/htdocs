@@ -1,3 +1,31 @@
+/* width */
+
+::-webkit-scrollbar {
+    height: 3px;
+    width: 3px;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: rgb(240, 240, 240);
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: #555;
+}
+
+
+/* Handle on hover */
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: rgb(13, 139, 77);
+}
+
 .site-nav {
     z-index: 2000;
 }
@@ -13,6 +41,34 @@ a {
 
 a:visited {
     color: black;
+}
+
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 1px;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: rgb(240, 240, 240);
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: rgb(240, 240, 240);
+}
+
+
+/* Handle on hover */
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 .drow-one {
@@ -34,8 +90,8 @@ a:visited {
 
 .ads-container #cancel-icon {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 3%;
+    right: 1%;
     padding: 1%;
     width: 32px;
     height: 32px;
@@ -51,7 +107,7 @@ a:visited {
 }
 
 .post-types .scroller {
-    width: 240%;
+    width: 250%;
 }
 
 .post-types .scroller .btn {

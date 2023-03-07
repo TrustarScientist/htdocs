@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/site-wide.css">
+    <link rel="stylesheet" href="/static/css/post-details.css">
+    <script src="/static/bootstrap/js/bootstrap.bundle.js"></script>
+    <script defer src="/static/js/jQuery.min.js"></script>
+    <script defer src="/static/js/custom/site-wide.js"></script>
+    <script defer src="/static/js/custom/post-details.js"></script>
+    <title>Post Details Page</title>
+</head>
+
+<body>
+    <nav class="site-nav bg-light">
+        <header class="head bg-light">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-filter-left" viewBox="0 0 16 16">
+                <path d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+              </svg>
+            <aside class="fancy-menu bg-light">
+                <div>
+                    <a href="/login">Login</a>
+                    <a href="/register">Register</a>
+                    <a href="/about">About App</a>
+                </div>
+            </aside>
+            <a href="/" class="identity">
+                <img src="/static/images/banner-right-image.png" id="logo" alt="Company Logo">
+                <h1 class="name text-success">FreeQuest</h1>
+            </a>
+            <form action="/search" method="GET">
+                <input class="form-control" type="search" name="query" id="q" placeholder="What do you wanna know?">
+            </form>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+              </svg>
+        </header>
+        <div class="foot bg-light">
+            <a href="login.html" class="btn btn-success text-light me-3">Login</a>
+            <a href="about" class="btn btn-success me-3">About</a>
+            <button type="button" class="btn btn-success me-3 dropdown-toggle" data-bs-toggle="dropdown">
+              More
+            </button>
+            <ul class="dropdown-menu mt-3">
+                <li><a class="dropdown-item" href="/about">About</a></li>
+                <li><a class="dropdown-item" href="/login">Login</a></li>
+                <li><a class="dropdown-item" href="/register">Register</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="drow-one row">
+            <div class="dcol col-lg-3">
+
+            </div>
+            <div class="dcol col-lg-6">
+                <section class="post-stats ">
+                    <header class="poster">
+                        <img id="photo" src="" alt="poster photo">
+                        <div class="more">
+                            <h6 class="name"><a href="/user/Phychemma">Phychemma</a></h6>
+                            <span class="date"> updated: <b>2 days ago</b></span>
+                        </div>
+                    </header>
+                    <a href="/niche/niche-name" class="btn btn-success niche">@webdev</a>
+                </section>
+                <img class="mt-1 post-main-pic" src="" alt="post main photo">
+                <h4 class="post-title mt-2 pt-1"></h4>
+                <section class="metadata">
+                    <p style="display: none;">
+                        <span class="content-type btn  text-light" style="padding: 8% 5% ;"></span>
+                    </p>
+
+                    <div class="post-followings">
+                        <b>200</b>
+                        <p>People Following</p>
+                    </div>
+                    <div class="post-comments">
+                        <b>200</b>
+                        <p>Comments</p>
+                    </div>
+                    <div class="post-views">
+                        <b>200</b>
+                        <p>Views</p>
+                    </div>
+                </section>
+                <p class="content mt-3 mb-2">
+
+                </p>
+                <iframe class="video-frame" src="" style="width: 100%; height: 300px;" frameborder="0">
+                    jfjss
+                </iframe>
+                <p class="video-caption"></p>
+                <div class="gallery">
+
+                </div>
+                <div class="d-grid">
+                    <a href="#com-sec" class="btn btn-secondary mb-2">Jumb to the comments section...</a>
+                </div>
+                <div id="postchain" class="p-1">
+                    <h5 class="pt-1 pb-1 head">In this <span class="text-success mt-2">PostChain</span>...</h5>
+                    <article class="prev-and-next">
+                        <a href="/post/1/" class="prev btn btn-danger" style="display: none;">Previous</a>
+                        <a href="/post/2/" class="next btn btn-success" style="display: none;">Next</a>
+                    </article>
+                </div>
+                <section class="related-posts-section mt-3 mb-4">
+                    <h5>OTHER POSTS YOU MAY FIND INTERESTING...</h5>
+                    <section class="related-posts-con">
+                        <!-- <div class="userpost bg-light">
+                            <header class="head mb-1">
+                                <a href="profile.html">TrustarScientist</a>
+                                <span class="dot"></span>
+                                <span class="date">2023-01-22</span>
+                            </header>
+                            <article class="content-con">
+
+                                <a href="post-details.html" class="title">
+                                    Tinubu is likely going to win,  at least as far as the Nigerian Law is concerned.
+                                </a>
+                            </article>
+
+
+                        </div> -->
+
+                    </section>
+                </section>
+                <div class="d-grid" id="com-sec">
+                    <a href="/login" class="btn btn-success">
+                        Log in to follow or comment on post...
+                    </a>
+                </div>
+                <section class="comments-section">
+
+                    <!-- <article class="comment ">
+                        <p class="content  mt-2">THe truth is that I really don't know how to say 'no' to your posts...</p>
+                        <footer class="meta">
+                            <div class="user">
+                                <img src="/static/images/download (5).jpg" alt="commenter">
+                                <a href="profile.html">Gholahan</a>
+                            </div>
+                            <span class="comment-date" >2 days ago</span>
+                            <div class="reply-count-btn text-danger" data-comment="0">
+                                <b>201</b>
+                                <span> Replies</span>
+                            </div>
+                        </footer>
+                        
+                        <aside class="replies">
+                            <div class="reply bg-light mb-2">
+                                <p class="body">reply content</p>
+                                <span style="font-size: 0.7rem;">2023-12-02</span> --- <a href="/profile.html" class="replyer">CNN</a>
+                            </div>
+                        </aside>
+                        
+                    </article>
+                    -->
+
+
+                </section>
+
+            </div>
+            <div class="dcol col-lg-3">
+
+            </div>
+        </section>
+    </main>
+
+
+</body>
+
+</html>

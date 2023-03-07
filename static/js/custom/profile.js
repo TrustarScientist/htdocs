@@ -1,10 +1,13 @@
 $(document).ready(function() {
     // retreive info associated with this account
     $.post("/user/profile", { "user": "stored" }, function(data, status) {
+        //alert(data)
         // convert to Js object
         let res = JSON.parse(data);
         if (res != "") {
             document.querySelector(".starting .username").textContent = res.username;
+            let profileImgage = document.querySelector(".profile-photo");
+            profileImgage.src = `/storage/profile/${res.photo}`;
             document.querySelector(".starting .fullname").textContent = res.first_name + " " + res.last_name;
             document.querySelector(".starting .date").textContent = res.date_registered;
             document.querySelector(".intro").textContent = res.intro;
@@ -12,11 +15,12 @@ $(document).ready(function() {
             let ctrlBtn = document.querySelector(".pname2-con .pname2");
             ctrlBtn.textContent = res.username;
             ctrlBtn.dataset.pid = res.id;
+            //alert(res.photo);
             // get post id and request for profile posts
             profilePosts("/user/posts", {
                 "profile_id": res.id,
                 "starting": 0,
-                "amount": 1,
+                "amount": 7,
             }, ctrlBtn);
         }
     });
@@ -28,7 +32,7 @@ $(document).ready(function() {
         profilePosts("/user/posts", {
             "profile_id": e.target.dataset.pid,
             "starting": e.target.dataset.starting,
-            "amount": 1,
+            "amount": 7,
         }, e.target);
     });
 

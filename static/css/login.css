@@ -3,15 +3,15 @@ a {
     color: rgb(13, 139, 77);
 }
 
-.regform input:focus,
+.logform input:focus,
 button:focus,
-.regform select:focus,
-.regform textarea:focus {
+.logform select:focus,
+.logform textarea:focus {
     border-color: rgb(224, 223, 223);
     box-shadow: 1px 1px 3px 3px rgb(229, 245, 238);
 }
 
-.regform input[type="checkbox"] {
+.logform input[type="checkbox"] {
     border: 0;
 }
 

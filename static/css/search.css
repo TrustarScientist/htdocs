@@ -2,6 +2,18 @@
     padding-top: 50px;
 }
 
+.site-nav {
+    z-index: 273996589;
+}
+
+.site-nav .head .bi-filter-left {
+    visibility: hidden;
+}
+
+.site-nav .head .bi-search {
+    visibility: hidden;
+}
+
 .dcol {
     padding: 2%;
 }
@@ -19,6 +31,21 @@ textarea:focus {
     box-shadow: 1px 1px 3px 3px rgb(229, 245, 238);
 }
 
+.search-topic {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-topic select {
+    width: 40%;
+}
+
+.search-topic select:focus {
+    border-color: rgb(224, 223, 223);
+    box-shadow: 1px 1px 3px 3px rgb(229, 245, 238);
+}
+
 .qs .scope {
     margin: 5px 0;
     display: flex;
@@ -28,6 +55,10 @@ textarea:focus {
 
 .qs .scope * {
     width: 49%;
+}
+
+.qs .scope option::selection {
+    background-color: rgb(13, 139, 77);
 }
 
 .qs .main {
@@ -144,4 +175,10 @@ textarea:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+@media screen and (min-width:992px) {
+    .site-nav .head form input {
+        visibility: hidden;
+    }
 }

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/site-wide.css">
+    <link rel="stylesheet" href="/static/css/register.css">
+    <script src="/static/bootstrap/js/bootstrap.bundle.js"></script>
+    <script defer src="/static/js/jQuery.min.js"></script>
+    <script defer src="/static/js/custom/site-wide.js"></script>
+    <script defer src="/static/js/custom/register.js"></script>
+    <title>Post Details Page</title>
+</head>
+
+<body>
+    <nav class="site-nav bg-light">
+        <header class="head bg-light">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-filter-left" viewBox="0 0 16 16">
+                <path d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+              </svg>
+            <aside class="fancy-menu bg-light">
+                <div>
+                    <a href="/login">Login</a>
+                    <a href="/register">Register</a>
+                    <a href="/about">About App</a>
+                </div>
+            </aside>
+            <a href="/" class="identity">
+                <img src="/static/images/banner-right-image.png" id="logo" alt="Company Logo">
+                <h1 class="name text-success">FreeQuest</h1>
+            </a>
+            <form action="/search" method="GET">
+                <input class="form-control" type="search" name="query" id="q" placeholder="What do you wanna know?">
+            </form>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+              </svg>
+        </header>
+        <div class="foot bg-light">
+            <a href="login.html" class="btn btn-success text-light me-3">Login</a>
+            <a href="about" class="btn btn-success me-3">About</a>
+            <button type="button" class="btn btn-success me-3 dropdown-toggle" data-bs-toggle="dropdown">
+              More
+            </button>
+            <ul class="dropdown-menu mt-3">
+                <li><a class="dropdown-item" href="/about">About Us</a></li>
+                <li><a class="dropdown-item" href="/login">Login</a></li>
+                <li><a class="dropdown-item" href="/register">Register</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="drow-one row">
+            <div class="dcol col-lg-3">
+
+            </div>
+            <div class="dcol col-lg-6 mt-5">
+
+                <form action="/register" method="POST" class="regform bg-light p-2 pt-3 pb-3 mt-5 mb-5">
+                    <h4 class="info">Be a Member of The Islands</h4>
+                    <div class="alert alert-success as" style="display: none;">
+                        <strong>Success!</strong> You are now a member...login to remember your credentials.
+                    </div>
+                    <div class="alert alert-danger ad" style="display: none;">
+                        <strong>Success!</strong> Indicates a successful or positive action.
+                    </div>
+                    <label for="usn">Username:</label>
+                    <input type="text" name="username" class="form-control mb-2" id="usn" required="required" placeholder="Avoid spaces in naming...">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" class="form-control mb-2" id="email" required="required" placeholder="Make sure it's valid and accessible...">
+                    <label for="pswd">Password:</label>
+                    <input type="password" name="password" class="form-control mb-2" id="pswd" placeholder="such as TrustarScientist@2023" required="required">
+                    <label for="no">Phone Number:</label>
+                    <input type="tel" class="form-control mb-2" name="no" id="no">
+                    <label for="gender">Gender:</label>
+                    <select name="gender" class="form-select mb-2" id="gender">
+                        <option value="m">Male</option>
+                        <option value="f">Female</option>
+                        <option value="s">Special</option>
+                    </select>
+                    <p class="mt-2">Already have an account with us? Login in <a class="text-success" href="/login">here</a> instead</p>
+                    <div class="d-grid mb-2">
+                        <button class="btn btn-success">Register</button>
+                    </div>
+                    <p class="">By signing up, you agree to our terms of service.</p>
+                </form>
+            </div>
+            <div class="dcol col-lg-3"></div>
+        </section>
+    </main>
+</body>
+
+</html>

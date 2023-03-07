@@ -15,6 +15,7 @@
         "media_mgr" => "storage",
         "acct_mgr" => "user",
         "niche_mgr" => "niche",
+        "msg_mgr" => "message",
         
       ];
 ?>

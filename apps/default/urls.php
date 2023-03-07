@@ -5,6 +5,11 @@
         "/^search$/" => $searchEngine,
        "/^404$/" => $fourZeroFour,
        "/^login$/" => $login,
+       "/^logout$/" => $logout,
+       "/^about$/" => $about,
+       "/^register$/" => $register,
+       "/^newsfeed$/" => $newsfeed,
+       "/^connections$/" => $connections,
     ];
 
 ?>

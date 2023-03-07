@@ -7,6 +7,12 @@
     $name = $dataset[2];
     echo file_get_contents("mediafiles/$type/$name");
   };
+  $user_media = function($request, $dataset){
+    $type = $dataset[1];
+    $name = $dataset[2];
+    echo file_get_contents("mediafiles/$type/$name");
+  };
+
   $niche = function($request, $nicheAlias){
     if($request->method == "GET"){
       $_SESSION["pvt"] = "done";

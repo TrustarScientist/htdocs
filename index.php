@@ -17,7 +17,7 @@
     //regex to get controller code :: "/^\/(\w+)\/([@*\w.+&^$=%-]*)(\?[@*\w.+&^$?=%-]*)?$/"
 
 
-    if((preg_match("/^\/(\w*)(\?[_@*\w.+&^$?=%-]*)?$/", $request->uri, $matches))){
+    if((preg_match("/^\/(\w*)(\?[_@*\w.+&^:$?=%-]*)?$/", $request->uri, $matches))){
         
         $defaultUrl = $matches[1];
         
@@ -44,7 +44,7 @@
             }
         }
     }
-    else if((preg_match("/^\/(\w+)\/([_@*\w.+&\/^$=%-]*)(\?[@*\w.+&^$?=%-]*)?$/", $request->uri, $matches2))){
+    else if((preg_match("/^\/(\w+)\/([_@*\w.+\[\]&()\/^:$={}%-]*)(\?[@*\w.+&^:$?=%-]*)?$/", $request->uri, $matches2))){
         $appUrl = $matches2[1];
         $appSubUrl = $matches2[2];
         $app2use = null;
@@ -86,67 +86,7 @@
 
     }
     else{
-        echo "Lastly, this URL does not fit in...sorry!";
+        header("Location:/404#invalid-url-in-app");
         
     }
-    /**
-         *  We need to split the request uri to strings representing the 
-         *  controller starting uri and pass some sub-routes it might need to work on.
-         *  
-         
-    else if(preg_match('/([#$^&*()+=\-\[\]\';,.\/{}|":<>?~\\\\]+)/',preg_quote($request->uri), $matches2)){
-
-        echo "woo0000oooow";
-        print_r($matches2);
-        print_r($request->uri);
-
-        
-        $appPath = "";
-        preg_match("/^\/([\w]+)\/([@*\w.+&^$?=%-]*)(\?[@*\w.+&^$?=%-]*)?$/",preg_quote($request->uri), $matches);
-        $appPath = $matches[1];
-        $subRoute = $matches[2];
-        $app2use = "";
-        // scan through installed apps and pick the app to use from settings file
-        foreach ($installedApps as $appName => $path) {
-                if($path == $appPath){
-                    $app2use =  $appName;
-                }
-        }
-        
-        
-        if($app2use == ""){
-            header("Location:/404#$ssd");
-        }
-        else{
-            // default handler in 'app'
-            $appLevelHandler = function(){
-                header("Location:/404#handlernotfound");
-                
-            };
-            
-            if(file_exists("apps/".$app2use."/urls.php")){
-                // we expect a urlpatterns array in urls.php
-                require_once "apps/".$app2use."/urls.php";
-                foreach ($urlpatterns as $pattern => $handler) {
-                    # code...
-                    if(!empty(preg_match($pattern, $subRoute,$subMatch))){
-                        $appLevelHandler = $handler;
-                        break;
-                    }
-                
-                }
-                // call the view function to handle request
-                $appLevelHandler($request, $subMatch);
-
-            }
-        
-
-        }
-      
-        
-    }
-    else{
-        echo "finally...no hpoe";
-    }
-    */
 ?>

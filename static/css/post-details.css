@@ -1,5 +1,5 @@
 .site-nav {
-    z-index: 2000;
+    z-index: 2000555;
 }
 
 body {
@@ -27,16 +27,35 @@ a:hover {
 
 .post-main-pic {
     width: 100%;
+    border-top: 0;
+}
+
+.post-title {
+    border-top: 1px solid rgb(224, 223, 223);
 }
 
 .content {}
+
+.gallery {
+    padding: 2% 0;
+    border-top: 1px solid rgb(240, 240, 240);
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+.gallery img {
+    width: 48%;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    padding: 1%;
+    border: 1px solid rgb(224, 223, 223);
+    margin-right: 5px;
+}
 
 .post-stats {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgb(240, 240, 240);
+    padding-bottom: 5px;
     flex-wrap: wrap;
 }
 
@@ -53,13 +72,6 @@ a:hover {
     margin-right: 5px;
     margin-top: 5px;
     border-radius: 5px;
-}
-
-.post-stats .btn {
-    padding: 0.5% 0.5%;
-    display: block;
-    margin-top: 2px;
-    display: block;
 }
 
 .post-stats .btn b {
@@ -82,6 +94,35 @@ a:hover {
     padding: 0;
 }
 
+.metadata {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    text-align: center;
+}
+
+.metadata .content-type {
+    border-radius: 5px;
+    background-color: rgb(206, 23, 120);
+}
+
+.metadata p {
+    font-size: 0.8rem;
+}
+
+.metadata .views b {}
+
+.prev-and-next {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.prev-and-next * {
+    width: 49%;
+}
+
 #postchain {
     border: 1px solid rgb(240, 240, 240);
 }
@@ -102,7 +143,7 @@ a:hover {
     padding: 2% 0;
 }
 
-.comments-con .comment {
+.comments-section .comment {
     position: relative;
     padding: 1%;
     font-size: 0.9rem;
@@ -110,7 +151,7 @@ a:hover {
     border: 1px solid rgb(224, 223, 223);
 }
 
-.comments-con .comment .meta {
+.comments-section .comment .meta {
     padding: 2% 0;
     display: flex;
     justify-content: space-between;
@@ -118,15 +159,21 @@ a:hover {
     border-bottom: 1px solid rgb(240, 240, 240);
 }
 
-.comments-con .comment .meta .user a {
+.comments-section .comment .meta .user a {
     font-weight: 500;
     font-style: italic;
 }
 
-.comments-con .comment .meta .user img {
+.comments-section .comment .meta .user img {
     width: 25px;
     height: 25px;
+    margin-right: 5px;
     border-radius: 50%;
+}
+
+.comments-section .comment .meta .comment-date {
+    font-size: 0.7rem;
+    color: grey;
 }
 
 .reply-con {
@@ -142,6 +189,19 @@ a:hover {
     border-radius: 5px;
 }
 
+.reply {
+    width: 80%;
+}
+
+.reply .body {
+    color: rgb(13, 139, 77);
+}
+
+.reply span {
+    color: grey;
+    font-size: 0.8rem;
+}
+
 .userposts {}
 
 .userposts .userpost {
@@ -149,6 +209,8 @@ a:hover {
     margin: 10px 0;
     padding: 2% 1%;
     padding-bottom: 0;
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
 }
 
 .userpost .head {
@@ -160,12 +222,17 @@ a:hover {
     padding: 2px;
     margin: 1px 5px;
     display: inline-block;
-    background-color: black;
+    background-color: rgb(233, 14, 131);
     border-radius: 50%;
 }
 
 .userpost .head .author {
     margin-right: 5px;
+}
+
+.userpost .head .date {
+    font-size: 0.7rem;
+    color: grey;
 }
 
 .userpost .thumbnail-con img {
@@ -186,9 +253,11 @@ a:hover {
 
 .userpost .content-con .title {
     display: block;
-    font-weight: 555;
+    font-weight: 550;
     font-size: 1rem;
-    padding: 10px 0;
+    padding: 10px 1px;
+    text-align: start;
+    width: 70%;
 }
 
 .userpost .date {

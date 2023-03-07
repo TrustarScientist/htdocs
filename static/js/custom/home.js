@@ -8,13 +8,34 @@ $(".ads-container #cancel-icon").click(function() {
  */
 
 $(document).ready(function() {
+    /**
+     *  code to fetch top niches based on rank...top 12 trending Niches
+     */
+    $.post("/niche/toprank", {}, function(data, status) {
+        //alert(data);
+        // convert to Js object
+        let res = JSON.parse(data);
+        // container
+        let parentCon = document.querySelector(".post-types .scroller");
+        if (res != []) {
+            // create niche links
+            res.forEach(niche => {
+                let newNiche = document.createElement("a");
+                newNiche.setAttribute("class", "btn btn-outline-secondary");
+                newNiche.href = `/niche/${niche.alias}`;
+                newNiche.textContent = niche.alias;
+                parentCon.appendChild(newNiche);
+            });
+        }
+    })
+
     // next btn
     let nextPostBtn = document.querySelector(".more-posts-btns .next");
     let prevPostBtn = document.querySelector(".more-posts-btns .prev");
 
     let dataset = {
         "starting": 0,
-        "amount": 2
+        "amount": 12
     };
     postAggregator("/post/trending", dataset, nextPostBtn, prevPostBtn);
     /**
@@ -24,7 +45,7 @@ $(document).ready(function() {
         let startingPoint = (e.target.dataset.next);
         postAggregator("/post/trending", {
             "starting": startingPoint,
-            "amount": 2
+            "amount": 12
         }, nextPostBtn, prevPostBtn);
     });
 

@@ -1,72 +1,334 @@
-body {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+/* width */
+
+::-webkit-scrollbar {
+    width: 1px;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: rgb(240, 240, 240);
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: rgb(240, 240, 240);
+}
+
+
+/* Handle on hover */
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 .drow-one {
-    padding: 0;
-    padding-top: 60px;
+    padding-top: 20px;
 }
 
-.dcol {
+.pvt-nav .foot {
+    z-index: 22980;
+}
+
+.msg-creation-con input:focus,
+button:focus,
+textarea:focus {
+    border-color: rgb(224, 223, 223);
+    box-shadow: 1px 1px 3px 3px rgb(229, 245, 238);
+}
+
+.people-controller {
+    padding: 1% 2%;
+    border-radius: 5px;
+}
+
+.msg-sub-page {
+    margin-top: 45px;
+    width: 100%;
+    z-index: 83384;
+    display: block;
+}
+
+.msg-sub-page .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    padding: 3% 0;
+}
+
+.chat-section {
+    display: none;
+    padding-top: 45px;
+    position: relative;
+}
+
+.chat-section .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    padding: 1% 0;
+}
+
+.messages {
+    margin-top: 10px;
+}
+
+.messages .msg {
+    margin: 10px 0;
+    border: 1px solid rgb(240, 240, 240);
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.messages .msg .sender {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    margin-top: 2px;
+    padding: 2px;
+}
+
+.messages .msg .date {
+    font-size: 0.7rem;
+    color: grey;
+}
+
+.messages .msg .content {
+    font-size: 0.9rem;
+    width: 87%;
+}
+
+.messages .msg .content .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+.chat {
+    border: 1px solid rgb(240, 240, 240);
+    width: 70%;
+    margin: 10px 0;
     padding: 1%;
 }
 
-.msg-section {}
-
-.msg-con {}
-
-.msg {
-    padding: 2% 1%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgb(240, 240, 240);
-    box-shadow: 1px 1px 6px rgb(240, 240, 240);
-}
-
-.msg .body {
-    width: 85%;
-}
-
-.msg .photo {
-    margin-right: 5px;
-    padding: 0.5%;
-    border-radius: 50%;
-    border: 1px solid rgb(240, 240, 240);
-}
-
-.msg .metadata {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgb(240, 240, 240);
-}
-
-.msg .metadata .name {
-    font-style: italic;
-}
-
-.msg .metadata .date {
-    font-size: 0.8rem;
-    color: rgb(13, 139, 77);
-}
-
-.msg .content {
+.chat .body {
     font-size: 0.9rem;
 }
 
-@media screen and (min-width:1024px) {
+.chat .datetime {
+    font-size: 0.7rem;
+    color: gray;
+}
+
+.conversations .received {
+    background-color: rgb(243, 250, 243);
+}
+
+.conversations .sent {
+    background-color: rgb(253, 236, 236);
+    margin-left: 30%;
+}
+
+.msg-creation-con {
+    position: fixed;
+    bottom: 50px;
+    width: 94%;
+    padding-left: 0;
+    background-color: white;
+}
+
+.msg-creation-con .form {
+    padding: 1% 0.5%;
+    border-top: 1px solid rgb(240, 240, 240);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.msg-creation-con #user-msg {
+    width: 80%;
+}
+
+.people-section {
+    display: none;
+    margin-bottom: 30px;
+}
+
+.people-section .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1% 0;
+    padding-bottom: 3%;
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+.people-section .head #network-search {
+    width: 80%;
+    margin-bottom: 5px;
+}
+
+.people-section input:focus,
+button:focus,
+textarea:focus {
+    border-color: rgb(224, 223, 223);
+    box-shadow: 1px 1px 3px 3px rgb(229, 245, 238);
+}
+
+.rp-container {
+    margin-top: 10px;
+    margin-bottom: 50px;
+    border-top: 1px solid rgb(240, 240, 240);
+}
+
+.rp-container .scroller {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1% 0;
+}
+
+.scroller .person {
+    position: relative;
+    text-align: center;
+    padding: 1% 7px;
+    width: 47%;
+    height: 140px;
+    margin: 10px 0;
+    border: 1px solid rgb(240, 240, 240);
+}
+
+.scroller .person .userlink {
+    position: absolute;
+    right: 5%;
+}
+
+.scroller .person .image {
+    border-radius: 50%;
+    width: 85px;
+    height: 85px;
+    padding: 2px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    border: 1px solid rgb(240, 240, 240);
+}
+
+.scroller .person .name {
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+@media screen and (min-width: 576px) {
+    .msg-sub-page,
+    .chat-section,
+    .people-section {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+    .msg-creation-con {
+        width: 77.5%;
+    }
+}
+
+@media screen and (min-width:768px) {
     .drow-one {
         padding-top: 80px;
     }
-    .msg-section {
+    .msg-sub-page,
+    .chat-section,
+    .people-section {
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+    .msg-creation-con {
+        width: 70%;
+    }
+    .scroller .person {
+        width: 30%;
+    }
+}
+
+@media screen and (min-width:992px) {
+    .msg-sub-page,
+    .chat-section,
+    .people-section {
+        padding: 0.5%;
+        margin-top: 0;
+        padding-top: 0;
+        display: block;
+    }
+    .msg-sub-page {
+        margin-top: -2px;
+        position: fixed;
+        width: 23%;
         overflow-y: scroll;
+        height: 100%;
+        padding-bottom: 100px;
     }
-    .msg {
-        font-size: 1.2rem;
+    .msg-sub-page .people-controller {
+        display: none;
     }
-    .msg .content {
+    .msg-sub-page .messages .msg:hover {
+        background-color: rgb(240, 240, 240);
+    }
+    .msg .body {
         font-size: 1rem;
+    }
+    .chat-section {
+        margin-top: -9px;
+    }
+    .chat-section .received {
+        font-size: 1rem;
+    }
+    .chat-section .sent {
+        font-size: 1rem;
+    }
+    .chat-section .received .body,
+    .chat-section .sent .body {
+        font-size: 1.1rem;
+    }
+    .chat-section .received .datetime,
+    .chat-section .sent .datetime {
+        font-size: 0.8rem;
+    }
+    .people-section {
+        margin-top: 7px;
+        padding-bottom: 100px;
+        position: fixed;
+        width: 23%;
+        overflow-y: scroll;
+        height: 100%;
+        border-left: 1px solid rgb(240, 240, 240);
+    }
+    .people-section .person:hover {
+        background-color: rgb(240, 240, 240);
+    }
+    .people-section .person .name {
+        font-size: 0.9rem;
+    }
+    .msg-sub-page .head svg,
+    .chat-section .head svg,
+    .people-section .head svg {
+        display: none;
+    }
+    .chat-section .head {
+        align-items: flex-end;
+        padding: 0;
+    }
+    .msg-creation-con {
+        width: 47%;
+    }
+    .scroller .person {
+        width: 45%;
     }
 }
