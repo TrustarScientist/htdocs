@@ -115,7 +115,7 @@ textarea:focus {
 }
 
 .pvt-nav .head .events-menu {
-    height: 81.5%;
+    height: 95%;
     background-color: white;
     position: fixed;
     top: 60px;
@@ -140,7 +140,6 @@ textarea:focus {
 
 .pvt-nav .head .events-menu .path-details {
     border: 1px solid rgb(240, 240, 240);
-    display: none;
     width: 98%;
     margin: 0 auto;
     border-radius: 0 0 5px 5px;
@@ -170,15 +169,17 @@ textarea:focus {
 
 .pvt-nav .foot a {
     display: block;
+    transition: 1s;
 }
 
 .pvt-nav .foot p {
     display: none;
+    font-weight: 500;
 }
 
 .pvt-nav .foot p:hover {
-    color: rgb(13, 139, 77);
-    border-bottom: 2px solid rgb(13, 139, 77);
+    border-bottom: 2px solid deeppink;
+    transition: 0.5s;
 }
 
 @media screen and (min-width:576px) {

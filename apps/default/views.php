@@ -12,9 +12,7 @@
             render($request, "index.html");
        }
    };
-   $connections = function($request){
-    render($request, "pvt/connections.html");
-   };
+   
    $searchEngine = function($request){
     if($request->method == "GET"){
         if(!$request->is_authenticated){

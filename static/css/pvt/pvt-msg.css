@@ -1,183 +1,211 @@
-/* width */
-
-::-webkit-scrollbar {
-    width: 1px;
+.site-nav {
+    z-index: 2000;
 }
 
-
-/* Track */
-
- ::-webkit-scrollbar-track {
-    background: rgb(240, 240, 240);
-}
-
-
-/* Handle */
-
- ::-webkit-scrollbar-thumb {
-    background: rgb(240, 240, 240);
-}
-
-
-/* Handle on hover */
-
- ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
-.drow-one {
-    padding-top: 20px;
+.pvt-nav {
+    z-index: 3000;
 }
 
 .pvt-nav .foot {
-    z-index: 22980;
+    z-index: 356786;
 }
 
-.msg-creation-con input:focus,
-button:focus,
-textarea:focus {
-    border-color: rgb(224, 223, 223);
-    box-shadow: 1px 1px 3px 3px rgb(229, 245, 238);
+.pvt-nav .foot #fifth {
+    border-bottom: 2px solid rgb(13, 139, 77);
 }
 
-.people-controller {
-    padding: 1% 2%;
-    border-radius: 5px;
+a {
+    text-decoration: none;
+    color: black;
 }
 
-.msg-sub-page {
-    margin-top: 45px;
-    width: 100%;
-    z-index: 83384;
-    display: block;
+.dropdown-menu {
+    z-index: 28929;
 }
 
-.msg-sub-page .head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgb(240, 240, 240);
-    padding: 3% 0;
+a:focus,
+a:hover {
+    color: rgb(13, 139, 77);
 }
 
-.chat-section {
+a:visited {
+    color: black;
+}
+
+.drow-one {
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.recommended-people-section {
     display: none;
-    padding-top: 45px;
-    position: relative;
 }
 
-.chat-section .head {
+.dcol {
+    padding: 1% 1%;
+}
+
+.msg-paths {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgb(240, 240, 240);
-    padding: 1% 0;
 }
 
-.messages {
-    margin-top: 10px;
+.incoming-messages-section {
+    border: 1px solid rgb(240, 240, 240);
+    padding: 4% 0.5%;
+    border-radius: 5px;
+    position: fixed;
+    top: 70px;
+    height: 100%;
+    width: 98.5%;
+    overflow-y: scroll;
+    padding-bottom: 150px;
+    background-color: white;
 }
 
-.messages .msg {
-    margin: 10px 0;
+.incoming-messages {
+    padding: 0.5%;
+}
+
+.incoming-messages .incoming-msg {
     border: 1px solid rgb(240, 240, 240);
     padding: 1%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: 0.5s;
 }
 
-.messages .msg .sender {
+.incoming-messages .incoming-msg:hover {
+    background-color: grey;
+    color: white;
+}
+
+.incoming-messages .incoming-msg .sender-photo {
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    padding: 1%;
     margin-right: 5px;
-    margin-top: 2px;
-    padding: 2px;
+    border: 1px solid rgb(240, 240, 240);
 }
 
-.messages .msg .date {
+.incoming-messages .incoming-msg .details {
+    width: 100%;
+}
+
+.incoming-messages .incoming-msg .details p {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.incoming-messages .incoming-msg .details .uad {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.incoming-messages .incoming-msg .details .uad .date {
     font-size: 0.7rem;
     color: grey;
 }
 
-.messages .msg .content {
-    font-size: 0.9rem;
-    width: 87%;
+.default-text {
+    width: 60%;
+    border-radius: 50% 25% 70% 20%;
+    margin: 20% auto;
+    padding: 6%;
+    box-shadow: 5px 5px 30px rgb(196, 195, 195);
+    display: none;
 }
 
-.messages .msg .content .info {
+.default-text:hover {
+    background-color: grey;
+}
+
+.chat-board {
+    margin-top: 1.8%;
+    padding: 1%;
+    padding-top: 2%;
+    display: none;
+    transition: 1s;
+    border-radius: 5px;
+    min-height: 200%;
+    background-image: url(/static/images/banner-right-image.png);
+}
+
+.chat-board .chat-pane {
+    background-color: white;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     border-bottom: 1px solid rgb(240, 240, 240);
 }
 
-.chat {
-    border: 1px solid rgb(240, 240, 240);
+.chat-board .chat {
     width: 70%;
-    margin: 10px 0;
+    border-radius: 40px;
+    margin: 20px 0;
+    padding: 4%;
+    font-size: 0.8rem;
+    box-shadow: 3px 3px 10px rgb(204, 203, 203);
+}
+
+.chat-board .chat .date {
+    font-size: 0.8rem;
+    color: grey;
+}
+
+.chat-board .chat:hover {
+    background-color: ghostwhite;
+}
+
+.chat-board .sender {
+    margin-left: 30%;
+    background-color: rgb(253, 229, 241);
+    transition: 0.5s;
+}
+
+.chat-board .sender:hover {
+    background-color: rgb(224, 18, 128);
+    color: white;
+}
+
+.chat-board .receiver {
+    background-color: rgb(232, 250, 241);
+    transition: 0.5s;
+}
+
+.chat-board .receiver:hover {
+    background-color: rgb(13, 139, 77);
+    color: white;
+}
+
+.chat-board .msg-send-form {
+    width: 100%;
+    position: fixed;
+    bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: ghostwhite;
+    left: 0;
     padding: 1%;
 }
 
-.chat .body {
-    font-size: 0.9rem;
-}
-
-.chat .datetime {
-    font-size: 0.7rem;
-    color: gray;
-}
-
-.conversations .received {
-    background-color: rgb(243, 250, 243);
-}
-
-.conversations .sent {
-    background-color: rgb(253, 236, 236);
-    margin-left: 30%;
-}
-
-.msg-creation-con {
-    position: fixed;
-    bottom: 50px;
-    width: 94%;
-    padding-left: 0;
-    background-color: white;
-}
-
-.msg-creation-con .form {
-    padding: 1% 0.5%;
-    border-top: 1px solid rgb(240, 240, 240);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.msg-creation-con #user-msg {
+.chat-board .msg-send-form input {
     width: 80%;
 }
 
-.people-section {
-    display: none;
-    margin-bottom: 30px;
-}
-
-.people-section .head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1% 0;
-    padding-bottom: 3%;
-    border-bottom: 1px solid rgb(240, 240, 240);
-}
-
-.people-section .head #network-search {
-    width: 80%;
-    margin-bottom: 5px;
-}
-
-.people-section input:focus,
+.chat-board .msg-send-form input:focus,
 button:focus,
 textarea:focus {
     border-color: rgb(224, 223, 223);
@@ -185,31 +213,40 @@ textarea:focus {
 }
 
 .rp-container {
-    margin-top: 10px;
-    margin-bottom: 50px;
-    border-top: 1px solid rgb(240, 240, 240);
+    width: 100%;
 }
 
 .rp-container .scroller {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    padding: 1% 0;
 }
 
 .scroller .person {
     position: relative;
     text-align: center;
-    padding: 1% 7px;
-    width: 47%;
-    height: 140px;
-    margin: 10px 0;
+    margin-top: 5px;
+    padding: 1% 3px;
+    width: 45%;
+    margin-bottom: 10px;
     border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
+}
+
+.scroller .person:hover {
+    background-color: ghostwhite;
 }
 
 .scroller .person .userlink {
     position: absolute;
+    right: 5%;
+}
+
+.scroller .person .like-icon {
+    position: absolute;
+    top: 10px;
     right: 5%;
 }
 
@@ -218,40 +255,256 @@ textarea:focus {
     width: 85px;
     height: 85px;
     padding: 2px;
-    margin-bottom: 10px;
-    margin-top: 5px;
+    display: block;
+    margin: 5px auto;
     border: 1px solid rgb(240, 240, 240);
 }
 
 .scroller .person .name {
     font-size: 0.8rem;
-    margin: 0;
+    margin: 5px 0;
+    display: block;
+    padding-bottom: 1%;
 }
 
-@media screen and (min-width: 576px) {
-    .msg-sub-page,
-    .chat-section,
-    .people-section {
+.userposts {}
+
+.userposts .userpost {
+    margin: 5px 0;
+    padding: 0;
+    border-radius: 5px;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
+}
+
+.userposts .userpost:hover {
+    background-color: ghostwhite;
+}
+
+.userpost .thumbnail-con img {
+    width: 100%;
+}
+
+.userpost .content-con {
+    display: block;
+}
+
+.userpost .post-thumbnail {
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+}
+
+.userpost .title {
+    display: block;
+    font-weight: 500;
+    margin-top: 10px;
+    font-size: 1rem;
+    padding: 1%;
+}
+
+.userpost .content-con .title:focus {
+    color: rgb(13, 139, 77);
+}
+
+.userpost .content-con .post-type {
+    margin-top: 2px;
+    display: inline-block;
+    margin-left: 5px;
+    padding: 0.5% 1.5%;
+    font-size: 0.9rem;
+    border-radius: 5px;
+}
+
+.userpost .metadata {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+}
+
+.userpost .metadata .user-info {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1%;
+}
+
+.userpost .metadata .user-info .photo {
+    width: 35px;
+    height: 35px;
+}
+
+.userpost .metadata .user-info img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    border-radius: 50%;
+}
+
+.userpost .metadata .user-info .ud .date {
+    font-size: 0.7rem;
+    color: gray;
+    margin-top: -1px;
+}
+
+.userpost .metadata .stats {
+    padding-top: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 39%;
+}
+
+.userpost .metadata .stats div {
+    margin: 0 4px;
+    width: 45%;
+}
+
+.userpost .metadata .stats .count {
+    font-size: 0.7rem;
+    color: grey;
+}
+
+.userpost .metadata .alias-con {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.more-posts-btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2% 0;
+    border-top: 1px solid rgb(240, 240, 240);
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+.niches-section {
+    margin-bottom: 70px;
+    position: fixed;
+    width: 23%;
+}
+
+.niches {}
+
+.niches .niche {
+    border: 1px solid rgb(240, 240, 240);
+    padding: 0 1%;
+    margin: 10px auto;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.niches .niche:hover {
+    background-color: ghostwhite;
+}
+
+.niches .niche .name {
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: black;
+}
+
+.niches .niche .foot {
+    margin-top: 2%;
+    border-top: 1px solid rgb(240, 240, 240);
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.niches .niche .foot:hover {
+    border-top: 1px solid rgb(216, 215, 215);
+}
+
+.niches .niche .foot .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.niches .niche .foot .info .banner {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.niches .niche .alias {
+    font-size: 0.9rem;
+    padding: 1% 0;
+    color: gray;
+    display: block;
+    text-align: start;
+}
+
+.niches .niche .foot .mem {
+    font-size: 0.9rem;
+}
+
+.niches .niche .foot .post {
+    margin-left: 10px;
+    font-size: 0.9rem;
+}
+
+.niches .niche .foot .membership {
+    padding: 0% 2%;
+}
+
+.niches .niche .foot .more {
+    padding: 1% 2%;
+    margin-left: 10px;
+}
+
+.niches .niche .foot .join {
+    padding: 1% 2%;
+}
+
+@media screen and (min-width:576px) {
+    .dcol:nth-child(2) {
         padding-left: 10%;
         padding-right: 10%;
     }
-    .msg-creation-con {
-        width: 77.5%;
+    .incoming-messages-section {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+        padding-top: 1%;
+    }
+    .chat-board .msg-send-form {
+        left: 8%;
+        width: 85%;
+        border-radius: 10px;
     }
 }
 
 @media screen and (min-width:768px) {
-    .drow-one {
-        padding-top: 80px;
+    .dcol:nth-child(2) {
+        margin-top: 60px;
+        padding-left: 1%;
+        padding-right: 1%;
     }
-    .msg-sub-page,
-    .chat-section,
-    .people-section {
-        padding-left: 15%;
-        padding-right: 15%;
+    .incoming-messages-section {
+        width: 64.5%;
+        margin-left: 33.5%;
+        padding: 1%;
+        margin-top: 5%;
     }
-    .msg-creation-con {
-        width: 70%;
+    .chat-board .msg-send-form {
+        width: 65.5%;
+        left: 34%;
+        bottom: 0;
+        border-radius: 10px;
+    }
+    .userpost {
+        border: 1px solid rgb(240, 240, 240);
     }
     .scroller .person {
         width: 30%;
@@ -259,76 +512,71 @@ textarea:focus {
 }
 
 @media screen and (min-width:992px) {
-    .msg-sub-page,
-    .chat-section,
-    .people-section {
-        padding: 0.5%;
-        margin-top: 0;
-        padding-top: 0;
+    .drow-one {
+        padding-top: 60px;
+    }
+    .dcol:nth-child(2) {
+        margin-top: 8px;
+    }
+    #recommeded-people-section {
         display: block;
     }
-    .msg-sub-page {
-        margin-top: -2px;
-        position: fixed;
-        width: 23%;
-        overflow-y: scroll;
-        height: 100%;
-        padding-bottom: 100px;
+    .profile-metadata-con {
+        margin-top: 13px;
     }
-    .msg-sub-page .people-controller {
+    .profile-edit-con {
+        display: block;
+        position: fixed;
+        top: 85px;
+        overflow-y: scroll;
+        width: 23%;
+        height: 84%;
+        padding: 0.5%;
+        border: 1px solid rgb(240, 240, 240);
+        border-radius: 5px;
+        padding-bottom: 50px;
+    }
+    .default-text {
+        display: block;
+    }
+    .chat-board .chat-pane .cancel {
         display: none;
     }
-    .msg-sub-page .messages .msg:hover {
-        background-color: rgb(240, 240, 240);
+    .chat-board .msg-send-form {
+        width: 48%;
+        left: 26%;
+        padding: 1.5% 1%;
     }
-    .msg .body {
-        font-size: 1rem;
-    }
-    .chat-section {
-        margin-top: -9px;
-    }
-    .chat-section .received {
-        font-size: 1rem;
-    }
-    .chat-section .sent {
-        font-size: 1rem;
-    }
-    .chat-section .received .body,
-    .chat-section .sent .body {
-        font-size: 1.1rem;
-    }
-    .chat-section .received .datetime,
-    .chat-section .sent .datetime {
-        font-size: 0.8rem;
-    }
-    .people-section {
-        margin-top: 7px;
-        padding-bottom: 100px;
-        position: fixed;
-        width: 23%;
-        overflow-y: scroll;
+    .incoming-messages-section {
+        margin-left: 0;
+        margin-top: 0px;
+        width: 24%;
         height: 100%;
-        border-left: 1px solid rgb(240, 240, 240);
-    }
-    .people-section .person:hover {
-        background-color: rgb(240, 240, 240);
-    }
-    .people-section .person .name {
-        font-size: 0.9rem;
-    }
-    .msg-sub-page .head svg,
-    .chat-section .head svg,
-    .people-section .head svg {
-        display: none;
-    }
-    .chat-section .head {
-        align-items: flex-end;
-        padding: 0;
-    }
-    .msg-creation-con {
-        width: 47%;
+        padding: 0.5%;
+        padding-top: 1%;
+        padding-bottom: 150px;
     }
     .scroller .person {
-        width: 45%;
+        width: 24%;
+    }
+    .niches-section {
+        display: block;
+    }
+    .userposts-section {
+        display: block;
+        padding: 1%;
+        padding-top: 1px;
+    }
+    .userposts .userpost {
+        border: 1px solid rgb(240, 240, 240);
+    }
+    .userpost .content-con .title {
+        font-size: 1.2rem;
+    }
+    .incoming-messages-section {
+        position: fixed;
+        top: 87px;
+        width: 23%;
+        height: 100%;
     }
 }

@@ -1,13 +1,17 @@
-.drow-one {
-    padding-top: 70px;
+.site-nav {
+    z-index: 2000;
+}
+
+.pvt-nav {
+    z-index: 3000;
 }
 
 .pvt-nav .foot {
-    z-index: 334567;
+    z-index: 356786;
 }
 
-body {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+.pvt-nav .foot #third {
+    border-bottom: 2px solid rgb(13, 139, 77);
 }
 
 a {
@@ -15,165 +19,292 @@ a {
     color: black;
 }
 
-a:visited {
+.dropdown-menu {
+    z-index: 28929;
+}
+
+a:focus,
+a:hover {
     color: rgb(13, 139, 77);
 }
 
-.msg-form {
+a:visited {
+    color: black;
+}
+
+.drow-one {
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+
+.recommended-people-section {
     display: none;
 }
 
-.msg-form textarea:focus {
+.dcol {
+    padding: 1% 1%;
+}
+
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+
+/** test code 4 profile */
+
+.profile-metadata-con {
+    position: relative;
+    width: 100%;
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.profile-metadata-con .edit-con {
+    background-color: white;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 50px;
+    padding-top: 0.4%;
+    right: 30%;
+    border-radius: 50%;
+}
+
+.profile-metadata-con .photo-con {
+    width: 50%;
+    margin: 10px auto;
+    display: block;
+}
+
+.profile-metadata-con .photo-con .photo {
+    width: 100%;
+    border-radius: 20px;
+    padding: 1%;
+    z-index: 3377;
+    border: 1px solid rgb(240, 240, 240);
+}
+
+.profile-metadata-con .stats {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+.profile-metadata-con .stats p {
+    border: 1px solid rgb(240, 240, 240);
+    padding: 2% 1%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 30%;
+}
+
+.profile-metadata-con .stats p:nth-child(1) {
+    color: rgb(13, 139, 77);
+}
+
+.profile-metadata-con .stats p:nth-child(1):hover {
+    color: white;
+    background-color: rgb(13, 139, 77);
+}
+
+.profile-metadata-con .stats p:nth-child(2) {
+    color: grey;
+}
+
+.profile-metadata-con .stats p:nth-child(2):hover {
+    color: white;
+    background-color: grey;
+}
+
+.profile-metadata-con .edit-btn {
+    display: none;
+}
+
+.profile-path-btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2% 1%;
+    border-radius: 5px;
+    margin: 10px 0;
+    border: 1px solid rgb(240, 240, 240);
+}
+
+.profile-path-btns b {}
+
+.profile-path-btns b:hover {
+    color: grey;
+}
+
+.profile-path-btns .about {
+    border-bottom: 2px solid rgb(13, 139, 77);
+}
+
+.profile-edit-con {
+    display: none;
+}
+
+.paths-con .about-path {
+    display: block;
+}
+
+.paths-con .network-path {
+    display: none;
+}
+
+.paths-con .posts-path {
+    display: none;
+}
+
+.paths-con .communities-path {
+    display: none;
+}
+
+.profile-edit-con {
+    padding-bottom: 60px;
+    z-index: 23732892373023032723520329732;
+    display: block;
+}
+
+.profile-edit-con input:focus,
+.profile-edit-con select:focus,
+.profile-edit-con textarea:focus {
     border-color: rgb(224, 223, 223);
     box-shadow: 1px 1px 3px 3px rgb(229, 245, 238);
 }
 
-.profile-con {
-    margin: 5px auto;
-}
-
-.profile-con img {
-    margin: 1px auto;
-    display: block;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    padding: 1%;
-    border: 1px solid rgb(240, 240, 240);
-}
-
-.intro {
-    text-align: center;
-}
-
-.connection-con {
-    text-align: center;
-}
-
-.connection-con .btn {
-    margin: 0 7px;
-}
-
-.profile-paths {
+.profile-edit-con .edit-form .edit-switch {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
-    border-bottom: 1px solid rgb(240, 240, 240);
-    text-align: center;
+    align-items: center;
+    padding-bottom: 1%;
 }
 
-.profile-paths b {
-    padding-bottom: 3px;
-    width: 25%;
-}
-
-.profile-paths .bio {
-    border-bottom: 2px solid rgb(13, 139, 77);
-}
-
-.network-section,
-.posts-section,
-.niches-section {
+.profile-edit-con .edit-form {
     display: none;
 }
 
-.profile-niche {
-    margin-bottom: 5px;
-}
-
-.profile-niche .info {
-    margin-top: 10px;
-    border-top: 1px solid rgb(240, 240, 240);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-}
-
-.profile-niche .niche-name {
-    padding-bottom: 20px;
+.profile-edit-con .edit-form input {
+    margin-bottom: 10px;
     display: block;
-    color: black;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
 }
 
-.profile-niche .info span {
-    color: grey;
-    font-size: 0.8rem;
+.profile-edit-con .edit-form .image-preview {
+    width: 100%;
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 5px;
+    margin: 10px 0;
 }
 
-
-/**  duplicate  person code */
-
-.people {}
-
-.people .person {
-    margin: 5px 0;
-    padding: 2% 1%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.profile-edit-con .other-info {
+    display: none;
 }
 
-.people .person .info {
-    width: 80%;
+.rp-container {
+    width: 100%;
+}
+
+.rp-container .scroller {
+    width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    flex-wrap: wrap;
 }
 
-.people .person .info img {
+.scroller .person {
+    position: relative;
+    text-align: center;
+    margin-top: 5px;
+    padding: 1% 3px;
+    width: 45%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 5px;
+}
+
+.scroller .person:hover {
+    background-color: ghostwhite;
+}
+
+.scroller .person .userlink {
+    position: absolute;
+    right: 5%;
+}
+
+.scroller .person .like-icon {
+    position: absolute;
+    top: 10px;
+    right: 5%;
+}
+
+.scroller .person .image {
     border-radius: 50%;
-    margin-right: 5px;
-}
-
-.people .person .info .user .fullname {
-    font-size: 0.8rem;
+    width: 88px;
+    height: 88px;
+    padding: 2px;
     display: block;
-    color: grey;
+    margin: 5px auto;
+    border: 1px solid rgb(240, 240, 240);
 }
 
-.people .person .btn {
-    padding: 1% 2%;
+.scroller .person .name {
+    font-size: 0.8rem;
+    margin: 10px 0;
+    display: block;
+    padding-bottom: 1%;
 }
-
-
-/** user posts  duplicate code */
 
 .userposts {}
 
 .userposts .userpost {
-    position: relative;
-    margin: 5px 0;
-    padding: 2% 1%;
-    padding-bottom: 0;
-}
-
-.userpost .thumbnail-con img {
-    width: 100%;
-}
-
-.userpost .content-con {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.userpost .content-con img {
-    width: 30%;
-    margin-right: 10px;
+    margin: 10px 0;
+    padding: 0;
+    border-radius: 5px;
+    border: 1px solid rgb(219, 219, 219);
     border-radius: 5px;
 }
 
-.userpost .content-con .title {
-    display: block;
-    font-weight: 500;
+.userposts .userpost:hover {
+    background-color: ghostwhite;
 }
 
-.userpost .date {
-    font-size: 0.8rem;
-    color: gray;
+.userpost .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1%;
+}
+
+.userpost .head .post-thumbnail {
+    width: 50%;
+    margin-right: 5px;
+    border-radius: 5px;
+    border: 1px solid rgb(240, 240, 240);
+}
+
+.userpost .head .title {
+    display: block;
+    font-weight: 500;
+    font-size: 1rem;
+    text-align: start;
+    width: 74%;
+}
+
+.userpost .content-con .title:focus {
+    color: rgb(13, 139, 77);
+}
+
+.userpost .content-con .post-type {
+    margin-top: 2px;
+    display: inline-block;
+    margin-left: 5px;
+    padding: 0.5% 1.5%;
+    font-size: 0.9rem;
+    border-radius: 5px;
 }
 
 .userpost .metadata {
@@ -185,26 +316,44 @@ a:visited {
     border-top: 1px solid rgb(240, 240, 240);
 }
 
-.userpost .metadata .niche-info {
-    width: 40%;
+.userpost .metadata .user-info {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1%;
 }
 
-.userpost .metadata .niche-info .btn {
-    padding-top: 2%;
-    padding-bottom: 2%;
-    color: white;
+.userpost .metadata .user-info .photo {
+    width: 35px;
+    height: 35px;
+}
+
+.userpost .metadata .user-info img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    border-radius: 50%;
+}
+
+.userpost .metadata .user-info .ud .date {
+    font-size: 0.7rem;
+    color: gray;
+    margin-top: -1px;
 }
 
 .userpost .metadata .stats {
+    padding-top: 10px;
     text-align: center;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 50%;
+    width: 39%;
 }
 
 .userpost .metadata .stats div {
-    margin: 0 7px;
+    margin: 0 4px;
+    width: 45%;
 }
 
 .userpost .metadata .stats .count {
@@ -216,4 +365,198 @@ a:visited {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.more-posts-btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2% 0;
+    border-top: 1px solid rgb(240, 240, 240);
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+.niches-section {
+    margin-bottom: 70px;
+    position: fixed;
+    width: 23%;
+}
+
+.niches {}
+
+.niches .niche {
+    border: 1px solid rgb(219, 219, 219);
+    padding: 0 1%;
+    margin: 10px auto;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.niches .niche:hover {
+    background-color: ghostwhite;
+}
+
+.niches .niche .name {
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: black;
+    display: block;
+    margin-top: 2%;
+}
+
+.niches .niche .foot {
+    margin-top: 2%;
+    border-top: 1px solid rgb(240, 240, 240);
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.niches .niche .foot:hover {
+    border-top: 1px solid rgb(216, 215, 215);
+}
+
+.niches .niche .foot .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.niches .niche .foot .info .banner {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.niches .niche .alias {
+    font-size: 0.9rem;
+    padding: 1% 0;
+    color: gray;
+    display: block;
+    text-align: start;
+}
+
+.niches .niche .foot .mem {
+    font-size: 0.9rem;
+}
+
+.niches .niche .foot .mem span {
+    color: grey;
+}
+
+.niches .niche .foot .post {
+    margin-left: 10px;
+}
+
+.niches .niche .foot .post span {
+    color: grey;
+}
+
+.niches .niche .foot .membership {
+    padding: 0% 2%;
+}
+
+.niches .niche .foot .more {
+    padding: 1% 2%;
+    margin-left: 10px;
+}
+
+.niches .niche .foot .join {
+    padding: 1% 2%;
+}
+
+@media screen and (min-width:576px) {
+    .dcol:nth-child(2) {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+}
+
+@media screen and (min-width:768px) {
+    .dcol:nth-child(2) {
+        margin-top: 60px;
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+    .profile-edit-con {
+        width: 65%;
+        margin-left: 35%;
+    }
+    .userpost {
+        border: 1px solid rgb(240, 240, 240);
+    }
+    .scroller .person {
+        width: 30%;
+    }
+}
+
+@media screen and (min-width:992px) {
+    .drow-one {
+        padding-top: 60px;
+    }
+    .dcol:nth-child(2) {
+        margin-top: 8px;
+    }
+    #recommeded-people-section {
+        display: block;
+    }
+    .profile-metadata-con {
+        margin-top: 13px;
+    }
+    .profile-metadata-con .edit-btn {
+        display: none;
+    }
+    .profile-edit-con {
+        display: block;
+        position: fixed;
+        top: 85px;
+        overflow-y: scroll;
+        width: 23%;
+        height: 84%;
+        padding: 0.5%;
+        margin-left: 0;
+        border: 1px solid rgb(240, 240, 240);
+        border-radius: 5px;
+        padding-bottom: 50px;
+    }
+    .profile-edit-con .other-info {
+        display: block;
+    }
+    .edit-form .edit-cancel {}
+    .scroller .person {
+        width: 24%;
+    }
+    .niches-section {
+        display: block;
+    }
+    .userposts-section {
+        display: block;
+        padding: 1%;
+        padding-top: 1px;
+    }
+    .userposts .userpost {
+        border: 1px solid rgb(240, 240, 240);
+    }
+    .userpost .content-con .title {
+        font-size: 1.2rem;
+    }
+    .n-sub-page {
+        top: 12%;
+        width: 21%;
+        display: block;
+    }
+    .n-sub-page .notes {
+        width: 100%;
+        padding: 0 1%;
+        font-size: 0.7rem;
+    }
+    .n-sub-page .notes .notification {
+        border: 0;
+        width: 100%;
+        font-size: 1rem;
+        border-bottom: 1px solid rgb(206, 204, 204);
+    }
 }

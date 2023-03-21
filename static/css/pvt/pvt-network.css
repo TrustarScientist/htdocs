@@ -1,157 +1,193 @@
-/* width */
-
-::-webkit-scrollbar {
-    width: 1px;
+* a {
+    color: black;
+    text-decoration: none;
+    font-size: 0.9rem;
 }
 
-
-/* Track */
-
- ::-webkit-scrollbar-track {
-    background: rgb(240, 240, 240);
-}
-
-
-/* Handle */
-
- ::-webkit-scrollbar-thumb {
-    background: rgb(240, 240, 240);
-}
-
-
-/* Handle on hover */
-
- ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+* a:hover {
+    color: rgb(13, 139, 77);
 }
 
 .pvt-nav .foot,
 .pvt-nav .head {
-    z-index: 293838084748;
+    z-index: 29383;
+}
+
+.pvt-nav .foot #second {
+    border-bottom: 2px solid rgb(13, 139, 77);
+}
+
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .drow-one {
-    padding-bottom: 60px;
+    padding: 1%;
 }
 
-.scope {
-    margin-top: 70px;
-    padding-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    border-bottom: 1px solid rgb(240, 240, 240);
-    position: fixed;
-    top: -20px;
-    width: 93%;
-    background-color: white;
-    z-index: 38;
+.dcol {
+    padding: 1% 0;
 }
 
-.scope * {
-    width: 50%;
-    margin-bottom: 0;
-}
-
-.scope .people {
-    border-bottom: 1px solid rgb(13, 139, 77);
+.dcol:nth-child(2) {
+    margin-top: 60px;
 }
 
 .rp-container {
-    margin-top: 3px;
-    margin-bottom: 10px;
-}
-
-.first-col {
-    padding-top: 60px;
-}
-
-.frequest {}
-
-.rp-container .people {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
     padding: 0;
 }
 
-.people .person {
+.rp-container .p_or_n {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1%;
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
+}
+
+.rp-container .scroller {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.scroller .person {
     position: relative;
     text-align: center;
-    padding: 1% 7px;
-    width: 47%;
-    height: 140px;
-    margin: 10px 0;
-    border: 1px solid rgb(240, 240, 240);
+    margin-top: 5px;
+    padding: 1% 3px;
+    width: 45%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 5px;
 }
 
-.people .person:hover {
-    background-color: rgb(240, 240, 240);
+.scroller .person:hover {
+    background-color: ghostwhite;
 }
 
-.modal button:focus {}
-
-.people .person .userlink {
+.scroller .person .userlink {
     position: absolute;
     right: 5%;
-    top: 5%;
 }
 
-.people .person .image {
+.scroller .person .like-icon {
+    position: absolute;
+    top: 10px;
+    right: 5%;
+}
+
+.scroller .person .image {
     border-radius: 50%;
-    width: 85px;
-    height: 85px;
+    width: 88px;
+    height: 88px;
     padding: 2px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    display: block;
+    margin: 5px auto;
     border: 1px solid rgb(240, 240, 240);
 }
 
-.people .person .name {
-    display: block;
+.scroller .person .name {
     font-size: 0.8rem;
-    margin: 0;
-    text-decoration: none;
-    color: black;
+    margin: 10px 0;
+    display: block;
+    padding-bottom: 1%;
 }
 
-.niches-section {
-    margin-bottom: 70px;
+.pi-head {
+    padding: 1.5% 1%;
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
 }
 
-.niches-section {
-    display: none;
+.yp-head {
+    padding: 1%;
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
 }
+
+.niches-section {}
 
 .niches {}
 
 .niches .niche {
-    border: 1px solid rgb(240, 240, 240);
-    padding: 2% 1%;
-    margin: 10px 0;
+    border: 1px solid rgb(219, 219, 219);
+    padding: 0 1%;
+    margin: 10px auto;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.niches .niche:hover {
+    background-color: ghostwhite;
 }
 
 .niches .niche .name {
-    font-size: 0.9rem;
+    font-size: 1rem;
+    font-weight: 500;
     text-decoration: none;
     color: black;
+    display: block;
+    margin-top: 2%;
 }
 
 .niches .niche .foot {
+    margin-top: 2%;
     border-top: 1px solid rgb(240, 240, 240);
-    padding-top: 1%;
+    padding: 1%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
 }
 
-.niches .niche .foot .alias {
-    font-size: 0.9rem;
+.niches .niche .foot:hover {
+    border-top: 1px solid rgb(216, 215, 215);
+}
+
+.niches .niche .foot .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.niches .niche .foot .info .banner {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
     margin-right: 10px;
-    padding: 1% 2%;
+}
+
+.niches .niche .alias {
+    font-size: 0.9rem;
+    padding: 1% 0;
     color: gray;
+    display: block;
+    text-align: start;
+}
+
+.niches .niche .foot .mem {
+    font-size: 0.8rem;
+}
+
+.niches .niche .foot .mem span {
+    color: grey;
+}
+
+.niches .niche .foot .post {
+    margin-left: 10px;
+    font-size: 0.8rem;
+}
+
+.niches .niche .foot .post span {
+    color: grey;
+}
+
+.niches .niche .foot .membership {
+    padding: 0% 2%;
 }
 
 .niches .niche .foot .more {
@@ -164,30 +200,32 @@
 }
 
 @media screen and (min-width:576px) {
-    .request-info,
-    .f-info,
-    .niches-section {
+    .dcol:nth-child(2) {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+    .dcol:nth-child(3) {
         padding-left: 10%;
         padding-right: 10%;
     }
 }
 
 @media screen and (min-width:768px) {
-    .request-info,
-    .f-info,
-    .niches-section {
-        padding-left: 15%;
-        padding-right: 15%;
+    .rp-container .scroller {
+        justify-content: flex-start;
     }
-    .request-info {
-        padding-top: 50px;
+    .dcol:nth-child(2) {
+        margin-top: 100px;
+        padding-left: 1%;
+        padding-right: 1%;
     }
-    .scope {
-        top: 30px;
-        width: 68%;
+    .dcol:nth-child(3) {
+        padding-left: 34.5%;
+        padding-right: 1%;
+        padding-bottom: 100px;
     }
-    .people .person {
-        width: 32%;
+    .scroller .person {
+        width: 30%;
     }
 }
 
@@ -195,48 +233,30 @@
     .drow-one {
         padding-top: 10px;
     }
-    .request-info,
-    .f-info,
-    .niches-section {
-        padding-left: 1%;
-        padding-right: 1%;
+    .dcol:nth-child(2) {
+        margin-top: 63px;
     }
-    .request-info {
-        position: fixed;
-        width: 23%;
-        overflow-y: scroll;
-        height: 100%;
-        margin-top: -50px;
+    .rp-container .scroller {
+        justify-content: space-between;
+    }
+    .rp-container .p_or_n .niches-btn {
+        visibility: hidden;
     }
     .people .person {
-        width: 47%;
-    }
-    .people .person .image {
-        width: 80px;
-        height: 80px;
-    }
-    .scope {
-        display: none;
-    }
-    .f-info {
-        padding-top: 70px;
-    }
-    .f-info .person {
-        width: 30%;
-    }
-    .frequest {
-        margin-top: -34px;
+        width: 23%;
+        margin-right: 0;
     }
     .niches-section {
+        background-color: white;
         display: block;
         width: 23%;
-        margin-top: 82px;
         position: fixed;
+        top: 85px;
+        right: 1%;
         overflow-y: scroll;
-        height: 100%;
-        border-left: 1px solid rgb(240, 240, 240);
-    }
-    .niches-section .niche:hover {
-        background-color: rgb(240, 240, 240);
+        height: 84%;
+        border: 1px solid rgb(240, 240, 240);
+        border-radius: 5px;
+        padding: 0.5%;
     }
 }

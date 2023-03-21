@@ -9,7 +9,7 @@
        "/^about$/" => $about,
        "/^register$/" => $register,
        "/^newsfeed$/" => $newsfeed,
-       "/^connections$/" => $connections,
+       
     ];
 
 ?>

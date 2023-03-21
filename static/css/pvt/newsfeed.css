@@ -37,117 +37,78 @@ a:visited {
     padding-bottom: 30px;
 }
 
-.recommended-people-section {
-    display: none;
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .dcol {
     padding: 1% 1%;
 }
 
-.rp-container {
+
+/* width */
+
+::-webkit-scrollbar {
+    height: 3px;
+    width: 3px;
+}
+
+
+/* Track */
+
+.pn-con::-webkit-scrollbar-track {
+    background: white;
+}
+
+
+/* Handle */
+
+.pn-con::-webkit-scrollbar-thumb {
+    background: white;
+}
+
+
+/* Handle on hover */
+
+.pn-con::-webkit-scrollbar-thumb:hover {
+    background: white;
+}
+
+.pn-con {
+    margin-top: 5px;
+    width: 100%;
     overflow-x: scroll;
+}
+
+.pn-con .popular-niches {
+    width: 150%;
     height: 100%;
-    border-left: 1px solid rgb(240, 240, 240);
-    border-right: 1px solid rgb(240, 240, 240);
-    border-radius: 5px;
-}
-
-.rp-container .scroller {
-    width: 205%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    padding: 1%;
-    flex-wrap: wrap;
-    border-top: 1px solid rgb(240, 240, 240);
-    border-bottom: 1px solid rgb(240, 240, 240);
 }
 
-.scroller .person {
-    position: relative;
-    text-align: center;
-    margin-top: 5px;
-    padding: 1% 3px;
-    width: 18%;
-    margin-bottom: 10px;
-    border: 1px solid rgb(240, 240, 240);
+.pn-con .popular-niches .pniche {
+    padding: 0.5% 1%;
+    border: 1px solid rgb(219, 219, 219);
     border-radius: 5px;
+    margin-right: 3%;
+    transition: 1s;
 }
 
-.scroller .person:hover {
-    background-color: ghostwhite;
-}
-
-.scroller .person .userlink {
-    position: absolute;
-    right: 5%;
-}
-
-.scroller .person .like-icon {
-    position: absolute;
-    top: 10px;
-    right: 5%;
-}
-
-.scroller .person .image {
-    border-radius: 50%;
-    width: 85px;
-    height: 85px;
-    padding: 2px;
-    display: block;
-    margin: 0 auto;
-    border: 1px solid rgb(240, 240, 240);
-}
-
-.scroller .person .name {
-    font-size: 0.8rem;
-    margin: 0;
-    display: block;
-    padding-bottom: 1%;
-}
-
-.pp-intro {
-    border-bottom: 1px solid rgb(240, 240, 240);
-}
-
-.n-sub-page {
-    padding-top: 10px;
-    position: fixed;
-    top: 10%;
-    width: 96%;
-    height: 90%;
-    z-index: 834;
-    display: none;
-    overflow-y: scroll;
-    background-color: white;
-}
-
-.n-sub-page .notes {}
-
-.n-sub-page .notes .notification {
-    display: block;
-    margin-top: 5px;
-    font-weight: 500;
-    padding: 1% 1%;
-    font-size: 0.9rem;
-    border-bottom: 1px solid rgb(240, 240, 240);
-}
-
-.n-sub-page .notification .date {
-    padding-top: 1%;
-    color: gray;
-    font-size: 0.7rem;
+.pn-con .popular-niches .pniche:hover {
+    background-color: rgb(105, 104, 116);
+    border: 1px solid white;
+    color: white;
 }
 
 .userposts {}
 
 .userposts .userpost {
-    margin: 5px 0;
+    margin: 10px 0;
     padding: 0;
     border-radius: 5px;
-    border-bottom: 1px solid rgb(240, 240, 240);
-    border: 1px solid rgb(240, 240, 240);
+    border: 1px solid rgb(219, 219, 219);
     border-radius: 5px;
 }
 
@@ -155,25 +116,26 @@ a:visited {
     background-color: ghostwhite;
 }
 
-.userpost .thumbnail-con img {
-    width: 100%;
+.userpost .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1%;
 }
 
-.userpost .content-con {
-    display: block;
+.userpost .head .post-thumbnail {
+    width: 50%;
+    margin-right: 5px;
+    border-radius: 5px;
+    border: 1px solid rgb(240, 240, 240);
 }
 
-.userpost .post-thumbnail {
-    width: 100%;
-    border-radius: 5px 5px 0 0;
-}
-
-.userpost .title {
+.userpost .head .title {
     display: block;
     font-weight: 500;
-    margin-top: 10px;
     font-size: 1rem;
-    padding: 1%;
+    text-align: start;
+    width: 74%;
 }
 
 .userpost .content-con .title:focus {
@@ -195,6 +157,7 @@ a:visited {
     align-items: center;
     flex-wrap: wrap;
     font-size: 0.9rem;
+    border-top: 1px solid rgb(240, 240, 240);
 }
 
 .userpost .metadata .user-info {
@@ -229,7 +192,7 @@ a:visited {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 37%;
+    width: 39%;
 }
 
 .userpost .metadata .stats div {
@@ -263,78 +226,6 @@ a:visited {
     width: 23%;
 }
 
-.niches-section {
-    display: none;
-}
-
-.niches {
-    overflow-y: scroll;
-}
-
-.niches .niche {
-    border: 1px solid rgb(240, 240, 240);
-    padding: 0 1%;
-    margin: 10px auto;
-    border-radius: 5px;
-    width: 98%;
-}
-
-.niches .niche:hover {
-    background-color: ghostwhite;
-}
-
-.niches .niche .name {
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-decoration: none;
-    color: black;
-}
-
-.niches .niche .foot {
-    border-top: 1px solid rgb(240, 240, 240);
-    padding: 1%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.niches .niche .foot:hover {
-    border-top: 1px solid rgb(216, 215, 215);
-}
-
-.niches .niche .foot .info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.niches .niche .foot .info .banner {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.niches .niche .foot .alias {
-    font-size: 0.9rem;
-    margin-right: 10px;
-    padding: 1% 2%;
-    color: gray;
-}
-
-.niches .niche .foot .membership {
-    padding: 0% 2%;
-}
-
-.niches .niche .foot .more {
-    padding: 1% 2%;
-    margin-left: 10px;
-}
-
-.niches .niche .foot .join {
-    padding: 1% 2%;
-}
-
 @media screen and (min-width:576px) {
     .dcol:nth-child(2) {
         padding-left: 10%;
@@ -360,43 +251,7 @@ a:visited {
     .dcol:nth-child(2) {
         margin-top: 8px;
     }
-    #recommeded-people-section {
-        display: block;
-    }
-    .rp-container .scroller {
-        width: 150%;
-    }
-    .scroller .person {
-        width: 18%;
-    }
-    .niches-section {
-        display: block;
-    }
-    .userposts-section {
-        display: block;
-        padding: 1%;
-        padding-top: 1px;
-    }
-    .userposts .userpost {
-        border: 1px solid rgb(240, 240, 240);
-    }
-    .userpost .content-con .title {
-        font-size: 1.2rem;
-    }
-    .n-sub-page {
-        top: 12%;
-        width: 21%;
-        display: block;
-    }
-    .n-sub-page .notes {
-        width: 100%;
-        padding: 0 1%;
-        font-size: 0.7rem;
-    }
-    .n-sub-page .notes .notification {
-        border: 0;
-        width: 100%;
-        font-size: 1rem;
-        border-bottom: 1px solid rgb(240, 240, 240);
+    .pn-con .popular-niches {
+        padding: 0.5% 0;
     }
 }

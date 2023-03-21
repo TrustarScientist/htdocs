@@ -44,7 +44,7 @@
     };
 
     $topRank = function($request){
-      $rankedNiches = xDb::find("niche", "alias", "", "ORDER BY rank DESC LIMIT 12");
+      $rankedNiches = xDb::find("niche", "alias", "", "ORDER BY rank DESC LIMIT 9");
       echo json_encode($rankedNiches);
     };
     
@@ -101,7 +101,55 @@
     }
   };
   $joinOrLeave = function($request){
-      echo "join or leave";
+      $responseState = 0;
+      // if the acct-id property is not specified, it defaults to current user id
+      $acctId = (isset($request->POST["member-id"]))? $request->POST["member-id"]: $request->userid;
+      $nicheId = $request->POST["niche-id"];
+      /**
+       *  if 'toggle is true, change the state of the request . For example, if the user is already a member, delete membership 
+       *  record btwn the acct & niche and vice versa
+       *  if it is false, just return the membership state...whether a member or not
+       */
+      $toggle = (isset($request->POST["toggle"]))? $request->POST["toggle"]:1;
+      if($toggle == 0){
+        // just check wether the current user is a member or not
+        $mState = xDb::find("niche_membership", "*", " WHERE member = $acctId AND niche = $nicheId ");
+        if(!empty($mState)){
+          echo "am"; // is member
+        }else{
+          echo "nam"; // is NOT a member
+        }
+
+
+
+
+
+      }else{
+          /**
+         *  if acct is already a member delete membership else do otherwise
+         */
+      
+      
+        $memberships = xDb::find("niche_membership", "*", " WHERE member = $acctId AND niche = $nicheId ");
+        if(empty($memberships)){
+          // create membership record
+          xDb::create("niche_membership", array(
+            "member" => $acctId,
+            "niche" => $nicheId,
+            "date" => date("Y-m-d")
+          ));
+          $responseState = 1;
+        }else{
+          // delete membership record...and other posible duplicates
+          foreach ($memberships as $key => $membership) {
+            xDb::delete("niche_membership", "WHERE member = $acctId AND niche = $nicheId");
+          }
+          $responseState = 0;
+        }
+        // respond
+        echo $responseState;
+      }
+      
   };
 
      
