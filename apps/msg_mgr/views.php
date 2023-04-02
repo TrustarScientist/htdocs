@@ -11,7 +11,7 @@
           render($request, "pvt/pvt-msg.html");
         }else{
           // return json data on POST request...latest messages
-          $messages = xDb::find("user_msg", "*", "WHERE receiver = $request->userid AND sender != $request->userid AND `is_read` = '0' ", "ORDER BY datetime DESC", "LIMIT 0, 10");
+          $messages = xDb::find("user_msg", "*", "WHERE receiver = $request->userid AND sender != $request->userid AND `is_read` = '0' ", "ORDER BY datetime DESC", "LIMIT 0, 1000");
           if(!empty($messages)){
           // add related data
             foreach ($messages as $key => $msg) {
@@ -32,8 +32,8 @@
     // fetch unread messages...ordered by their date...from the latest to the oldest
     $getLatestMessages = function($request){
       // last message  fetched's date is required so that we don't weary th DB ENGINE
-      $endingMsgDate = $request->POST["ending_msg_date"];
-      $latestMessages = xDb::find("user_msg", "*", "WHERE receiver = '$request->userid' AND is_read = '0' AND datetime > '$endingMsgDate' ", "ORDER BY datetime DESC", "");
+      $endingMsgDate = $request->POST["LMT"];
+      $latestMessages = xDb::find("user_msg", "*", "WHERE receiver = '$request->userid' AND is_read = '0' AND datetime > '$endingMsgDate' ", "ORDER BY datetime DESC", "LIMIT 25");
       if(!empty($latestMessages)){
         foreach ($latestMessages as $key => $laMsg) {
           $laMsg->sender =  xDb::get("user", "id", $laMsg->sender, "id, username, photo");
@@ -51,19 +51,23 @@
     
 
     $addMessage = function($request){
+      $response = 0;
       $sender = $request->userid;
-      $receiver = $request->POST["receiver"];
-      $body = addslashes($request->POST["body"]);
-      $created = 0;
-      if($sender != $receiver){
+      $receiver = $request->POST["to"];
+      $body = htmlentities(addslashes($request->POST["body"]));
+      $datetime = date("Y-m-d H:i:s");
+
+      if(($sender != $receiver) && ($body != "")){
         $created = xDb::create("user_msg", array(
           "sender" => $sender,
           "receiver" => $receiver,
-          "datetime" => date("Y-m-d H:i:s"),
+          "datetime" => $datetime,
           "body" => $body                  
         ), true);
       }
-      print_r($created);
+      $response = 1;
+
+      echo $response;
     };
 
 

@@ -214,6 +214,9 @@ body {
     .rp-container .scroller {
         justify-content: flex-start;
     }
+    .rp-container .scroller .person {
+        margin-right: 1.5%;
+    }
     .dcol:nth-child(2) {
         margin-top: 100px;
         padding-left: 1%;
@@ -236,9 +239,7 @@ body {
     .dcol:nth-child(2) {
         margin-top: 63px;
     }
-    .rp-container .scroller {
-        justify-content: space-between;
-    }
+    .rp-container .scroller {}
     .rp-container .p_or_n .niches-btn {
         visibility: hidden;
     }

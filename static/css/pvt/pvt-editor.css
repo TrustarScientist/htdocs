@@ -11,7 +11,7 @@
 }
 
 .pvt-nav .foot #fourth {
-    border-bottom: 2px solid rgb(13, 139, 77);
+    border-bottom: 2px solid deeppink;
 }
 
 a {
@@ -45,294 +45,117 @@ a:visited {
     padding: 1% 1%;
 }
 
-.rp-container {
-    width: 100%;
+.dcol input:focus,
+.dcol select:focus {
+    border-color: rgb(197, 196, 196);
+    box-shadow: 1px 1px 2px 1px rgb(163, 250, 170);
 }
 
-.rp-container .scroller {
-    width: 100%;
+.edit-scopes {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    margin: 10px auto;
+    margin-bottom: 0;
 }
 
-.scroller .person {
-    position: relative;
-    text-align: center;
-    margin-top: 5px;
-    padding: 1% 3px;
-    width: 45%;
-    margin-bottom: 10px;
-    border: 1px solid rgb(240, 240, 240);
-    border-radius: 5px;
-}
 
-.scroller .person:hover {
-    background-color: ghostwhite;
-}
+/** code for list of self posts */
 
-.scroller .person .userlink {
-    position: absolute;
-    right: 5%;
-}
-
-.scroller .person .like-icon {
-    position: absolute;
-    top: 10px;
-    right: 5%;
-}
-
-.scroller .person .image {
-    border-radius: 50%;
-    width: 85px;
-    height: 85px;
-    padding: 2px;
-    display: block;
-    margin: 5px auto;
-    border: 1px solid rgb(240, 240, 240);
-}
-
-.scroller .person .name {
-    font-size: 0.8rem;
-    margin: 5px 0;
-    display: block;
-    padding-bottom: 1%;
-}
-
-.n-sub-page {
-    padding-top: 10px;
+.userposts2edit-con {
+    background-color: white;
+    z-index: 2922827783;
     position: fixed;
-    top: 10%;
-    width: 96%;
-    height: 90%;
-    z-index: 834;
+    top: 60px;
+    margin-left: -1%;
+    width: 100%;
+    height: 81.5%;
+    padding: 1%;
     display: none;
     overflow-y: scroll;
-    background-color: white;
 }
 
-.n-sub-page .notes {}
+.self-posts {}
 
-.n-sub-page .notes .notification {
-    display: block;
-    margin-top: 5px;
-    font-weight: 500;
-    padding: 1% 1%;
-    font-size: 0.9rem;
-    border-bottom: 1px solid rgb(240, 240, 240);
-}
-
-.n-sub-page .notification .date {
-    padding-top: 1%;
-    color: gray;
-    font-size: 0.7rem;
-}
-
-.userposts {}
-
-.userposts .userpost {
-    margin: 5px 0;
-    padding: 0;
+.self-posts .self-post {
+    position: relative;
+    border: 1px solid rgb(223, 222, 222);
     border-radius: 5px;
-    border-bottom: 1px solid rgb(240, 240, 240);
-    border: 1px solid rgb(240, 240, 240);
-    border-radius: 5px;
-}
-
-.userposts .userpost:hover {
-    background-color: ghostwhite;
-}
-
-.userpost .thumbnail-con img {
-    width: 100%;
-}
-
-.userpost .content-con {
-    display: block;
-}
-
-.userpost .post-thumbnail {
-    width: 100%;
-    border-radius: 5px 5px 0 0;
-}
-
-.userpost .title {
-    display: block;
-    font-weight: 500;
-    margin-top: 10px;
-    font-size: 1rem;
-    padding: 1%;
-}
-
-.userpost .content-con .title:focus {
-    color: rgb(13, 139, 77);
-}
-
-.userpost .content-con .post-type {
-    margin-top: 2px;
-    display: inline-block;
-    margin-left: 5px;
-    padding: 0.5% 1.5%;
-    font-size: 0.9rem;
-    border-radius: 5px;
-}
-
-.userpost .metadata {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    font-size: 0.9rem;
-}
-
-.userpost .metadata .user-info {
-    margin-top: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 1%;
-}
-
-.userpost .metadata .user-info .photo {
-    width: 35px;
-    height: 35px;
-}
-
-.userpost .metadata .user-info img {
-    width: 30px;
-    height: 30px;
-    margin-right: 5px;
-    border-radius: 50%;
-}
-
-.userpost .metadata .user-info .ud .date {
-    font-size: 0.7rem;
-    color: gray;
-    margin-top: -1px;
-}
-
-.userpost .metadata .stats {
-    padding-top: 10px;
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 39%;
-}
-
-.userpost .metadata .stats div {
-    margin: 0 4px;
-    width: 45%;
-}
-
-.userpost .metadata .stats .count {
-    font-size: 0.7rem;
-    color: grey;
-}
-
-.userpost .metadata .alias-con {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.more-posts-btns {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2% 0;
-    border-top: 1px solid rgb(240, 240, 240);
-    border-bottom: 1px solid rgb(240, 240, 240);
-}
-
-.niches-section {
-    margin-bottom: 70px;
-    position: fixed;
-    width: 23%;
-}
-
-.niches {}
-
-.niches .niche {
-    border: 1px solid rgb(240, 240, 240);
-    padding: 0 1%;
-    margin: 10px auto;
-    border-radius: 5px;
-    width: 100%;
-}
-
-.niches .niche:hover {
-    background-color: ghostwhite;
-}
-
-.niches .niche .name {
-    font-size: 1rem;
-    font-weight: 500;
-    text-decoration: none;
-    color: black;
-}
-
-.niches .niche .foot {
-    margin-top: 2%;
-    border-top: 1px solid rgb(240, 240, 240);
-    padding: 1%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.niches .niche .foot:hover {
-    border-top: 1px solid rgb(216, 215, 215);
-}
-
-.niches .niche .foot .info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.niches .niche .foot .info .banner {
-    width: 30px;
-    height: 30px;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-
-.niches .niche .alias {
-    font-size: 0.9rem;
     padding: 1% 0;
-    color: gray;
+    margin: 10px auto;
+}
+
+.self-post .title {
     display: block;
-    text-align: start;
-}
-
-.niches .niche .foot .mem {
+    font-weight: 500;
+    padding: 0 1%;
     font-size: 0.9rem;
 }
 
-.niches .niche .foot .post {
-    margin-left: 10px;
-    font-size: 0.9rem;
+.self-post .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1%;
+    border-top: 1px solid rgb(240, 240, 240);
+    font-size: 0.8rem;
 }
 
-.niches .niche .foot .membership {
-    padding: 0% 2%;
+.self-post .foot button {
+    padding: 2%;
+    margin-right: 20px;
+    border-radius: 5px;
+    border: 0;
 }
 
-.niches .niche .foot .more {
-    padding: 1% 2%;
-    margin-left: 10px;
+.self-post .foot button:nth-child(1) {
+    background-color: gray;
+    border: 0;
+    color: white;
 }
 
-.niches .niche .foot .join {
-    padding: 1% 2%;
+.self-post .foot button:nth-child(2) {
+    color: deeppink;
+}
+
+.self-post .foot .date {
+    color: gray;
+    font-size: 0.7rem;
+}
+
+.self-post .foot .controllers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.self-post .delete {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: red;
+    z-index: 220199999999999999999999993277327;
+}
+
+
+/** special ckeditor code */
+
+.ck-editor__editable {
+    min-height: 200px;
 }
 
 @media screen and (min-width:576px) {
     .dcol:nth-child(2) {
         padding-left: 10%;
         padding-right: 10%;
+    }
+    .dcol:nth-child(3) {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+    .userposts2edit-con {
+        width: 81%;
     }
 }
 
@@ -342,11 +165,16 @@ a:visited {
         padding-left: 1%;
         padding-right: 1%;
     }
-    .userpost {
-        border: 1px solid rgb(240, 240, 240);
+    .dcol:nth-child(3) {
+        padding-left: 34%;
+        padding-right: 1%;
     }
-    .scroller .person {
-        width: 30%;
+    .userposts2edit-con {
+        top: 100px;
+        width: 65%;
+        right: 1%;
+        height: 83%;
+        margin-top: 5px;
     }
 }
 
@@ -355,57 +183,22 @@ a:visited {
         padding-top: 60px;
     }
     .dcol:nth-child(2) {
-        margin-top: 8px;
+        margin-top: 1px;
     }
-    #recommeded-people-section {
+    .dcol:nth-child(3) {
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+    .your-posts-display-btn {
+        display: none;
+    }
+    .userposts2edit-con {
+        top: 73px;
         display: block;
-    }
-    .profile-metadata-con {
-        margin-top: 13px;
-    }
-    .profile-edit-con {
-        display: block;
-        position: fixed;
-        top: 85px;
-        overflow-y: scroll;
         width: 23%;
-        height: 84%;
-        padding: 0.5%;
-        border: 1px solid rgb(240, 240, 240);
-        border-radius: 5px;
-        padding-bottom: 50px;
+        padding: 0 0.5%;
     }
-    .scroller .person {
-        width: 24%;
-    }
-    .niches-section {
-        display: block;
-    }
-    .userposts-section {
-        display: block;
-        padding: 1%;
-        padding-top: 1px;
-    }
-    .userposts .userpost {
-        border: 1px solid rgb(240, 240, 240);
-    }
-    .userpost .content-con .title {
-        font-size: 1.2rem;
-    }
-    .n-sub-page {
-        top: 12%;
-        width: 21%;
-        display: block;
-    }
-    .n-sub-page .notes {
-        width: 100%;
-        padding: 0 1%;
-        font-size: 0.7rem;
-    }
-    .n-sub-page .notes .notification {
-        border: 0;
-        width: 100%;
-        font-size: 1rem;
-        border-bottom: 1px solid rgb(240, 240, 240);
+    .self-posts-cancel-icon {
+        display: none;
     }
 }

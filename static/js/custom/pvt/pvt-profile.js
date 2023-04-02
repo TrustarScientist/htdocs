@@ -124,6 +124,48 @@ $.post("/user/profile", {}, function(data, status) {
     if (profileDetails.friend_request_allowed == 1) {
         document.querySelector(".profile-metadata-con .send-friend-request").style.display = "inline";
     }
+
+    /**
+     *  direct messaging to profile account management code
+     */
+    let profileMsgForm = document.querySelector(".profile-msg-form");
+    let pmfBody = document.querySelector(".profile-msg-form #profile-msg");
+    let pmfBtn = document.querySelector(".profile-msg-form .sbt");
+    pmfBody.onclick = function(eb) {
+        eb.target.innerHTML = "";
+    };
+    profileMsgForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+        let msgData = {
+            "to": profileDetails.id,
+            "body": pmfBody.value
+        }
+        $.post("/message/send", msgData, function(data, status) {
+            //alert(data);
+            if (data == 1) {
+                pmfBtn.textContent = "Message Sent...";
+                pmfBody.value = "";
+                setTimeout(() => {
+                    pmfBtn.textContent = "Send New Message";
+
+                }, 1000);
+            }
+        });
+    });
+
+
+    // code to allow profile messaging form display or not
+    if ((profileDetails.c_user_profile != 1) && (profileDetails.friend_request_allowed != 1)) {
+        let msgSendController = document.querySelector(".profile-metadata-con .msg-send-controller");
+        msgSendController.style.display = "inline";
+        msgSendController.addEventListener("click", function() {
+            $(".profile-msg-form").fadeToggle("slow");
+        })
+    }
+
+
+
+
     /**
      *  code to manage sending of friend request
      */

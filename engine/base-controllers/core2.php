@@ -17,167 +17,123 @@
     }
     function personalizedPost($userId, $starting="0", $amount="7"){
         
-        // scan through the current user's memberships
-        $memObjects = xDb::find("niche_membership", "*", "where member = $userId");
-        //get niche IDs
-        $userNicheIds = array();
-        foreach ($memObjects as $key => $mem) {
-            array_push($userNicheIds, $mem->niche);
-        
-        }
-        // scan thru some posts based on $starting position & $amount
-        $posts = xDb::find("post", "*", "", "ORDER BY date_updated DESC", "LIMIT $starting, $amount");
-        $personalizedPosts = array();
-        // filter posts based on user niches
-        foreach ($posts as $key => $post) {
-            if(in_array($post->category, $userNicheIds)){
-                array_push($personalizedPosts, $post);
-            }
-        }
-        echo json_encode($personalizedPosts);
-        // // load posts based on the current user's niches
-        // print_r($nicheObjects);
-         if(!empty($memObjects)){
-        //     // firstly, let's build the sql code
-        //     $query = "where ";
-        //     foreach ($nicheObjects as $nObj) {
-        //         # code...
-        //         $nid = $nObj->niche;
-        //         $query .= "category = $nid OR "; 
+        // // scan through the current user's memberships
+        // $memObjects = xDb::find("niche_membership", "*", "where member = $userId");
+        // if(!empty($memObjects)){
+        //     //get niche IDs
+        //     $userNicheIds = array();
+        //     foreach ($memObjects as $key => $mem) {
+        //         array_push($userNicheIds, $mem->niche);
+            
         //     }
-        //     $query = substr($query, 0, (strlen($query)-3));
-        //     $nPosts = xDb::find("post", "*", $query, "", " order by date_updated desc LIMIT $starting, $amount");
-        //     // aggregate related data
+        //     // scan thru some posts based on $starting position & $amount
+        //     $somePosts = xDb::find("post", "*", "", "ORDER BY date_updated DESC", "LIMIT $starting, $amount");
+        //     // echo json_encode($somePosts);
         //     $personalizedPosts = array();
-        //     $personalizedPost = array();
-        //     $pos = 0;
-        //     if(!empty($nPosts)){
-        //         foreach ($nPosts as $nPost) {
-        //             # code...
-        //             $personalizedPost["postid"] = $nPost->id;
-        //             $personalizedPost["poster"] = array();
-        //             $personalizedPost["niche"] = array();
-        //             $personalizedPost["title"] = $nPost->title;
-        //             $personalizedPost["content"] = $nPost->content;
-        //             $personalizedPost["date"] = date("Y-M-d h:i:s",strtotime($nPost->date_updated));
-        //             $personalizedPost["slug"] = $nPost->slug;
-        //             $personalizedPost["views"] = $nPost->views;
-        //             $personalizedPost["thumbnail"] = "";
-        //             $personalizedPost["followings"] = 0;
-        //             $personalizedPost["comment_count"] = 0;
-        //             $personalizedPost["current_user_has_followed"] = 0;
-        //             $personalizedPost["current_user_is_post_niche_member"] = 0;
-        //             $personalizedPost["current_user_is_liking_poster"] = 0;
-        //             $personalizedPost["poster_blocked"] = false;
-        //             if(!empty(xDb::find("user_blacklist", "*", "WHERE blocker = $userId AND blocked = $nPost->poster"))){
-        //                 $personalizedPost["poster_blocked"] = true;
-        //             }
-        //             $userObject = xDb::get("user", "id", $nPost->poster, "id, username, photo");
-        //             if(!empty($userObject)){
-        //                 $personalizedPost["poster"] = $userObject;
-        //             }
-        //             $nicheObject = xDb::get("niche", "id", $nPost->category, "id, alias");
-        //             if(!empty($nicheObject)){
-        //                 $personalizedPost["niche"] = $nicheObject;
-        //                 // check current user's membership state in the niche the post is filed in
-        //                 $membershipState = xDb::find("niche_membership", "*", "WHERE member = $userId AND niche = $nPost->category");
-        //                 if(!empty($membershipState)){
-        //                     $personalizedPost["current_user_is_post_niche_member"] = 1;
-        //                 }
-        //             }
-        //             // photos
-        //             $thumbnail = xDb::get("post_image", "post", $nPost->id);
-        //             if(!empty($thumbnail)){
-        //                 $personalizedPost["thumbnail"] = $thumbnail->path;
-        //             }
-        //             // comments count
-        //             $commentCount = xDb::getCount("post_comment", "*", "post", $nPost->id);
-        //             $personalizedPost["comment_count"] = $commentCount;
-        //             // post followings
-        //             $following_count = xDb::getCount("post_followership", "*", "post", $nPost->id);
-        //             if(!empty($following_count)){
-        //                 $personalizedPost["followings"] = $following_count;
-        //             }
-        //             // is the current user already following this post?
-        //             $fState = xDb::find("post_followership", "*", "where follower = $userId AND post = $nPost->id");
-        //             if(!empty($fState)){
-        //                 $personalizedPost["current_user_has_followed"] = 1;
-        //             }
-                    
-        //             // add to personalized posts array
-        //             $personalizedPosts[$pos] = $personalizedPost;
-        //             $pos += 1;
+        //     // filter posts based on user niches
+        //     foreach ($somePosts as $key => $somePost) {
+        //         if(in_array($somePost->category, $userNicheIds)){
+        //             array_push($personalizedPosts, $somePost);
         //         }
         //     }
+        //     //print_r($personalizedPosts);
+        //     // add related data
+        //     $responseData = array();
+        //     $post = array();
+        //     $ct = 0;
+        //     foreach ($personalizedPosts as $data) {
+        //         # code...
+        //         $post["postid"] = $data->id;
+        //         $post["title"] = $data->title;
+        //         $post["slug"] = $data->slug;
+        //         $post["content"] = $data->content;
+        //         $post["updated"] = date("Y-M-d",strtotime($data->date_updated));
+        //         $post["views"] = $data->views;
+        //         // user who created
+        //         $post["user"] = "";
+        //         $userObj = "";
+        //         // niche categorized in
+        //         $post["niche"] = "";
+        //         $nicheObj = "";
+        //         if(!empty($data->poster)){
+        //             $userObj = xDb::get("user", "id", $data->poster, "id, username, photo");
+        //             if(!empty($userObj)){
+        //                 $post["user"] = $userObj;
+        //             }
+        //         }
+        //         if(!empty($data->category)){
+        //             $nicheObj = xDb::get("niche", "id", $data->category, "id, alias");
+        //             if(!empty($nicheObj)){
+        //                 $post["niche"] = $nicheObj;
+        //             }
+        //         }
+        //         $post["pic"] = "";
+        //         $postPic = xDb::get("post_image", "post", $data->id, "path");
+        //         if(!empty($postPic)){
+        //             $post["pic"] = $postPic->path;
+        //         }
+        //         //stats
+        //         $post["following"] = xDb::getCount("post_followership", "*", "post", $data->id);
+        //         $post["comments"] = xDb::getCount("post_comment", "*", "post", $data->id);
+        //         // check whether d current user has followed this post or not
+        //         $post["c_user_has_followed"] = 0;
+        //         $post["c_user_has_followed"] = count(xDb::find("post_followership", "*", "WHERE post = $data->id AND follower = $userId"));
+        //         // aggregate
+        //         $responseData[$ct] = $post;
+        //         $ct += 1;
+        //     }
             
-        //     // return response
-        //     echo json_encode($personalizedPosts);
-        }
-        else{
-            //just return latest posts
-            $posts = array();
-            $index = 0;
-            $container = array();
-            $latestPosts = xDb::find("post", "*", "", "", "LIMIT $starting, $amount");
-            if(!empty($latestPosts)){
-                foreach ($latestPosts as $post) {
-                    # code...
-                    $container["postid"] = $post->id;
-                    $container["poster"] = array();
-                    $container["niche"] = array();
-                    $container["title"] = $post->title;
-                    $container["content"] = $post->content;
-                    $container["date"] = date("Y-M-d h:i:s",strtotime($post->date_updated));
-                    $container["slug"] = $post->slug;
-                    $container["views"] = $post->views;
-                    $container["thumbnail"] = "";
-                    $container["followings"] = 0;
-                    $container["comment_count"] = 0;
-                    $container["current_user_has_followed"] = 0;
-                    $container["current_user_is_post_niche_member"] = 0;
-                    $container["current_user_is_liking_poster"] = 0;
-                    $container["poster_blocked"] = false;
-                    if(!empty(xDb::find("user_blacklist", "*", "WHERE blocker = $userId AND blocked = $post->poster"))){
-                        $container["poster_blocked"] = true;
+        //     echo json_encode($responseData);
+            
+        // }else{
+            $randomPosts = xDb::find("post", "*", "", "ORDER BY date_updated DESC", "LIMIT $starting, $amount");
+            $responseData2 = array();
+            $post2 = array();
+            $ct2 = 0;
+            foreach ($randomPosts as $data2) {
+                # code...
+                $post2["postid"] = $data2->id;
+                $post2["title"] = $data2->title;
+                $post2["slug"] = $data2->slug;
+                $post2["content"] = $data2->content;
+                $post2["updated"] = date("Y-M-d",strtotime($data2->date_updated));
+                $post2["views"] = $data2->views;
+                // user who created
+                $post2["user"] = "";
+                $userObj = "";
+                // niche categorized in
+                $post2["niche"] = "";
+                $nicheObj = "";
+                if(!empty($data2->poster)){
+                    $userObj = xDb::get("user", "id", $data2->poster, "id, username, photo");
+                    if(!empty($userObj)){
+                        $post2["user"] = $userObj;
                     }
-                    $userObject = xDb::get("user", "id", $post->poster, "id, username, photo");
-                    if(!empty($userObject)){
-                        $container["poster"] = $userObject;
-                    }
-                    $nicheObject = xDb::get("niche", "id", $post->category, "id, alias");
-                    if(!empty($nicheObject)){
-                        $container["niche"] = $nicheObject;
-                        // check current user's membership state in the niche the post is filed in
-                        $membershipState = xDb::find("niche_membership", "*", "WHERE member = $userId AND niche = $post->category");
-                        if(!empty($membershipState)){
-                            $container["current_user_is_post_niche_member"] = 1;
-                        }
-                    }
-                    // photos
-                    $thumbnail = xDb::get("post_image", "post", $post->id);
-                    if(!empty($thumbnail)){
-                        $container["thumbnail"] = $thumbnail->path;
-                    }
-                    // comments count
-                    $commentCount = xDb::getCount("post_comment", "*", "post", $post->id);
-                    $container["comment_count"] = $commentCount;
-                    // post followings
-                    $following_count = xDb::getCount("post_followership", "*", "post", $post->id);
-                    if(!empty($following_count)){
-                        $container["followings"] = $following_count;
-                    }
-                    // is the current user already following this post?
-                    $fState = xDb::find("post_followership", "*", "where follower = $userId AND post = $post->id");
-                    if(!empty($fState)){
-                        $container["current_user_has_followed"] = 1;
-                    }
-                    // add to personalized posts array
-                    $posts[$index] = $container;
-                    $index += 1;
                 }
+                if(!empty($data2->category)){
+                    $nicheObj = xDb::get("niche", "id", $data2->category, "id, alias");
+                    if(!empty($nicheObj)){
+                        $post2["niche"] = $nicheObj;
+                    }
+                }
+                $post2["pic"] = "";
+                $postPic2 = xDb::get("post_image", "post", $data2->id, "path");
+                if(!empty($postPic2)){
+                    $post2["pic"] = $postPic2->path;
+                }
+                //stats
+                $post2["following"] = xDb::getCount("post_followership", "*", "post", $data2->id);
+                $post2["comments"] = xDb::getCount("post_comment", "*", "post", $data2->id);
+                // check whether d current user has followed this post or not
+                $post2["c_user_has_followed"] = 0;
+                $post2["c_user_has_followed"] = count(xDb::find("post_followership", "*", "WHERE post = $data2->id AND follower = $userId"));
+                // aggregate
+                $responseData2[$ct2] = $post2;
+                $ct2 += 1;
             }
-            echo json_encode($posts);
-        }
+            shuffle($responseData2);
+            echo json_encode($responseData2);
+        // }
         
     }
     function comments($request){

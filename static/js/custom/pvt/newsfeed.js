@@ -3,12 +3,12 @@ $(document).ready(function() {
      *  fetch top ranking niches
      */
     $.get("/niche/toprank", function(data, status) {
-        //alert(data);
+        alert(data);
         let topNiches = JSON.parse(data);
         if (topNiches.length > 0) {
             topNiches.forEach(tNiche => {
                 let nicheLink = document.createElement("a");
-                nicheLink.setAttribute("class", "pniche");
+                nicheLink.setAttribute("class", "pniche bg-light");
                 nicheLink.textContent = "";
                 nicheLink.textContent = tNiche.alias;
                 nicheLink.href = `/niche/${tNiche.alias}`;
@@ -23,20 +23,43 @@ $(document).ready(function() {
      * code to fetch personalized posts
      */
     let userpostsCon = document.querySelector(".userposts-section .userposts");
-
+    let morePPost = document.querySelector(".more-p-posts");
     $.post("/post/newsfeed", {
         "starting": 0,
-        "amount": 100
+        "amount": 5
     }, function(data, status) {
-        alert(data);
+        //alert(data);
         let posts = JSON.parse(data);
         if (posts.length > 0) {
             posts.forEach(post => {
                 postCreator(post);
             });
+            morePPost.dataset.nextPpos = Number(morePPost.dataset.nextPpos) + posts.length;
+        } else {
+            userpostsCon.innerHTML = `<h6 class="p-5"> No Posts For You Yet...`;
+            morePPost.style.display = "none";
         }
     });
 
+    // next personalized posts
+    morePPost.addEventListener("click", function(e) {
+        //alert(e.target.dataset.nextPpos)
+        $.post("/post/newsfeed", {
+            "starting": morePPost.dataset.nextPpos,
+            "amount": 5
+        }, function(data, status) {
+            //alert(data);
+            let posts2 = JSON.parse(data);
+            if (posts2.length > 0) {
+                posts2.forEach(p2 => {
+                    postCreator(p2);
+                });
+                morePPost.dataset.nextPpos = Number(morePPost.dataset.nextPpos) + posts2.length;
+            } else {
+                morePPost.style.display = "none";
+            }
+        });
+    });
 
     // helper function to create post cards
     function postCreator(post) {
@@ -51,6 +74,7 @@ $(document).ready(function() {
         head.setAttribute("class", "head");
         userpost.appendChild(head);
         // create thumbnail if available
+
         if (post.pic != "") {
             let thumbnail = document.createElement("img");
             thumbnail.setAttribute("class", "post-thumbnail");

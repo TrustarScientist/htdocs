@@ -11,16 +11,17 @@
     <script defer src="/static/bootstrap/js/bootstrap.bundle.js"></script>
     <script defer src="/static/js/jQuery.min.js"></script>
     <script defer src="/static/js/custom/pvt/pvt-site-wide.js"></script>
-    <script defer src="/static/js/custom/pvt/pvt-profile.js"></script>
+    <script defer src="/ckeditor5-classic/ckeditor.js"></script>
+    <script defer src="/static/js/custom/pvt/pvt-editor.js"></script>
     <title>Editor Page</title>
 </head>
 
 <body>
     <nav class="pvt-nav ">
-        <header class="head bg-light" style="z-index: 4567890;">
+        <header class="head bg-success " style="z-index: 4567890;">
             <div class="brand">
                 <img src="/static/images/avatar-2.jpg" alt="brand logo" width="30px" height="30px">
-                <h1 class="name text-success">Knowisland</h1>
+                <h1 class="name text-light">Knowisland</h1>
             </div>
             <form id="form" action="/search" method="post">
                 <input class="form-control" type="search" name="qeury" id="term" placeholder="What do you wanna know?">
@@ -35,9 +36,9 @@
 
             </div>
             <!-- to show events happening now in the form of notifications, messages, alerts -->
-            <aside class="events-menu">
+            <aside class="events-menu" style="z-index: 232368386327977323032326832;">
                 <div class="con">
-                    <header class="notifications path bg-secondary text-light">
+                    <header class="notifications path text-light" style="background-color: gray;">
                         <a href="/notifications" class="text-light">Notifications</a>
                         <span>0</span>
                     </header>
@@ -46,39 +47,18 @@
                         lates notifications here...
                     </footer>
                 </div>
-                <div class="con">
-                    <header class="messages path bg-secondary text-light">
-                        <a href="/msg/latest" class="text-light">Messages</a>
 
-                        <span>0</span>
-                    </header>
-                    <footer class="m-d path-details bg-light">
-                        <!-- this contains incoming events -->
-                        incoming messages here...
-                    </footer>
-                </div>
-                <div class="con">
-                    <header class="frequests path bg-secondary text-light">
-                        <a href="/" class="text-light">Friend Requests</a>
-                        <span>0</span>
-                    </header>
-                    <footer class="f-d path-details bg-light">
-                        <!-- this contains incoming events -->
-                        recent friend requests here...
-                    </footer>
-                </div>
-
-                <a href="/logout" class="logout path bg-light text-dark">
+                <a href="/logout" class="logout path text-danger">
                     Logout...
                 </a>
             </aside>
         </header>
-        <footer class="foot bg-light">
+        <footer class="foot bg-success">
             <a href="/newsfeed">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="" class="bi bi-house-fill" viewBox="0 0 16 16"> <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/> <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/> </svg>
                 <p id="first">Newsfeed</p>
             </a>
-            <a href="/connections">
+            <a href="/user/connections">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="" class="bi bi-people-fill" viewBox="0 0 16 16"> <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/> </svg>
                 <p id="second">Network</p>
             </a>
@@ -86,12 +66,12 @@
                 <img id="current_user_photo" src="" alt="logged in user photo">
                 <p id="third">Awesome</p>
             </a>
-            <a href="/post/create">
+            <a href="/post/edit">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
                     <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                   </svg>
-                <p id="fourth">Create</p>
+                <p id="fourth">Editor</p>
             </a>
             <a href="/message/inbox"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-chat-fill" viewBox="0 0 16 16">
                 <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/>
@@ -106,10 +86,79 @@
 
 
             </div>
-            <div class="dcol col-md-8 col-lg-6 pt-1">
+            <div class="dcol col-md-8 col-lg-6">
+                <section class="content-area pb-5">
+                    <header style="display: flex;justify-content: space-between;align-items: center;border: 1px solid rgb(240, 240, 240);border-radius: 5px;margin-top: 10px; padding: 1%;">
+                        <h4>Check Post Creation Rules...</h4>
+                        <button class="btn btn-light your-posts-display-btn" style="padding: 1%;margin-right: 1%;">Your Posts</button>
+                    </header>
 
+                    <div class="edit-scopes">
+                        <select name="post-visibility" id="post-visibility" class="post-visibility form-control" style="width: 32%;" required="required">
+                            <option value="pub" selected>Public</option>
+                            <option value="pvt">Private</option>
+                        </select>
+                        <select name="post-type" id="post-type" class="form-control" style="width: 32%;" required="required">
+                            <option value="1" selected>News</option>
+                            <option value="2">Fact</option>
+                            <option value="3">Comedy</option>
+                            <option value="4">Personal</option>
+                            <option value="5">Question</option>
+                            <option value="6">Tutorial</option>
+                            <option value="7">Review</option>
+                        </select>
+                        <select name="post-category" id="post-category" class="form-control" style="width: 32%;" required="required">
+                        
+                        </select>
+                    </div>
+                    <header class="mb-2" style="display: flex; justify-content: space-between;font-size: 0.8rem; color: rgb(13, 139, 77);">
+                        <span style="width: 30%;">Visibility</span>
+                        <span style="text-align: center; width: 30%;">Type of Post</span>
+                        <span style="width: 30%;">Destination Community</span>
+                    </header>
+                    <input type="text" id="post-title" class="form-control mt-2 mb-3 p-2" placeholder="Title of post...Required" required="required">
+                    <section class="post-editor mt-1">
+
+                        <div id="ckeditor">
+
+                        </div>
+
+                    </section>
+                    <footer class="d-grid mt-4">
+                        <button class="btn btn-success" id="editor-data-btn">Save New Post</button>
+                    </footer>
+                </section>
             </div>
             <div class="dcol col-lg-3">
+                <section class="userposts2edit-con">
+                    <button class="btn btn-success " id="editor-data-set-btn" style="display: none;">Set Editor Data</button>
+                    <header class="up2e-head" style="display: flex;justify-content: space-between;align-items: center;">
+                        <input type="text" name="self-post-search" id="sps" class="form-control mt-2" placeholder="search your posts...">
+                        <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 5%; margin-right: 1%" width="30" height="30" fill="currentColor" class="bi bi-x-lg  self-posts-cancel-icon" viewBox="0 0 16 16">
+                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                          </svg>
+                    </header>
+
+                    <div class="self-posts">
+                        <!-- <article class="self-post">
+                            <a href="/post/23/" class="title">
+                                The title of the post should be placed here...
+                            </a>
+                            <footer class="foot">
+                                <header class="controllers">
+                                    <button class=" update-btn">Update</button>
+                                    <button class=" deletion-btn">Delete</button>
+                                </header>
+                                <span class="date">March 23, 2021</span>
+                            </footer>
+                        </article> -->
+
+                    </div>
+                    <button class="btn btn-light more-self-posts-btn" style="font-size: 0.8rem;" data-pos="0">More of your posts...</button>
+                    <footer class="delete">
+                        iugu
+                    </footer>
+                </section>
 
             </div>
         </section>

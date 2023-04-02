@@ -72,7 +72,7 @@ body {
 }
 
 .profile-metadata-con .photo-con {
-    width: 50%;
+    width: 60%;
     margin: 10px auto;
     display: block;
 }
@@ -120,6 +120,15 @@ body {
 
 .profile-metadata-con .edit-btn {
     display: none;
+}
+
+.profile-msg-form {
+    display: none;
+}
+
+.profile-msg-form textarea:focus {
+    border-color: rgb(224, 223, 223);
+    box-shadow: 1px 1px 3px 3px rgb(229, 245, 238);
 }
 
 .profile-path-btns {

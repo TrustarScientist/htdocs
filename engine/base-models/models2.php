@@ -194,7 +194,7 @@
             }
             
         }
-        public static function delete($table, $cond="", $extras=""){
+        public static function delete($table, $cond="0", $extras=""){
             $db  = new xDb();
             if($db->connected){
                 $smt = ($db->connector)->prepare("DELETE FROM $table $cond $extras ");

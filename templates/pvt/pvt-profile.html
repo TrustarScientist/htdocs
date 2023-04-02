@@ -108,9 +108,17 @@
                         </footer>
                         <p class="intro">Profile should be here...</p>
                         <button id="send-friend-request mb-2" class="send-friend-request btn btn-outline-secondary" style="padding: 1%;display: none;">Send Friend Request</button>
-                        <button class="edit-btn btn btn-dark" style="padding: 0.5% 1%; margin-left: 5px;margin-bottom: 5px;">Edit Profile</button>
+                        <button class="edit-btn btn btn-dark" style="padding: 0.5% 1%; margin-left: 5px;">Edit Profile</button>
+                        <button class="msg-send-controller btn btn-success" style="padding: 0.5% 1%;display: none;margin-left: 5px;">Send Message</button>
                     </section>
+                    <form action="/message/send" class="profile-msg-form mt-2 mb-2" method="post">
+                        <textarea name="profile-msg" id="profile-msg" class="form-control mb-2" cols="30" rows="5">
 
+                        </textarea>
+                        <div class="d-grid">
+                            <button class="btn btn-success sbt" type="submit">Send</button>
+                        </div>
+                    </form>
                     <header class="profile-path-btns">
                         <b class="about">About</b>
                         <b class="network">Network</b>

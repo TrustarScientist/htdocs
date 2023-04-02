@@ -123,21 +123,41 @@
    };
    $postDetailsPage = function($request, $dataset){
         if($request->method == "GET"){
-            $postId = $dataset[1];
-            $slug = $dataset[2];
-            $postObject = xDb::get("post", "id", $postId, "*");
-            if(!empty($postObject)){
-            $_SESSION["post_id"] = $postObject->id;
-            $_SESSION["is_viewed"] = 0;
-            
-            // profile page
-            render($request, "post-details.html");
-            
-            }
-            else{
-                // respond with 404
-                header("Location:/404#postnotfound");
-            
+            if(!$request->is_authenticated){
+                $postId = $dataset[1];
+                $slug = $dataset[2];
+                $postObject = xDb::get("post", "id", $postId, "*");
+                if(!empty($postObject)){
+                $_SESSION["post_id"] = $postObject->id;
+                $_SESSION["is_viewed"] = 0;
+                
+                // profile page
+                render($request, "post-details.html");
+                
+                }
+                else{
+                    // respond with 404
+                    header("Location:/404#post-not-found");
+                
+                }
+            }else{
+                // authenticated post details page
+                $postId = $dataset[1];
+                $slug = $dataset[2];
+                $postObject = xDb::get("post", "id", $postId, "*");
+                if(!empty($postObject)){
+                $_SESSION["post_id"] = $postObject->id;
+                $_SESSION["is_viewed"] = 0;
+                
+                // profile page
+                render($request, "pvt/pvt-post-details.html");
+                
+                }
+                else{
+                    // respond with 404
+                    header("Location:/404#pvt-post-not-found");
+                
+                }
             }
             
         }
@@ -160,6 +180,12 @@
                 if(!empty($userObject)){
                     $postObject->poster = $userObject;
                 }
+                // content 
+                $postObject->content = html_entity_decode($postObject->content);
+
+
+
+
                 $contentTypeObj = xDb::get("contenttype", "id", $postObject->content_type);
                 if(!empty($contentTypeObj)){
                     $postObject->content_type = $contentTypeObj;
@@ -216,6 +242,156 @@
         }
         echo json_encode($replies);
    };
-   
+
+   $imageUploader = function($request){
+    $response = array();
+      // get photo if available
+      /**
+       *  we should process the image if and only if the image is truely uploaded, not less than 1, not more than 2 MB
+       */
+      if((isset($request->FILES["upload"])) && ($request->FILES["upload"]["size"] > 0) && ($request->FILES["upload"]["size"] < 5000000)){
+          /**
+         *  We need to manage the files first before storing other data
+         *  the file needs to be stored in the File System with unique,tokenized naming
+         */
+        // store file in file system
+        $dbRecordString = "";
+        // generate token for file name uniqueness
+        $tokenChars = array(
+          "a1", "b2", "c3", "d4", "e5", "f5", "g6", "h7", "i8", "j9", "k10", "l11", "m12", "n13", "o14", "p15","q16", "r17", "s18", "t19", "u20", "v21", "w22", "x3", "y24", "z25",
+          "26A", "25B", "24C", "23D", "22E", "21F", "20G", "19H", "18I", "17J", "16K", "15L", "14M", "13N", "12O", "11P", "10Q", "9R", "8S", "7T", "6U", "5V", "4W", "3X","2Y", "1Z"
+        );
+        $tokenIndex1  = rand(0, count($tokenChars)-1);
+        $tokenIndex2  = rand(0, count($tokenChars)-1);
+        $tokenIndex3  = rand(0, count($tokenChars)-1);
+        $token =  $tokenChars[$tokenIndex1] . $tokenIndex1 . $tokenChars[$tokenIndex2] . $tokenIndex2 . $tokenChars[$tokenIndex3] . $tokenIndex3 . "-";
+        // attempt storing it in FS
+        $user = xDb::get("user", "id", $request->userid, "username,photo");
+  
+        $dbRecordString = $user->username . "-" . $token . basename($request->FILES["upload"]["name"]);
+        $uploadPath = "storage/post/" . $dbRecordString;
+        if(move_uploaded_file($request->FILES["upload"]["tmp_name"], $uploadPath)){
+  
+          /**
+           *  now that the file is saved in FS successfully, let's update the DB records
+           */
+  
+  
+          try {
+            xDb::create(
+                "editor_post_image",
+                array(
+                        "path" => $dbRecordString
+                    )
+                );
+            
+            $response["url"] = "/storage/post/" . $dbRecordString;
+            
     
+          } catch (\Throwable $th) {
+            //throw $th;
+            
+            
+          }
+        }
+  
+        
+        // finally...return response
+        echo json_encode($response);
+    }
+   };
+   
+   $createPost = function($request){
+    $postVisibility = (isset($request->POST["visibility"])) ? $request->POST["visibility"]: "pub";
+    $postType = (isset($request->POST["type"])) ? $request->POST["type"] : 1;
+    $postNiche = (isset($request->POST["category"])) ? $request->POST["category"] : 7;
+    $postTitle = (isset($request->POST["title"])) ? $request->POST["title"] : "An Anomymous Post...Can't Be Trusted!";
+    $content =  htmlspecialchars($request->POST["content"], ENT_QUOTES);
+    $acctId =  $request->userid;
+    
+    $date_created = date("Y-m-d H:i:s");
+    $date_updated = date("Y-m-d H:i:s");
+
+    $state = xDb::create("post", array(
+        "visibility" => $postVisibility,
+        "content_type" => $postType,
+        "category" => $postNiche,
+        "poster" => $acctId,
+        "title" => $postTitle,
+        "date_created" => $date_created,
+        "date_updated" => $date_updated,
+        "content" => $content
+
+    ));
+    if(!empty($state)){
+        echo "1";
+    }else{
+        echo "0";
+    }
+
+   };
+    
+    $post2Edit =  function($request){
+        $postId = isset($request->POST["post2edit"])? $request->POST["post2edit"]: 0;
+        $postObject = xDb::get("post", "id", $postId);
+        if(!empty($postObject)){
+            $postObject->content =  html_entity_decode($postObject->content);
+            echo  json_encode($postObject);
+        }else{
+            echo  json_encode(false);
+        }
+        
+   };
+
+   $updatePost = function($request){
+
+        $postId = $request->POST["postid"];
+        $postVisibility = (isset($request->POST["visibility"])) ? $request->POST["visibility"]: "pub";
+        $postType = (isset($request->POST["type"])) ? $request->POST["type"] : 1;
+        $postNiche = (isset($request->POST["category"])) ? $request->POST["category"] : 7;
+        $postTitle = (isset($request->POST["title"])) ? $request->POST["title"] : "An Anomymous Post...Can't Be Updated!";
+        $content =  htmlspecialchars($request->POST["content"], ENT_QUOTES);
+        $acctId =  $request->userid;
+    
+        $date_updated = date("Y-m-d H:i:s");
+
+        $state = xDb::update("post", array(
+            "visibility" => $postVisibility,
+            "content_type" => $postType,
+            "category" => $postNiche,
+            "poster" => $acctId,
+            "title" => $postTitle,
+            "date_updated" => $date_updated,
+            "content" => $content
+
+        ), "WHERE id = $postId");
+        if(!empty($state)){
+            echo "1";
+        }else{
+            echo "0";
+        }
+   };
+
+   $cUserPosts = function($request){
+        $starting = (isset($request->POST["starting"]))? $request->POST["starting"] : 0;
+        $amount = (isset($request->POST["amount"]))? $request->POST["amount"] : 0;
+        $cUserPostsData = xDb::find("post", "id, title, date_updated, slug", "WHERE poster = $request->userid", "ORDER BY date_updated DESC ", "LIMIT $starting, $amount");
+        if(!empty($cUserPostsData)){
+            echo json_encode($cUserPostsData);
+        }else{
+            echo json_encode(array());
+        }
+   };
+
+
+   $deletePost = function($request){
+        $pid = $request->POST["pid"];
+        $result = xDb::delete("post", "WHERE id = $pid");
+        if(!empty($result)){
+            echo "1";
+        }else{
+            echo "0";
+        }
+   };
+
 ?>

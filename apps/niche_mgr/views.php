@@ -5,18 +5,34 @@
     $niche = function($request, $dataset){
       // store acct to see on GET request after verifying that it is real and the niche page is loaded
       if($request->method == "GET"){
-        $alias = $dataset[1];
-        $nicheObject = xDb::get("niche", "alias", $alias, "*");
-        if(!empty($nicheObject)){
-          $_SESSION["niche"] = $nicheObject->id;
-          // profile page
-          render($request, "niche.html");
-          
-        }
-        else{
-          // respond with 404
-          header("Location:/404#nichenotfound");
-          
+        if(!$request->is_authenticated){
+            $alias = $dataset[1];
+          $nicheObject = xDb::get("niche", "alias", $alias, "*");
+          if(!empty($nicheObject)){
+            $_SESSION["niche"] = $nicheObject->id;
+            // profile page
+            render($request, "niche.html");
+            
+          }
+          else{
+            // respond with 404
+            header("Location:/404#nichenotfound");
+            
+          }
+        }else{
+          $alias = $dataset[1];
+          $nicheObject = xDb::get("niche", "alias", $alias, "*");
+          if(!empty($nicheObject)){
+            $_SESSION["niche"] = $nicheObject->id;
+            // profile page
+            render($request, "pvt/pvt-niche.html");
+            
+          }
+          else{
+            // respond with 404
+            header("Location:/404#pvt-niche-notfound");
+            
+          }
         }
         
       }
@@ -44,8 +60,21 @@
     };
 
     $topRank = function($request){
-      $rankedNiches = xDb::find("niche", "alias", "", "ORDER BY rank DESC LIMIT 9");
-      echo json_encode($rankedNiches);
+      // get the total number of niches
+      $tmpNiches = xDb::find("niche");
+      $total = count($tmpNiches);
+      // pick random number for starting position. It must not be more than half of the total
+      $random = rand(1, $total);
+      $rankedNiches = xDb::find("niche", "alias", "", "ORDER BY rank DESC LIMIT $random,  $total");
+      shuffle($rankedNiches);
+      if(count($rankedNiches) > 15){
+        echo json_encode(array_slice($rankedNiches, 0, 12));
+      }else if(count($rankedNiches) < 15){
+        echo json_encode($rankedNiches);
+      }else{
+        echo json_encode(array_slice($tmpNiches, 0, 12));
+      }
+      
     };
     
   $nichePosts = function($request){

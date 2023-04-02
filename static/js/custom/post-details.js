@@ -85,7 +85,7 @@ $(document).ready(function() {
             let postType = document.querySelector(".content-type");
             postType.href = `/search?ct=${res.content_type.name}`;
             postType.textContent = res.content_type.name;
-            document.querySelector(".content").textContent = res.content;
+            document.querySelector(".content").innerHTML = res.content;
             // gallery code
             let galleryCon = document.querySelector(".gallery");
             if (res.photos.length > 1) {

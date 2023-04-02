@@ -139,7 +139,6 @@ body {
     transition: 1s;
     border-radius: 5px;
     min-height: 200%;
-    background-image: url(/static/images/banner-right-image.png);
 }
 
 .chat-board .chat-pane {

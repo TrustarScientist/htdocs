@@ -2,9 +2,9 @@
     include_once "views.php";
     $urlpatterns = [
         "/^inbox$/" => $inbox,
-        // "/^latest$/" => $getLatestMessages,
+        "/^inbox\/latest$/" => $getLatestMessages,
         // "/^conversation$/" => $conversation,
-        // "/^add$/" => $addMessage,
+        "/^send$/" => $addMessage,
         // "/^friendtochat$/"=>  $returnfriends,
         // "/^getChats$/"=>$getChats,
         // "/^sendchat$/"=> $insertChat,

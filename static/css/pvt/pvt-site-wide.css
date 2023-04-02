@@ -29,13 +29,12 @@
 .pvt-nav {
     padding: 0;
     z-index: 2000;
+    transition: 1s;
 }
 
-.pvt-nav input:focus,
-button:focus,
-textarea:focus {
-    border-color: rgb(224, 223, 223);
-    box-shadow: 1px 1px 3px 3px rgb(229, 245, 238);
+.pvt-nav input:focus {
+    border-color: gray;
+    box-shadow: 1px 1px 5px 1px gray;
 }
 
 .pvt-nav .head {
@@ -44,7 +43,6 @@ textarea:focus {
     width: 100%;
     position: fixed;
     top: 0;
-    border-bottom: 1px solid rgb(240, 240, 240);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -82,19 +80,14 @@ textarea:focus {
 }
 
 .pvt-nav .commons svg {
-    fill: rgb(57, 57, 57);
     margin-right: 3px;
+    fill: white;
 }
 
 .pvt-nav .foot #current_user_photo {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-}
-
-.pvt-nav .commons svg:hover,
-.pvt-nav .foot svg:hover {
-    fill: rgb(13, 139, 77);
 }
 
 .pvt-nav .commons a svg:nth-child(1) {
@@ -155,7 +148,6 @@ textarea:focus {
     width: 100%;
     position: fixed;
     bottom: 0;
-    border-top: 1px solid rgb(240, 240, 240);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -164,22 +156,22 @@ textarea:focus {
 .pvt-nav .foot svg {
     width: 25px;
     height: 25px;
-    fill: rgb(57, 57, 57);
+    fill: white;
 }
 
 .pvt-nav .foot a {
-    display: block;
     transition: 1s;
+    color: gray;
 }
 
 .pvt-nav .foot p {
     display: none;
     font-weight: 500;
+    color: white;
 }
 
 .pvt-nav .foot p:hover {
     border-bottom: 2px solid deeppink;
-    transition: 0.5s;
 }
 
 @media screen and (min-width:576px) {
@@ -236,7 +228,6 @@ textarea:focus {
         display: block;
         width: 20%;
         font-size: 1.2rem;
-        color: gray;
         text-align: center;
         text-decoration: none;
     }
@@ -250,7 +241,6 @@ textarea:focus {
     .pvt-nav .foot p {
         display: block;
         margin: 0;
-        background-color: ghostwhite;
     }
 }
 
@@ -278,7 +268,7 @@ textarea:focus {
     }
     .pvt-nav .head form {
         display: block;
-        width: 50%;
+        width: 40%;
         margin-right: 10%;
     }
     .pvt-nav .head .commons {
@@ -303,7 +293,7 @@ textarea:focus {
         display: block;
     }
     .pvt-nav .foot {
-        width: 29%;
+        width: 32%;
     }
     .pvt-nav .foot a {
         padding-top: 1%;
@@ -321,6 +311,15 @@ textarea:focus {
     }
     .pvt-nav .foot p {
         display: inline-block;
-        font-size: 0.7rem;
+        font-size: 0.8rem;
+    }
+    html {
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width:1440px) {
+    html {
+        font-size: 25px;
     }
 }

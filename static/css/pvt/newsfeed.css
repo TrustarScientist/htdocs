@@ -1,7 +1,3 @@
-.site-nav {
-    z-index: 2000;
-}
-
 .pvt-nav {
     z-index: 3000;
 }
@@ -26,10 +22,6 @@ a {
 a:focus,
 a:hover {
     color: rgb(13, 139, 77);
-}
-
-a:visited {
-    color: black;
 }
 
 .drow-one {
@@ -89,31 +81,32 @@ body {
 }
 
 .pn-con .popular-niches .pniche {
-    padding: 0.5% 1%;
-    border: 1px solid rgb(219, 219, 219);
-    border-radius: 5px;
+    padding: 1% 2%;
+    border-radius: 20px;
     margin-right: 3%;
     transition: 1s;
+    background-color: rgb(229, 245, 238);
+    box-shadow: 2px 2px 3px rgb(212, 212, 212);
 }
 
 .pn-con .popular-niches .pniche:hover {
-    background-color: rgb(105, 104, 116);
     border: 1px solid white;
-    color: white;
 }
 
 .userposts {}
 
 .userposts .userpost {
+    border-top: 1px solid rgb(240, 240, 240);
     margin: 10px 0;
     padding: 0;
     border-radius: 5px;
-    border: 1px solid rgb(219, 219, 219);
     border-radius: 5px;
+    box-shadow: 3px 3px 10px rgb(240, 240, 240);
+    transition: 1s;
 }
 
 .userposts .userpost:hover {
-    background-color: ghostwhite;
+    background-color: rgb(243, 250, 247);
 }
 
 .userpost .head {
@@ -128,11 +121,12 @@ body {
     margin-right: 5px;
     border-radius: 5px;
     border: 1px solid rgb(240, 240, 240);
+    max-height: 300px;
 }
 
 .userpost .head .title {
     display: block;
-    font-weight: 500;
+    font-weight: 530;
     font-size: 1rem;
     text-align: start;
     width: 74%;
@@ -166,6 +160,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding-left: 1%;
+    width: 40%;
 }
 
 .userpost .metadata .user-info .photo {
@@ -178,6 +173,14 @@ body {
     height: 30px;
     margin-right: 5px;
     border-radius: 50%;
+}
+
+.userpost .metadata .user-info .ud {
+    width: 80%;
+}
+
+.userpost .metadata .user-info .ud .username {
+    display: block;
 }
 
 .userpost .metadata .user-info .ud .date {
@@ -226,6 +229,10 @@ body {
     width: 23%;
 }
 
+.content-types-section {
+    display: none;
+}
+
 @media screen and (min-width:576px) {
     .dcol:nth-child(2) {
         padding-left: 10%;
@@ -253,5 +260,19 @@ body {
     }
     .pn-con .popular-niches {
         padding: 0.5% 0;
+    }
+    .content-types-section {
+        display: block;
+        position: fixed;
+        top: 45px;
+        width: 23%;
+        background-color: white;
+        right: 1%;
+        padding: 1%;
+    }
+    .content-types-section a {
+        display: block;
+        margin: 10px 0;
+        font-size: 1.2rem;
     }
 }

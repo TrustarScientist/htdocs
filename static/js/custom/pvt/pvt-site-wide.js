@@ -22,7 +22,7 @@ $(".pvt-nav .head .commons #search-icon").click(function() {
 });
 // events menu toggle code
 $(".pvt-nav .head .bi-pen").click(function() {
-    $(".pvt-nav .head .events-menu").fadeToggle("slow");
+    $(".pvt-nav .head .events-menu").fadeToggle("fast");
 });
 /**
  *  code to fetch current user's info such as username, id, photo e.t.c

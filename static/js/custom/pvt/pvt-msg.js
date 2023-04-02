@@ -78,89 +78,182 @@ $(".chat-pane .cancel").click(function() {
  *  first, get the container for the incoming messsages
  *  keep updating all msg's
  */
-
-
-let incomingMessagesContainer = document.querySelector(".incoming-messages");
-incomingMessagesContainer.innerHTML = "";
-let lastFetchedMsg = {};
+let incomingMessagesCon = document.querySelector(".incoming-messages");
 $.post("/message/inbox", {}, function(data, status) {
-    // parse response
-    alert(data)
-    let messages = JSON.parse(data);
-    let filteredMessages = [{ sender: { "id": 0 } }];
-    // TEST CODE 2
-    for (let index = 0; index < messages.length; index++) {
-        const msg = messages[index];
-        for (let ct = 0; ct < filteredMessages.length; ct++) {
-            const fMsg = filteredMessages[ct];
-            if (fMsg.sender.id == msg.sender.id) {
-                filteredMessages.splice(ct, 1);
-                filteredMessages.push(msg);
-            } else {
-                filteredMessages.p
-            }
+    //alert(data);
+    let incomingMessages = JSON.parse(data);
+
+    let unique = [];
+    let distinct = [];
+    for (let index = 0; index < incomingMessages.length; index++) {
+
+        if (!unique[incomingMessages[index].sender.id]) {
+            distinct.push(incomingMessages[index]);
+            unique[incomingMessages[index].sender.id] = 1;
         }
+    }
+    // console.log(distinct);
+    distinct.forEach(dMsg => {
+        msgMaker(dMsg);
+    });
+    let lastMessageDate = distinct[0].datetime;
+    /** 
+     *  to fetch more incomming messages, remove duplicates and appending them
+     */
+
+    setInterval(() => {
+        $.post("/message/inbox/latest", {
+            "LMT": lastMessageDate
+        }, function(data, status) {
+            //alert(data);
+            let incomingMessages2 = JSON.parse(data);
+
+            if (incomingMessages2.length > 0) {
+                let unique2 = [];
+                let distinct2 = [];
+                for (let index2 = 0; index2 < incomingMessages2.length; index2++) {
+
+                    if (!unique2[incomingMessages2[index2].sender.id]) {
+                        distinct2.push(incomingMessages2[index2]);
+                        unique2[incomingMessages2[index2].sender.id] = 1;
+                    }
+
+                }
+                let shownMessages = document.querySelectorAll(".incoming-msg");
+                distinct2.forEach(dMsg2 => {
+                    shownMessages.forEach(shownMsg => {
+                        if (shownMsg.dataset.senderId == dMsg2.sender.id) {
+                            shownMsg.remove();
+
+                        }
+                    });
+                    prependMsgMaker(dMsg2);
+                    // update shown messages count
+                    shownMessages = document.querySelectorAll(".incoming-msg");
+                    shownMessages = new Set(shownMessages);
+                });
+                //update last message date
+                lastMessageDate = distinct2[0].datetime;
+            } else {
+                console.log("empty response")
+            }
+
+
+        })
+    }, 100);
+
+
+
+
+
+
+
+    function msgMaker(msg) {
+        //console.log(msg)
+        let newMsg = document.createElement("article");
+        newMsg.setAttribute("class", "incoming-msg");
+        newMsg.setAttribute("data-msg-id", msg.id);
+        newMsg.setAttribute("data-sender-id", msg.sender.id);
+        // add event handler on the new msg
+        newMsg.addEventListener("click", function() {
+            // pass sender ID to message sending button when clicked
+            document.querySelector(".msg-send-form").dataset.to = msg.sender.id;
+
+
+            // display chat area if need be
+            if (getWidth() < 992) {
+                // it means it's not a desktop screen...
+                $("default-text").css("display", "none");
+                $(".chat-board").css("display", "block");
+                $(".incoming-messages-section").css("display", "none");
+            } else {
+                // desktop mode
+                $(".default-text").css("display", "none");
+                $(".chat-board").css("display", "block");
+            }
+            /**
+             *  code to continuously fetch conversation
+             */
+
+
+
+        });
+        // add sender image
+        let senderImage = document.createElement("img");
+        senderImage.setAttribute("class", "sender-photo ");
+        senderImage.src = "/storage/profile/" + msg.sender.photo;
+        newMsg.appendChild(senderImage);
+        // add footer
+        let msgFoot = document.createElement("footer");
+        msgFoot.setAttribute("class", "details");
+        newMsg.appendChild(msgFoot);
+        // add username and date container to msg foot
+        let uAd = document.createElement("p");
+        uAd.setAttribute("class", "uad");
+        uAd.innerHTML = `<b class="username ">${msg.sender.username}</b><span class="date ">${msg.datetime}</span>`;
+        msgFoot.appendChild(uAd);
+        // add msg content to foot
+        let msgBody = document.createElement("p");
+        msgBody.setAttribute("class", "body");
+        msgBody.textContent = msg.body;
+        msgFoot.appendChild(msgBody);
+
+
+        // finally, add the message card to the messages container
+        incomingMessagesCon.appendChild(newMsg);
 
     }
 
 
+})
 
-
-    if (messages.length > 0) {
-
-        lastFetchedMsg = messages[0];
-        // alert(lastFetchedMsg.datetime)
-        // build message cards
-        //incomingMessagesContainer.innerHTML = "";
-        let shownMessages = document.querySelectorAll(".incoming-msg");
-
-        messages.forEach(msg => {
-            msgMaker(msg);
-        });
-        /**
-         *  fetch latest messages continuously from the end of these initial messages fetched
-         */
-        // setInterval(() => {
-        //     $.post("/message/latest", {
-        //         "ending_msg_date": lastFetchedMsg.datetime
-        //     }, function(data2, status) {
-        //         //alert(data2)
-        //         let latestMessages = JSON.parse(data2);
-        //         if (latestMessages.length > 0) {
-        //             // update ending message date like above
-        //             lastFetchedMsg = latestMessages[0];
-        //             /** 
-        //              * build more message cards
-        //              *  make sure to prepend them from the top
-        //              *  reverse order...to display properly
-        //              * */
-        //             latestMessages.reverse();
-        //             latestMessages.forEach(laMsg => {
-
-        //                 prependMsgMaker(laMsg);
-        //             });
-
-        //         } else {
-        //             // do nothing...for now
-        //             // alert("epmty response")
-        //         }
-
-
-        //     });
-        // }, 1000);
-    } else {}
-});
+// messaging send functionality
+let sendForm = document.querySelector(".msg-send-form");
+sendForm.addEventListener("submit", function(e) {
+    let bodyInput = document.querySelector("#body");
+    e.preventDefault();
+    let postData = {
+        "to": e.target.dataset.to,
+        "body": bodyInput.value
+    }
+    $.post("/message/send", postData, function(data, status) {
+        //alert(data);
+        if (data == 1) {
+            bodyInput.value = "";
+        }
+    });
+})
 
 
 
-function msgMaker(msg) {
-    //console.log(msg)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function prependMsgMaker(msg) {
     let newMsg = document.createElement("article");
     newMsg.setAttribute("class", "incoming-msg");
     newMsg.setAttribute("data-msg-id", msg.id);
-    newMsg.setAttribute("data-sender-id", msg.sender.id);
     // add event handler on the new msg
     newMsg.addEventListener("click", function() {
+        // pass sender ID to message sending button when clicked
+        document.querySelector(".msg-send-form").dataset.to = msg.sender.id;
+
+
         // display chat area if need be
         if (getWidth() < 992) {
             // it means it's not a desktop screen...
@@ -192,72 +285,12 @@ function msgMaker(msg) {
     msgBody.setAttribute("class", "body");
     msgBody.textContent = msg.body;
     msgFoot.appendChild(msgBody);
-
-    // 
     // finally, add the message card to the messages container
-    incomingMessagesContainer.appendChild(newMsg);
-
-
-
-    // //check whether cards are more than 5
-    // let madeMsgs = document.querySelectorAll(".incoming-msg");
-    // if (madeMsgs.length > 5) {
-    //     (madeMsgs[(madeMsgs.length - 1)].remove());
-    // } else {
-    //     // alert("less than five");
-    // }
-
-}
-
-function prependMsgMaker(msg) {
-    let newMsg = document.createElement("article");
-    newMsg.setAttribute("class", "incoming-msg");
-    newMsg.setAttribute("data-msg-id", msg.id);
-    // add event handler on the new msg
-    newMsg.addEventListener("click", function() {
-        alert(newMsg.dataset.msgId);
-    });
-    // add sender image
-    let senderImage = document.createElement("img");
-    senderImage.setAttribute("class", "sender-photo");
-    senderImage.src = "/storage/profile/" + msg.sender.photo;
-    newMsg.appendChild(senderImage);
-    // add footer
-    let msgFoot = document.createElement("footer");
-    msgFoot.setAttribute("class", "details");
-    newMsg.appendChild(msgFoot);
-    // add username and date container to msg foot
-    let uAd = document.createElement("p");
-    uAd.setAttribute("class", "uad");
-    uAd.innerHTML = `<b class="username ">${msg.sender.username}</b><span class="date ">${msg.datetime}</span>`;
-    msgFoot.appendChild(uAd);
-    // add msg content to foot
-    let msgBody = document.createElement("p");
-    msgBody.setAttribute("class", "body");
-    msgBody.textContent = msg.body;
-    msgFoot.appendChild(msgBody);
-    // finally, add the message card to the messages container
-    incomingMessagesContainer.prepend(newMsg);
+    incomingMessagesCon.prepend(newMsg);
 
 }
 
 
-
-/**
- *  code to send and receiver chat messages
- */
-// let sendForm = document.querySelector(".chat-board .msg-send-form");
-// sendForm.addEventListener("submit", function(e) {
-//     e.preventDefault();
-//     let message = document.querySelector(".chat-board .msg-send-form input");
-//     $.post("/message/add", {
-//         "body": message.value,
-//         "receiver": message.dataset.to
-//     }, function(data, status) {
-//         alert(data)
-//     });
-
-// });
 
 
 
