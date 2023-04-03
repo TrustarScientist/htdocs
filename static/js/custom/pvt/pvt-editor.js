@@ -333,6 +333,9 @@ function selfPostMaker(object) {
     footer.appendChild(footBtns);
     let updateBtn = document.createElement("button");
     updateBtn.setAttribute("class", " update-btn ");
+    updateBtn.addEventListener("click", (updateE) => {
+        alert("update")
+    })
     updateBtn.textContent = "Update";
     footBtns.appendChild(updateBtn);
     //delete button
