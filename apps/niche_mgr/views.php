@@ -1,7 +1,70 @@
 <?php
    require_once "engine/base-controllers/core.php";
     require_once "engine/base-models/models2.php";
+    $nicheInfo = function($request){
+      //extract niche alias
+      $nicheAlias  =  $request->POST["niche-alias"];
+      $nicheData = xDb::get("niche", "alias", $nicheAlias);
+      if(!empty($nicheData)){
+        // check wether  the current user is a member or not
+        $nicheData->cuser_is_member = false;
+        $cUserMembership = xDb::find("niche_membership", "*", "WHERE member = $request->userid AND niche = $nicheData->id");
+        if(!empty($cUserMembership)){
+          $nicheData->cuser_is_member = true;
+        }
+        // get other related niches
+        $relatedNiches = array();
+        if($nicheData->parent != null){
+          // store the parent niche of this niche
+          $parentNiche  = xDb::get("niche", "id", $nicheData->parent);
+          array_push($relatedNiches, $parentNiche->alias);
+          // get related niches from parent niche
+          $pNiche = $parentNiche;
+          for ($i=0; $i < 7; $i++) { 
+            if($pNiche->parent != null){
+              $nextNiche = xDb::get("niche", "id", $pNiche->parent);
+              if(!empty($nextNiche)){
+                array_push($relatedNiches, $nextNiche->alias);
+                if($nextNiche->parent != null){
+                  $pNiche = $nextNiche;
+                }
+              }
+            }
+          }
+        }
+        $relatedNiches =  array_unique($relatedNiches);
+        $nicheData->related_niches = $relatedNiches;
+        echo json_encode($nicheData);
+      }else{
+        echo json_encode(array());
+      }
+      
+    };
+
+
     
+    $nicheMembers = function($request){
+      $nicheAlias = $request->POST["niche-alias"];
+      $starting = (isset($request->POST["starting"])) ? $request->POST["starting"] : 0;
+      $amount =  (isset($request->POST["amount"])) ? $request->POST["amount"] : 1;
+      $members = array();
+      // get niche id for forein key serch
+      $nicheObject = xDb::get("niche", "alias", $nicheAlias);
+      if(!empty($nicheObject)){
+        $memberships = xDb::find("niche_membership", "member", " WHERE niche = $nicheObject->id", "", "LIMIT 500");
+        foreach ($memberships as $key => $membership) {
+          $membership->member = xDb::find("user", "id, username, photo", " WHERE  id = $membership->member");
+          
+        }
+        echo json_encode($memberships);
+      }else{
+        echo json_encode(array());
+      }
+      
+    };
+
+
+
     $niche = function($request, $dataset){
       // store acct to see on GET request after verifying that it is real and the niche page is loaded
       if($request->method == "GET"){
@@ -76,9 +139,78 @@
       }
       
     };
+  $pvtNichePosts = function($request){
+    $nicheId = $request->POST["niche-id"];
+    $starting = (isset($request->POST["starting"]))? $request->POST["starting"]:0;
+    $amount = (isset($request->POST["amount"]))?$request->POST["amount"]:0;
+
+    // get niche posts
+    $nichePosts = xDb::find("post", "*", "WHERE visibility = 'pub' AND category = $nicheId  ", "ORDER BY date_updated DESC", "LIMIT $starting, $amount");
+    // final dataset to return to client
+    $responseData2 = array();
+    // aggregate data
+    $post2 = array();
+    $ct2 = 0;
     
+    foreach($nichePosts as $data2) {
+        $post2["poster_blocked"] = false;
+        $blacklist = xDb::find("user_blacklist", "*", "WHERE blocked = $data2->poster AND blocker = $request->userid");
+        if(!empty($blacklist)){
+            $post2["poster_blocked"] = true;
+        }
+        $post2["cuser_is_member"] = false;
+        $membership = xDb::find("niche_membership", "*", "WHERE niche = $data2->category AND member = $request->userid");
+        if(!empty($membership)){
+            $post2["cuser_is_member"] = true;
+        }
+        $post2["contenttype"] = (xDb::get("contenttype", "id", $data2->content_type))->name;
+        $post2["postid"] = $data2->id;
+        $post2["title"] = $data2->title;
+        $post2["slug"] = $data2->slug;
+        $post2["content"] = $data2->content;
+        $post2["updated"] = date("Y-M-d",strtotime($data2->date_updated));
+        $post2["views"] = $data2->views;
+        // user who created
+        $post2["user"] = "";
+        $post2["own"] = 0;
+        if($request->userid == $data2->poster){
+            $post2["own"] = 1;
+        }
+        $userObj = "";
+        // niche categorized in
+        $post2["niche"] = "";
+        $nicheObj = "";
+        if(!empty($data2->poster)){
+            $userObj = xDb::get("user", "id", $data2->poster, "id, username, photo");
+            if(!empty($userObj)){
+                $post2["user"] = $userObj;
+            }
+        }
+        if(!empty($data2->category)){
+            $nicheObj = xDb::get("niche", "id", $data2->category, "id, alias");
+            if(!empty($nicheObj)){
+                $post2["niche"] = $nicheObj;
+            }
+        }
+        $post2["pic"] = "";
+        $postPic2 = xDb::get("editor_post_image", "post", $data2->id, "path");
+        if(!empty($postPic2)){
+            $post2["pic"] = $postPic2->path;
+        }
+        //stats
+        $post2["following"] = xDb::getCount("post_followership", "*", "post", $data2->id);
+        $post2["comments"] = xDb::getCount("post_comment", "*", "post", $data2->id);
+        // check whether d current user has followed this post or not
+        $post2["c_user_has_followed"] = 0;
+        $post2["c_user_has_followed"] = count(xDb::find("post_followership", "*", "WHERE post = $data2->id AND follower = $request->userid"));
+        // aggregate
+        $responseData2[$ct2] = $post2;
+        $ct2 += 1;
+    }
+    echo json_encode($responseData2);
+  };
   $nichePosts = function($request){
-    // profile gotten from POST request body
+    // niche ID gotten from POST request body
     $nicheId = 0;
     $starting = 0;
     $amount = 1;
@@ -147,6 +279,7 @@
           echo "am"; // is member
         }else{
           echo "nam"; // is NOT a member
+         
         }
 
 

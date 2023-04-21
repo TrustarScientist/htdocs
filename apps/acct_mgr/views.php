@@ -83,18 +83,24 @@
             $acctObject->c_user_profile = 1;
           }
           $acctObject->friend_request_allowed = 0;
-          
-          // check friend request & user network
+          $acctObject->can_message = false;
+          // check  user network
           $uNet = xDb::find("user_network", "*", " WHERE (user1 = $acctObject->id AND user2 = $request->userid) OR (user2 = $acctObject->id AND user1 = $request->userid ) ");
           $uFr =  xDb::find("user_connection", "*", "WHERE sender = $request->userid AND receiver = $acctObject->id ");
-          if((empty($uNet)) && (empty($uFr))){
+          if((!empty($uNet))){
+            $acctObject->can_message = true;
+          }else if((empty($uNet)) && (!empty($uFr))){
+            $acctObject->friend_request_allowed = 2;
+          }else if((empty($uNet)) && (empty($uFr))){
             $acctObject->friend_request_allowed = 1;
           }
+          // return current user id too
+          $acctObject->cuser= $request->userid;
           // acct can't send friend request to self.
           if($request->userid == $acctObject->id){
             $acctObject->friend_request_allowed = -1;
           }
-          // can current user like acct or not?
+          // as current user like acct or not?
           $acctObject->c_user_has_liked_acct = 0;
           $acctLikeness = xDb::find("user_likeness", "*", "WHERE (liker = $request->userid AND liked = $acctObject->id) OR (liked = $request->userid AND liker = $acctObject->id) ");
           if(!empty($acctLikeness)){
@@ -171,7 +177,7 @@
       $orderCode = (isset($request->POST["order-code"])? $request->POST["order-code"]: "date_updated DESC");
       
     }
-    $profilePosts = xDb::find("post", "*", "where poster = '$profileId'", "ORDER BY $orderCode", "limit $starting, $amount");
+    $profilePosts = xDb::find("post", "*", "where poster = '$profileId' AND visibility =  'pub' ", "ORDER BY $orderCode", "limit $starting, $amount");
     $responseData =  array();
             $ct = 0;
             $post = array();
@@ -203,10 +209,12 @@
                         }
                     }
                     $post["pic"] = "";
-                    $postPic = xDb::get("post_image", "post", $data->id, "path");
+                    $postPic = xDb::get("editor_post_image", "post", $data->id, "path");
                     if(!empty($postPic)){
                         $post["pic"] = $postPic->path;
                     }
+                    // content type
+                    $post["contenttype"] = (xDb::get("contenttype", "id", $data->content_type))->name;
                     //stats
                     $post["following"] = xDb::getCount("post_followership", "*", "post", $data->id);
                     $post["comments"] = xDb::getCount("post_comment", "*", "post", $data->id);
@@ -427,6 +435,7 @@
      *  if no network, just respond with older accounts on this platform.
      */
     $acctNetwork = xDb::find("user_network", "DISTINCT * ", "WHERE (user1 = $acctId) OR (user2 = $acctId) ");
+    
     // store known people in the network...if network not empty
     //print_r($acctNetwork);
     $knownPeople = array();
@@ -447,7 +456,7 @@
        */
       
       $filteredUsers  = array();
-      $users = xDb::find("user", "id, username, photo");
+      $users = xDb::find("user", "id, username, photo", "", "", "LIMIT 3000");
       if(!empty($users)){
         foreach ($users as $key => $user) {
           // remove current user if in filtered users
@@ -515,24 +524,41 @@
        */
       
       $userBlocked = $request->POST["user_to_block"];
-
+      $toggle = (isset($request->POST["toggle"]))? $request->POST["toggle"] : null;
       $blacklist = xDb::find("user_blacklist", "*", "WHERE blocker = $request->userid AND blocked = $userBlocked");
+      // a user cannot block itself
+
+      if($userBlocked == $request->userid){
+        echo "np";
+      }else{
+        
+        if(empty($toggle)){
+          // just to check the blockage state
+          if(!empty($blacklist)){
+            echo "b";
+          }else{
+            echo "nb";
+          }
+        }else{
+          if(!empty($blacklist)){
+            // delete likeness record...and some possible duplicates
+            $delResult = xDb::delete("user_blacklist", "WHERE blocker = $request->userid AND blocked = $userBlocked");
+            $delResult = ((!empty($delResult))? "unblocked": "err-2u");
+            echo $delResult;
+          }
+          else{
+            $creationResult = xDb::create("user_blacklist", array(
+              "blocker" => $request->userid,
+              "blocked" => $userBlocked,
+              "date" => date("Y-m-d")
+            ), true);
+            
+            $creationResult = ((!empty($creationResult))? "blocked": "err-2b");
+            echo $creationResult;
+          }
+        }
+      }
       
-      if(!empty($blacklist)){
-        // delete likeness record...and some possible duplicates
-        $delResult = xDb::delete("user_blacklist", "WHERE blocker = $request->userid AND blocked = $userBlocked");
-        $delResult = ((!empty($delResult))? "unblocked": "err");
-        echo $delResult;
-      }
-      else{
-        $creationResult = xDb::create("user_blacklist", array(
-          "blocker" => $request->userid,
-          "blocked" => $userBlocked,
-          "date" => date("Y-m-d")
-        ));
-        $creationResult = ((!empty($creationResult))? "blocked": "err");
-        echo $creationResult;
-      }
   };
   $connections = function($request){
     if($request->is_authenticated){
@@ -572,8 +598,9 @@
      *  check whether a similar request is made already 
      *  
      */
-    $similarFr = xDb::find("user_connection", "*", " WHERE sender = $c_user AND receiver = $personId");
-    if(empty($similarFr)){
+    $similarFr = xDb::find("user_connection", "*", " WHERE (sender = $c_user AND receiver = $personId) OR (sender = $personId AND receiver = $c_user) ");
+    $similarNetwork = xDb::find("user_network", "*", " WHERE (user1 = $c_user AND user2 = $personId) OR (user1 = $personId AND user2 = $c_user) ");
+    if((empty($similarFr)) && (empty($similarNetwork))){
 
       // attempt saaving FR
       $creationState = xDb::create("user_connection", array(

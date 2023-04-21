@@ -232,15 +232,83 @@
                 header("Location:/404#postnotfound");
             }
    };
+   $pvtPostDetails = function($request){
+        $postId = $request->POST["postid"];
+        $postResult = xDb::get("post", "id", $postId);
+
+        if(!empty($postResult)){
+            // update views count
+            
+            $updated = xDb::update("post", array(
+                "views" => (((int) ($postResult->views) ) + 1)
+            ), " WHERE id = $postId");
+            
+            // get related data
+            $postResult->content = htmlspecialchars_decode($postResult->content);
+            $postResult->owned_by_cuser = false;
+            if($postResult->poster == $request->userid){
+                $postResult->owned_by_cuser = true;
+            }
+            $postResult->poster = xDb::get("user", "id", $postResult->poster, "id, username, photo");
+            $postResult->content_type = xDb::get("contenttype", "id", $postResult->content_type);
+            $postResult->category = xDb::get("niche", "id", $postResult->category);
+            $postResult->following = xDb::getCount("post_followership", "*", "post", $postResult->id);
+            $postResult->comments = xDb::getCount("post_comment", "*", "post", $postResult->id);
+            // send aggregate response
+            echo json_encode($postResult);
+        }else{
+            echo json_encode(array());
+        }
+   };
+   $commentAdd = function($request){
+        $content = $request->POST["content"];
+        $postId = $request->POST["postid"];
+        $commenterId = $request->userid;
+        $result = xDb::create("post_comment", array(
+            "commenter" => $commenterId,
+            "post"=> $postId,
+            "content" => htmlentities(addslashes($content)),
+            "date_created" => date("Y-m-d H:i:s")
+        ));
+        if(!empty($result)){
+            echo "1";
+        }else{
+            echo "0";
+        }
+   };
    $commentReplies = function($request){
         $commentId = $_POST["comment_id"];
-        $replies = xDb::find("post_comment_reply", "*", "where comment = $commentId");
+        $replies = xDb::find("post_comment_reply", "*", "where comment = $commentId","  ORDER BY id DESC ", "LIMIT 25");
         if(!empty($replies)){
             foreach ($replies as $key => $reply) {
                     $reply->replyer = xDb::get("user", "id", $reply->replyer, "username");
             }
+            echo json_encode($replies);
+        }else{
+            echo json_encode(array());
         }
-        echo json_encode($replies);
+        
+   };
+   $replyAdd = function($request){
+    $replyer = $request->userid;
+    $body = $request->POST["reply-body"];
+    $commentId = $request->POST["cid"];
+    if($body != ""){
+        $result = xDb::create("post_comment_reply", array(
+            "comment" => $commentId,
+            "replyer" => $replyer,
+            "content" => htmlentities(addslashes($body)),
+            "date" => date("Y-m-d H:i:s"),
+        ));
+        if(!empty($result)){
+            echo "1";
+        }else{
+            echo "0";
+        }
+    }else{
+        echo "-1";
+    }
+    
    };
 
    $imageUploader = function($request){
@@ -308,10 +376,20 @@
     $postTitle = (isset($request->POST["title"])) ? $request->POST["title"] : "An Anomymous Post...Can't Be Trusted!";
     $content =  htmlspecialchars($request->POST["content"], ENT_QUOTES);
     $acctId =  $request->userid;
-    
+
+    preg_match_all('/<img\s+src=[a-zA-Z0-9" *":,.!-().?";\']\/storage\/post\/([_@*\w.+&^:$?=%-]+)[a-zA-Z0-9" *":,.!-().?";\']>/', $request->POST["content"], $matches);
+    //get post images for later processing
+    $postImages = array();
+    if(isset($matches[1])){
+        $postImages = $matches[1];
+    }
+
     $date_created = date("Y-m-d H:i:s");
     $date_updated = date("Y-m-d H:i:s");
-
+    // generate a token for post uniqueness for later processing
+    $specialChars = ["@", "#", "*", "$","%", "&", "^", "!", "_", "=", "~", "?"];
+    $token = $specialChars[rand(0, (count($specialChars)-1))] . $specialChars[rand(0, (count($specialChars)-1))] . $postTitle . $specialChars[rand(0, (count($specialChars)-1))] . $specialChars[rand(0, (count($specialChars)-1))];
+    // attempt post storage
     $state = xDb::create("post", array(
         "visibility" => $postVisibility,
         "content_type" => $postType,
@@ -320,12 +398,32 @@
         "title" => $postTitle,
         "date_created" => $date_created,
         "date_updated" => $date_updated,
-        "content" => $content
-
+        "content" => $content,
+        "token" => $token,
     ));
+
     if(!empty($state)){
+        // link images to the post id
+        $thisPostId = (xDb::get("post", "token", $token, "id"))->id;
+        foreach ($postImages as $key => $postImage) {
+            $ur = xDb::update("editor_post_image", array(
+                "post" => $thisPostId
+            ), "WHERE path = '$postImage'");
+            
+        }
+        // delete all post images that are not linked
+        $unlinkedImages = xDb::find("editor_post_image", "*", "WHERE post IS NULL ");
+        foreach ($unlinkedImages as $key => $unlinkedImage) {
+            xDb::delete("editor_post_image", "WHERE id = '$unlinkedImage->id'");
+            unlink("storage/post/" . $unlinkedImage->path);
+        }
         echo "1";
     }else{
+        // delete images instead...from DB ENGINE & FILE SYSTEM
+        foreach ($postImages as $key => $pImage) {
+            xDb::delete("editor_post_image", "WHERE path = '$pImage'");
+            unlink("storage/post/" . $pImage);
+        }
         echo "0";
     }
 
@@ -334,7 +432,7 @@
     $post2Edit =  function($request){
         $postId = isset($request->POST["post2edit"])? $request->POST["post2edit"]: 0;
         $postObject = xDb::get("post", "id", $postId);
-        if(!empty($postObject)){
+        if((!empty($postObject)) && ($postObject->poster == $request->userid)){
             $postObject->content =  html_entity_decode($postObject->content);
             echo  json_encode($postObject);
         }else{
@@ -354,6 +452,13 @@
         $acctId =  $request->userid;
     
         $date_updated = date("Y-m-d H:i:s");
+        // let's get the images in this updated post
+        preg_match_all('/<img\s+src=[a-zA-Z0-9" *":,.!-().?";\']\/storage\/post\/([_@*\w.+&^:$?=%-]+)[a-zA-Z0-9" *":,.!-().?";\']>/', $request->POST["content"], $matches2);
+        $uPostImages = array();
+        if(isset($matches2[1])){
+            $uPostImages = $matches2[1];
+        }
+        
 
         $state = xDb::update("post", array(
             "visibility" => $postVisibility,
@@ -364,8 +469,24 @@
             "date_updated" => $date_updated,
             "content" => $content
 
-        ), "WHERE id = $postId");
+        ), "WHERE id = $postId AND poster = $acctId");
+
         if(!empty($state)){
+            // link up the images to this post id
+            foreach ($uPostImages as $key => $uPostImage) {
+                xDb::update("editor_post_image", array(
+                    "post" => $postId
+                ), "WHERE path = '$uPostImage'");
+            }
+            // get all the images linked to this post id
+            $linkedImages = xDb::find("editor_post_image", "*", "WHERE post = '$postId' ");
+            foreach ($linkedImages as $key => $linkedImage) {
+                // remove images that are not in this post content
+                if(!in_array($linkedImage->path, $uPostImages)){
+                    xDb::delete("editor_post_image", "WHERE path = '$linkedImage->path'");
+                    unlink("storage/post/" . $linkedImage->path);
+                }
+            }
             echo "1";
         }else{
             echo "0";
@@ -375,8 +496,11 @@
    $cUserPosts = function($request){
         $starting = (isset($request->POST["starting"]))? $request->POST["starting"] : 0;
         $amount = (isset($request->POST["amount"]))? $request->POST["amount"] : 0;
-        $cUserPostsData = xDb::find("post", "id, title, date_updated, slug", "WHERE poster = $request->userid", "ORDER BY date_updated DESC ", "LIMIT $starting, $amount");
+        $cUserPostsData = xDb::find("post", "id, title, date_updated, slug, content_type", "WHERE poster = $request->userid", "ORDER BY date_updated DESC ", "LIMIT $starting, $amount");
         if(!empty($cUserPostsData)){
+            foreach ($cUserPostsData as $key => $cupd) {
+                $cupd->content_type = xDb::get("contenttype", "id", $cupd->content_type, "name");
+            }
             echo json_encode($cUserPostsData);
         }else{
             echo json_encode(array());
@@ -384,9 +508,22 @@
    };
 
 
+   $cUserPostsSearch  = function($request){
+        $terms = $request->POST["terms"];
+        if($terms == ""){
+            echo json_encode(array());
+        }else{
+            $result = xDb::find("post", "id, title", " WHERE poster = $request->userid AND title LIKE '%$terms%' ", "ORDER BY date_updated", "LIMIT 12");
+            echo json_encode($result);
+        }
+   };
+
+
+
    $deletePost = function($request){
         $pid = $request->POST["pid"];
-        $result = xDb::delete("post", "WHERE id = $pid");
+        // ensure the post belongs to the current user
+        $result = xDb::delete("post", "WHERE id = $pid AND poster = $request->userid");
         if(!empty($result)){
             echo "1";
         }else{

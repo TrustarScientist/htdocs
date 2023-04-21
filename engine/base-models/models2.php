@@ -184,7 +184,7 @@
                         return 1;
                     } catch (\Throwable $th) {
                         //throw $th;
-                        
+                        echo json_encode($th);
                         return 0;
                     }
                 }

@@ -23,15 +23,6 @@ a {
     z-index: 28929;
 }
 
-a:focus,
-a:hover {
-    color: rgb(13, 139, 77);
-}
-
-a:visited {
-    color: black;
-}
-
 .drow-one {
     padding-top: 40px;
     padding-bottom: 30px;
@@ -51,11 +42,26 @@ body {
 
 .niche-con {}
 
-.niche-name {
+.niche-membership {
+    background-color: #dcf8c6;
+    margin-right: 2px;
+    border: 0;
+    padding: 1%;
+    border-radius: 5px;
+}
+
+.niche-membership:hover {
+    box-shadow: 2px 2px 3px 1px rgb(240, 240, 240);
+}
+
+.niche-con .niche-name {
+    margin-top: 10px;
     border: 1px solid rgb(240, 240, 240);
     border-radius: 5px;
-    padding: 1%;
+    padding: 2%;
 }
+
+.userpost .niche-name {}
 
 .niche-banner {
     width: 100%;
@@ -72,7 +78,6 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.9rem;
 }
 
 .niche-stats p:nth-child(1) {
@@ -88,6 +93,19 @@ body {
     margin: 10px 0;
     padding: 1%;
     border-radius: 5px;
+}
+
+.related-niches-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.related-niches-container a {
+    padding: 1%;
+    margin-right: 3%;
+    color: rgb(13, 139, 77);
 }
 
 .niche-posts-section {
@@ -115,12 +133,13 @@ body {
     width: 45%;
     margin-right: 10px;
     margin-bottom: 10px;
-    border: 1px solid rgb(219, 219, 219);
+    border: 1px solid rgb(240, 240, 240);
     border-radius: 5px;
+    box-shadow: 2px 2px 3px rgb(240, 240, 240);
 }
 
 .scroller .person:hover {
-    background-color: ghostwhite;
+    background-color: rgb(240, 240, 240);
 }
 
 .scroller .person .userlink {
@@ -145,119 +164,10 @@ body {
 }
 
 .scroller .person .name {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     margin: 10px 0;
     display: block;
     padding-bottom: 1%;
-}
-
-.userposts {}
-
-.userposts .userpost {
-    margin: 10px 0;
-    padding: 0;
-    border-radius: 5px;
-    border: 1px solid rgb(219, 219, 219);
-    border-radius: 5px;
-}
-
-.userposts .userpost:hover {
-    background-color: ghostwhite;
-}
-
-.userpost .head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1%;
-}
-
-.userpost .head .post-thumbnail {
-    width: 50%;
-    margin-right: 5px;
-    border-radius: 5px;
-    border: 1px solid rgb(240, 240, 240);
-}
-
-.userpost .head .title {
-    display: block;
-    font-weight: 500;
-    font-size: 1rem;
-    text-align: start;
-    width: 74%;
-}
-
-.userpost .content-con .title:focus {
-    color: rgb(13, 139, 77);
-}
-
-.userpost .content-con .post-type {
-    margin-top: 2px;
-    display: inline-block;
-    margin-left: 5px;
-    padding: 0.5% 1.5%;
-    font-size: 0.9rem;
-    border-radius: 5px;
-}
-
-.userpost .metadata {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    font-size: 0.9rem;
-    border-top: 1px solid rgb(240, 240, 240);
-}
-
-.userpost .metadata .user-info {
-    margin-top: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 1%;
-}
-
-.userpost .metadata .user-info .photo {
-    width: 35px;
-    height: 35px;
-}
-
-.userpost .metadata .user-info img {
-    width: 30px;
-    height: 30px;
-    margin-right: 5px;
-    border-radius: 50%;
-}
-
-.userpost .metadata .user-info .ud .date {
-    font-size: 0.7rem;
-    color: gray;
-    margin-top: -1px;
-}
-
-.userpost .metadata .stats {
-    padding-top: 10px;
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 39%;
-}
-
-.userpost .metadata .stats div {
-    margin: 0 4px;
-    width: 45%;
-}
-
-.userpost .metadata .stats .count {
-    font-size: 0.7rem;
-    color: grey;
-}
-
-.userpost .metadata .alias-con {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .more-posts-btns {
@@ -361,6 +271,16 @@ body {
     padding: 1% 2%;
 }
 
+.niche-ad-section {
+    display: none;
+}
+
+.niche-ad-section img {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
 @media screen and (min-width:576px) {
     .dcol:nth-child(2) {
         padding-left: 10%;
@@ -377,9 +297,6 @@ body {
     .profile-edit-con {
         width: 65%;
         margin-left: 35%;
-    }
-    .userpost {
-        border: 1px solid rgb(240, 240, 240);
     }
     .scroller .person {
         width: 30%;
@@ -425,31 +342,19 @@ body {
     .niches-section {
         display: block;
     }
-    .userposts-section {
+    .niche-con .niche-name {
+        margin-top: 1px;
+    }
+    .niche-ad-section {
+        position: fixed;
+        top: 80px;
+        right: 1%;
+        width: 23%;
         display: block;
+        margin-top: 10px;
+    }
+    .niche-ad-section .desc {
+        background-color: #dcf8c6;
         padding: 1%;
-        padding-top: 1px;
-    }
-    .userposts .userpost {
-        border: 1px solid rgb(240, 240, 240);
-    }
-    .userpost .content-con .title {
-        font-size: 1.2rem;
-    }
-    .n-sub-page {
-        top: 12%;
-        width: 21%;
-        display: block;
-    }
-    .n-sub-page .notes {
-        width: 100%;
-        padding: 0 1%;
-        font-size: 0.7rem;
-    }
-    .n-sub-page .notes .notification {
-        border: 0;
-        width: 100%;
-        font-size: 1rem;
-        border-bottom: 1px solid rgb(206, 204, 204);
     }
 }

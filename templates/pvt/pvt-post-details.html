@@ -12,84 +12,94 @@
     <script defer src="/static/js/jQuery.min.js"></script>
     <script defer src="/static/js/custom/pvt/pvt-site-wide.js"></script>
     <script defer src="/static/js/custom/pvt/pvt-post-details.js"></script>
-    <title>Profile Page</title>
+    <title>Post Details Page</title>
 </head>
 
 <body>
     <nav class="pvt-nav ">
-        <header class="head bg-light" style="z-index: 4567890;">
+        <header class="head bg-success" style="z-index: 4567890;">
             <div class="brand">
                 <img src="/static/images/avatar-2.jpg" alt="brand logo" width="30px" height="30px">
-                <h1 class="name text-success">Knowisland</h1>
+                <h1 class="name text-light">Knowisland</h1>
             </div>
             <form id="form" action="/search" method="post">
                 <input class="form-control" type="search" name="qeury" id="term" placeholder="What do you wanna know?">
             </form>
             <div class="commons">
-                <svg style="margin-right: 20%;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
-                  </svg>
                 <svg xmlns="http://www.w3.org/2000/svg" id="search-icon" width="25" height="25" fill="" class="bi bi-search" viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                   </svg>
 
-            </div>
-            <!-- to show events happening now in the form of notifications, messages, alerts -->
-            <aside class="events-menu">
-                <div class="con">
-                    <header class="notifications path bg-secondary text-light">
-                        <a href="/notifications" class="text-light">Notifications</a>
-                        <span>0</span>
-                    </header>
-                    <footer class="n-d path-details bg-light">
-                        <!-- this contains incoming events -->
-                        lates notifications here...
-                    </footer>
+                <div class="m-con">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                        <path d="M9.5
+            13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z "/></svg>
                 </div>
 
-                <a href="/logout" class="logout path text-danger">
-                    Logout...
-                </a>
-            </aside>
+            </div>
+
         </header>
-        <footer class="foot bg-light">
+        <footer class="foot bg-success">
             <a href="/newsfeed">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="" class="bi bi-house-fill" viewBox="0 0 16 16"> <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/> <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/> </svg>
                 <p id="first">Newsfeed</p>
             </a>
-            <a href="/user/connections">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="" class="bi bi-people-fill" viewBox="0 0 16 16"> <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/> </svg>
-                <p id="second">Network</p>
+            <a href="/post/edit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-plus-fill" viewBox="0 0 16 16">
+                    <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0z"/>
+                  </svg>
+                <p id="create">Create</p>
             </a>
             <a href="/user/drakee">
-                <img id="current_user_photo" src="" alt="logged in user photo">
-                <p id="third">Awesome</p>
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                </svg>
+                <p id="current-user" class="c-user-name"></p>
             </a>
-            <a href="/post/create">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
-                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+
+            <a href="/user/connections">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="" class="bi bi-people-fill" viewBox="0 0 16 16"> <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/> </svg>
+                <p id="network">Network</p>
+            </a>
+            <a href="/message/inbox">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-quote-fill" viewBox="0 0 16 16">
+                    <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM7.194 6.766a1.688 1.688 0 0 0-.227-.272 1.467 1.467 0 0 0-.469-.324l-.008-.004A1.785 1.785 0 0 0 5.734 6C4.776 6 4 6.746 4 7.667c0 .92.776 1.666 1.734 1.666.343 0 .662-.095.931-.26-.137.389-.39.804-.81 1.22a.405.405 0 0 0 .011.59c.173.16.447.155.614-.01 1.334-1.329 1.37-2.758.941-3.706a2.461 2.461 0 0 0-.227-.4zM11 9.073c-.136.389-.39.804-.81 1.22a.405.405 0 0 0 .012.59c.172.16.446.155.613-.01 1.334-1.329 1.37-2.758.942-3.706a2.466 2.466 0 0 0-.228-.4 1.686 1.686 0 0 0-.227-.273 1.466 1.466 0 0 0-.469-.324l-.008-.004A1.785 1.785 0 0 0 10.07 6c-.957 0-1.734.746-1.734 1.667 0 .92.777 1.666 1.734 1.666.343 0 .662-.095.931-.26z"/>
                   </svg>
-                <p id="fourth">Create</p>
-            </a>
-            <a href="/message/inbox"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-chat-fill" viewBox="0 0 16 16">
-                <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/>
-              </svg>
-                <p id="fifth">Messages</p>
+                <p id="messages">Messages</p>
             </a>
         </footer>
     </nav>
+    <div class="sitewide-loader"></div>
     <main class="container-fluid">
         <section class="drow-one row">
             <div class="dcol col-md-4 col-lg-3 pt-3">
+                <div class="dcol col-md-4 col-lg-3 pt-3 ">
+                    <!-- to show events happening now in the form of notifications, messages, alerts -->
+                    <aside class="events-menu" style="z-index: 232368386327977323032326832;">
+                        <div class="con">
+                            <header class="notifications bg-success text-light path notifications-tab">
+                                <a href="/notifications" class="text-light">Notifications</a>
+                                <span>0</span>
+                            </header>
+                            <button class="btn btn-light mb-2 mt-2">newkewbe ejewewiu weew ewjueew ewew ewee ege ewew euewue ewui732 32u32v</button>
 
+                        </div>
+
+                        <a href="/logout" class="logout path text-danger">
+                        Logout...
+                        </a>
+                    </aside>
+                </div>
             </div>
-            <div class="dcol col-md-8 col-lg-6">
+
+            <div class="dcol col-md-8 col-lg-6" style="display: none;">
+                <h1 class="post-title mb-2">The Title of the post goes here...no matter it's length</h1>
                 <header class="parent">
-                    <img class="main-post-pic " src="/static/images/pexels-alex-andrews-3805983.jpg" alt="main post pic">
-                    <h3 class="post-title mt-2">The Title of the post goes here...no matter it's length</h3>
 
                     <article class="poster-details">
+
                         <header class="poster">
                             <img class="photo" src="/static/images/chef-2.jpg" alt="poster photo">
                             <footer class="more">
@@ -97,34 +107,39 @@
                                 <span class="date">[date]</span>
                             </footer>
                         </header>
+                        <a href="#" class="ctype">Question</a>
+                        <header class="post-stats">
+                            <p class="views"><b>293</b><span> Views</span></p>
+                            <p class="following"><b>81272</b><span> Following</span></p>
+                            <p class="comments"><b>121</b><span> comments</span></p>
+
+                        </header>
+
                         <a href="/niche/@softdev" class="category">@webdev</a>
                     </article>
-                    <header class="post-stats">
-                        <p class="views"><b>293</b><span> Views</span></p>
-                        <p class="following"><b>81272</b><span> Following</span></p>
-                        <p class="comments"><b>121</b><span> comments</span></p>
 
-                    </header>
                 </header>
+
+                <a href="#" class="btn btn-light post-details-edit-btn text-success" style="display: none;">Edit this post...</a>
                 <div class="post-content">
-                    some sample css codes a { text-decoration: none; color: black; } a:hover { color: rgb(13, 139, 77); } .main-post-pic { width: 100%; border-radius: 5px; display: block; } .stats { background-color: rgb(70, 67, 86); color: white; display: flex; justify-content:
-                    flex-start; align-items: center; font-size: 0.8rem; padding: 1%; border-radius: 5px; } .stats p { margin: 0; margin-right: 3%; } .poster-details { display: flex; justify-content: flex-start; align-items: center; margin: 5px auto; }
-                    .poster-details .poster { display: flex; justify-content: space-between; align-items: center; } .poster-details .poster .photo { width: 35px; height: 35px; border-radius: 5px; margin-right: 1px; } .poster-details .poster .more { width:
-                    85%; } .poster-details .poster .more .date { display: block; font-size: 0.7rem; color: gray; } .poster-details .category { margin-left: 10px; padding: 0.1% 0.5%; border: 1px solid rgb(70, 67, 86); border-radius: 5px; }
+                    content
                 </div>
 
-                <aside class="post-functions">
+                <aside class="post-functions pt-3 pb-3 " style="border: 1px solid rgb(240, 240, 240);">
                     <b class="comment-section-btn">Comments</b>
                     <b class="other-posts-section-btn"><a href="#related-posts">Other Posts</a></b>
                 </aside>
-                <form class="comment-add" action="/post/comment/add" method="post">
-                    <textarea name="body" id="body" cols="20" rows="3" class="form-control">
-                        your comment here...
+                <form class="comment-add-form" action="/post/comment/add" method="post">
+                    <textarea name="body" id="body" cols="15" rows="3" class="form-control" style="border: 1px solid rgb(240, 240, 240);">
+                        
                     </textarea>
-                    <button class="btn btn-outline-success submit">Add</button>
+                    <div class="d-grid mt-2">
+                        <button class="btn btn-success submit">Add Comment</button>
+                    </div>
                 </form>
+
                 <section class="post-comment-section">
-                    <article class="comment">
+                    <!-- <article class="comment">
                         <p class="body">The content of the comment should be placed here...ok?</p>
                         <footer class="commenter-con">
                             <div class="commenter">
@@ -153,124 +168,23 @@
                                 <span class="date">date</span>
                             </article>
                         </div>
-                    </article>
+                        <form action="" method="post" class="reply-form">
+                            <input type="text" name="reply-message" id="rm" class="form-control" placeholder="reply to this comment...">
+                            <button class="btn btn-light" type="submit">Reply...</button>
+                        </form>
+                    </article> -->
                 </section>
-            </div>
-            <div class="dcol col-lg-3">
+                <button class="btn btn-light more-comments-btn mt-2 mb-2" data-mc="0" style="font-size: 0.9rem;">More Comments</button>
                 <div class="related-posts-section">
-                    <h4 id="related-posts" class="text-light bg-secondary" style="padding: 1%;border-radius: 5px;">Other Interesting Posts...</h4>
+                    <h4 id="related-posts" class="text-light bg-success" style="padding: 2%;border-radius: 5px;">Other Interesting Posts...</h4>
                     <section class="userposts">
-                        <article class="userpost">
-                            <header class="head">
-                                <img src="/static/images/chef-2.jpg" alt="" class="post-thumbnail">
-                                <a href="/post/" class="title">the title of the post should be placed here/</a>
-                            </header>
-                            <footer class="metadata mb-1">
-                                <section class="user-info">
-                                    <img src="/static/images/cpt_engineer.jpg" alt="" class="photo">
-                                    <div class="ud">
-                                        <a href="/user/Phychemma" class="username">Username</a>
-                                        <aside class="date">20-20-20</aside>
-                                    </div>
-                                </section>
-                                <section class="stats">
-                                    <div class="following-con">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="" class="bi bi-heart follow-icon" viewBox="0 0 16 16">
-                                        <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146zm.122 2.112v-.002.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a4.507 4.507 0 0 0-.288-.076 4.922 4.922 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a4.924 4.924 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034.114 0 .23-.011.343-.04L9.927 2.028c-.029.113-.04.23-.04.343a1.779 1.779 0 0 0 .062.46z"/>
-                                        </svg>
-                                        <aside class="count">3837</aside>
-                                    </div>
-                                    <div class="comments-con">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chat" viewBox="0 0 16 16">
-                                        <path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z"/>
-                                        </svg>
-                                        <aside class="count">30304</aside>
-                                    </div>
-                                    <div class="views-con">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eyeglasses" viewBox="0 0 16 16">
-                                        <path d="M4 6a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm2.625.547a3 3 0 0 0-5.584.953H.5a.5.5 0 0 0 0 1h.541A3 3 0 0 0 7 8a1 1 0 0 1 2 0 3 3 0 0 0 5.959.5h.541a.5.5 0 0 0 0-1h-.541a3 3 0 0 0-5.584-.953A1.993 1.993 0 0 0 8 6c-.532 0-1.016.208-1.375.547zM14 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
-                                        </svg>
-                                        <aside class="count">9037</aside>
-                                    </div>
 
-                                </section>
-                            </footer>
-                        </article>
-                        <article class="userpost">
-                            <header class="head">
-                                <img src="/static/images/pexels-eberhard-grossgasteiger-1421903.jpg" alt="" class="post-thumbnail">
-                                <a href="/post/" class="title">the title of the post should be placed here/</a>
-                            </header>
-                            <footer class="metadata mb-1">
-                                <section class="user-info">
-                                    <img src="/static/images/cpt_engineer.jpg" alt="" class="photo">
-                                    <div class="ud">
-                                        <a href="/user/Phychemma" class="username">Username</a>
-                                        <aside class="date">20-20-20</aside>
-                                    </div>
-                                </section>
-                                <section class="stats">
-                                    <div class="following-con">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="" class="bi bi-heart follow-icon" viewBox="0 0 16 16">
-                                        <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146zm.122 2.112v-.002.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a4.507 4.507 0 0 0-.288-.076 4.922 4.922 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a4.924 4.924 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034.114 0 .23-.011.343-.04L9.927 2.028c-.029.113-.04.23-.04.343a1.779 1.779 0 0 0 .062.46z"/>
-                                        </svg>
-                                        <aside class="count">3837</aside>
-                                    </div>
-                                    <div class="comments-con">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chat" viewBox="0 0 16 16">
-                                        <path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z"/>
-                                        </svg>
-                                        <aside class="count">30304</aside>
-                                    </div>
-                                    <div class="views-con">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eyeglasses" viewBox="0 0 16 16">
-                                        <path d="M4 6a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm2.625.547a3 3 0 0 0-5.584.953H.5a.5.5 0 0 0 0 1h.541A3 3 0 0 0 7 8a1 1 0 0 1 2 0 3 3 0 0 0 5.959.5h.541a.5.5 0 0 0 0-1h-.541a3 3 0 0 0-5.584-.953A1.993 1.993 0 0 0 8 6c-.532 0-1.016.208-1.375.547zM14 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
-                                        </svg>
-                                        <aside class="count">9037</aside>
-                                    </div>
-
-                                </section>
-                            </footer>
-                        </article>
-                        <article class="userpost">
-                            <header class="head">
-                                <img src="/static/images/banner-right-image.png" alt="" class="post-thumbnail">
-                                <a href="/post/" class="title">the title of the post should be placed here/</a>
-                            </header>
-                            <footer class="metadata mb-1">
-                                <section class="user-info">
-                                    <img src="/static/images/cpt_engineer.jpg" alt="" class="photo">
-                                    <div class="ud">
-                                        <a href="/user/Phychemma" class="username">Username</a>
-                                        <aside class="date">20-20-20</aside>
-                                    </div>
-                                </section>
-                                <section class="stats">
-                                    <div class="following-con">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="" class="bi bi-heart follow-icon" viewBox="0 0 16 16">
-                                        <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146zm.122 2.112v-.002.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a4.507 4.507 0 0 0-.288-.076 4.922 4.922 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a4.924 4.924 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034.114 0 .23-.011.343-.04L9.927 2.028c-.029.113-.04.23-.04.343a1.779 1.779 0 0 0 .062.46z"/>
-                                        </svg>
-                                        <aside class="count">3837</aside>
-                                    </div>
-                                    <div class="comments-con">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chat" viewBox="0 0 16 16">
-                                        <path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z"/>
-                                        </svg>
-                                        <aside class="count">30304</aside>
-                                    </div>
-                                    <div class="views-con">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eyeglasses" viewBox="0 0 16 16">
-                                        <path d="M4 6a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm2.625.547a3 3 0 0 0-5.584.953H.5a.5.5 0 0 0 0 1h.541A3 3 0 0 0 7 8a1 1 0 0 1 2 0 3 3 0 0 0 5.959.5h.541a.5.5 0 0 0 0-1h-.541a3 3 0 0 0-5.584-.953A1.993 1.993 0 0 0 8 6c-.532 0-1.016.208-1.375.547zM14 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
-                                        </svg>
-                                        <aside class="count">9037</aside>
-                                    </div>
-
-                                </section>
-                            </footer>
-                        </article>
                     </section>
 
                 </div>
+            </div>
+            <div class="dcol col-lg-3" style="display: none;">
+
             </div>
         </section>
     </main>

@@ -37,10 +37,6 @@ a:visited {
     padding-bottom: 30px;
 }
 
-.recommended-people-section {
-    display: none;
-}
-
 .dcol {
     padding: 1% 1%;
 }
@@ -48,7 +44,7 @@ a:visited {
 .dcol input:focus,
 .dcol select:focus {
     border-color: rgb(197, 196, 196);
-    box-shadow: 1px 1px 2px 1px rgb(163, 250, 170);
+    box-shadow: 1px 1px 2px 1px rgb(241, 245, 242);
 }
 
 .edit-scopes {
@@ -63,6 +59,7 @@ a:visited {
 /** code for list of self posts */
 
 .userposts2edit-con {
+    position: relative;
     background-color: white;
     z-index: 2922827783;
     position: fixed;
@@ -73,23 +70,56 @@ a:visited {
     padding: 1%;
     display: none;
     overflow-y: scroll;
+    transition: 1s;
+}
+
+.searched-posts .suggestion {
+    padding: 1%;
+    display: block;
+    margin: 10px 0;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    transition: 1s;
+    color: gray;
+}
+
+.searched-posts .suggestion:hover {
+    color: deeppink;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.self-post-search {
+    border: 1px solid gray;
 }
 
 .self-posts {}
 
 .self-posts .self-post {
+    background-color: white;
     position: relative;
-    border: 1px solid rgb(223, 222, 222);
     border-radius: 5px;
     padding: 1% 0;
     margin: 10px auto;
+    border: 1px solid rgb(240, 240, 240);
+    box-shadow: 2px 2px 3px rgb(240, 240, 240);
+    min-height: 10px;
 }
 
 .self-post .title {
     display: block;
     font-weight: 500;
-    padding: 0 1%;
+    padding: 1%;
     font-size: 0.9rem;
+}
+
+.self-post .content-type {
+    display: block;
+    text-align: end;
+    margin-top: 15px;
+    color: black;
+    font-size: 0.8rem;
+    padding: 1%;
 }
 
 .self-post .foot {
@@ -109,7 +139,7 @@ a:visited {
 }
 
 .self-post .foot button:nth-child(1) {
-    background-color: gray;
+    background-color: rgb(13, 139, 77);
     border: 0;
     color: white;
 }
@@ -120,7 +150,7 @@ a:visited {
 
 .self-post .foot .date {
     color: gray;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
 }
 
 .self-post .foot .controllers {
@@ -136,6 +166,10 @@ a:visited {
     top: 0;
     background-color: red;
     z-index: 220199999999999999999999993277327;
+}
+
+.self-posts .self-post:hover {
+    background-color: rgb(240, 240, 240);
 }
 
 

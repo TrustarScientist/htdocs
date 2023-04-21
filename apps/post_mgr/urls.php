@@ -3,7 +3,9 @@
     $urlpatterns = [
         "/^following$/" => $postFollowing,
         "/^comments$/" => $postComments,
+        "/^comment\/add$/" => $commentAdd,
         "/^comment\/replies$/" => $commentReplies,
+        "/^comment\/replies\/add$/" => $replyAdd,
         "/^newsfeed$/" => $newsfeed,
         "/^edit$/" => $editor,
         "/^trending$/" => $latest,
@@ -13,8 +15,10 @@
         "/^editor\/delete-post$/" => $deletePost,
         "/^editor\/post2edit$/" => $post2Edit,
         "/^editor\/posts$/" => $cUserPosts,
+        "/^editor\/posts\/search$/" => $cUserPostsSearch,
         "/^(\d+)\/([@*\w.+\[\]&()^:$?=%-]*)$/" => $postDetailsPage,
-        "/^details$/" => $postDetails, 
+        "/^details$/" => $postDetails,
+        "/^pvt\/details$/" => $pvtPostDetails,
         
     ];
 

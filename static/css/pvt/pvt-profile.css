@@ -114,8 +114,8 @@ body {
 }
 
 .profile-metadata-con .stats p:nth-child(2):hover {
-    color: white;
-    background-color: grey;
+    background-color: #dcf8cd;
+    border: 0;
 }
 
 .profile-metadata-con .edit-btn {
@@ -175,13 +175,15 @@ body {
     padding-bottom: 60px;
     z-index: 23732892373023032723520329732;
     display: block;
+    background-color: white;
 }
 
 .profile-edit-con input:focus,
 .profile-edit-con select:focus,
 .profile-edit-con textarea:focus {
     border-color: rgb(224, 223, 223);
-    box-shadow: 1px 1px 3px 3px rgb(229, 245, 238);
+    box-shadow: 1px 1px 3px rgb(229, 245, 238);
+    border: 0;
 }
 
 .profile-edit-con .edit-form .edit-switch {
@@ -213,6 +215,7 @@ body {
 
 .rp-container {
     width: 100%;
+    display: block;
 }
 
 .rp-container .scroller {
@@ -231,12 +234,13 @@ body {
     width: 45%;
     margin-right: 10px;
     margin-bottom: 10px;
-    border: 1px solid rgb(219, 219, 219);
+    border: 1px solid rgb(240, 240, 240);
     border-radius: 5px;
+    box-shadow: 2px 2px 3px rgb(240, 240, 240);
 }
 
 .scroller .person:hover {
-    background-color: ghostwhite;
+    background-color: rgb(240, 240, 240);
 }
 
 .scroller .person .userlink {
@@ -261,7 +265,7 @@ body {
 }
 
 .scroller .person .name {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     margin: 10px 0;
     display: block;
     padding-bottom: 1%;
@@ -273,12 +277,11 @@ body {
     margin: 10px 0;
     padding: 0;
     border-radius: 5px;
-    border: 1px solid rgb(219, 219, 219);
     border-radius: 5px;
 }
 
 .userposts .userpost:hover {
-    background-color: ghostwhite;
+    background-color: rgb(240, 240, 240);
 }
 
 .userpost .head {
@@ -394,15 +397,16 @@ body {
 .niches {}
 
 .niches .niche {
-    border: 1px solid rgb(219, 219, 219);
+    border: 1px solid rgb(240, 240, 240);
     padding: 0 1%;
     margin: 10px auto;
     border-radius: 5px;
     width: 100%;
+    box-shadow: 2px 2px 3px rgb(240, 240, 240);
 }
 
 .niches .niche:hover {
-    background-color: ghostwhite;
+    background-color: rgb(240, 240, 240);
 }
 
 .niches .niche .name {

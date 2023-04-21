@@ -3,6 +3,7 @@
     $urlpatterns = [
         "/^$/" => $homePage,
         "/^search$/" => $searchEngine,
+        "/^quest$/" => $questSearch,
        "/^404$/" => $fourZeroFour,
        "/^login$/" => $login,
        "/^logout$/" => $logout,

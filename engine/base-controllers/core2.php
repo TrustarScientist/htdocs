@@ -16,82 +16,37 @@
         
     }
     function personalizedPost($userId, $starting="0", $amount="7"){
-        
-        // // scan through the current user's memberships
-        // $memObjects = xDb::find("niche_membership", "*", "where member = $userId");
-        // if(!empty($memObjects)){
-        //     //get niche IDs
-        //     $userNicheIds = array();
-        //     foreach ($memObjects as $key => $mem) {
-        //         array_push($userNicheIds, $mem->niche);
-            
-        //     }
-        //     // scan thru some posts based on $starting position & $amount
-        //     $somePosts = xDb::find("post", "*", "", "ORDER BY date_updated DESC", "LIMIT $starting, $amount");
-        //     // echo json_encode($somePosts);
-        //     $personalizedPosts = array();
-        //     // filter posts based on user niches
-        //     foreach ($somePosts as $key => $somePost) {
-        //         if(in_array($somePost->category, $userNicheIds)){
-        //             array_push($personalizedPosts, $somePost);
-        //         }
-        //     }
-        //     //print_r($personalizedPosts);
-        //     // add related data
-        //     $responseData = array();
-        //     $post = array();
-        //     $ct = 0;
-        //     foreach ($personalizedPosts as $data) {
-        //         # code...
-        //         $post["postid"] = $data->id;
-        //         $post["title"] = $data->title;
-        //         $post["slug"] = $data->slug;
-        //         $post["content"] = $data->content;
-        //         $post["updated"] = date("Y-M-d",strtotime($data->date_updated));
-        //         $post["views"] = $data->views;
-        //         // user who created
-        //         $post["user"] = "";
-        //         $userObj = "";
-        //         // niche categorized in
-        //         $post["niche"] = "";
-        //         $nicheObj = "";
-        //         if(!empty($data->poster)){
-        //             $userObj = xDb::get("user", "id", $data->poster, "id, username, photo");
-        //             if(!empty($userObj)){
-        //                 $post["user"] = $userObj;
-        //             }
-        //         }
-        //         if(!empty($data->category)){
-        //             $nicheObj = xDb::get("niche", "id", $data->category, "id, alias");
-        //             if(!empty($nicheObj)){
-        //                 $post["niche"] = $nicheObj;
-        //             }
-        //         }
-        //         $post["pic"] = "";
-        //         $postPic = xDb::get("post_image", "post", $data->id, "path");
-        //         if(!empty($postPic)){
-        //             $post["pic"] = $postPic->path;
-        //         }
-        //         //stats
-        //         $post["following"] = xDb::getCount("post_followership", "*", "post", $data->id);
-        //         $post["comments"] = xDb::getCount("post_comment", "*", "post", $data->id);
-        //         // check whether d current user has followed this post or not
-        //         $post["c_user_has_followed"] = 0;
-        //         $post["c_user_has_followed"] = count(xDb::find("post_followership", "*", "WHERE post = $data->id AND follower = $userId"));
-        //         // aggregate
-        //         $responseData[$ct] = $post;
-        //         $ct += 1;
-        //     }
-            
-        //     echo json_encode($responseData);
-            
-        // }else{
-            $randomPosts = xDb::find("post", "*", "", "ORDER BY date_updated DESC", "LIMIT $starting, $amount");
+            /**
+             *  check whether the current user is a member of any niche
+             *  if it's a member, continue processing
+             *  else join the current user to the default or overall 'mother' niche
+             */
+            if(empty(xDb::get("niche_membership", "member", $userId))){
+                xDb::create("niche_membership", array(
+                    "niche" => 7,
+                    "member" => $userId,
+                ));
+            }
+            // get some posts
+            $randomPosts = xDb::find("post", "*", "WHERE visibility = 'pub'", "ORDER BY date_updated DESC", "LIMIT $starting, $amount");
+            // final dataset to return to client
             $responseData2 = array();
+            // aggregate data
             $post2 = array();
             $ct2 = 0;
-            foreach ($randomPosts as $data2) {
-                # code...
+            
+            foreach($randomPosts as $data2) {
+                $post2["poster_blocked"] = false;
+                $blacklist = xDb::find("user_blacklist", "*", "WHERE blocked = $data2->poster AND blocker = $userId");
+                if(!empty($blacklist)){
+                    $post2["poster_blocked"] = true;
+                }
+                $post2["cuser_is_member"] = false;
+                $membership = xDb::find("niche_membership", "*", "WHERE niche = $data2->category AND member = $userId");
+                if(!empty($membership)){
+                    $post2["cuser_is_member"] = true;
+                }
+                $post2["contenttype"] = (xDb::get("contenttype", "id", $data2->content_type))->name;
                 $post2["postid"] = $data2->id;
                 $post2["title"] = $data2->title;
                 $post2["slug"] = $data2->slug;
@@ -100,6 +55,10 @@
                 $post2["views"] = $data2->views;
                 // user who created
                 $post2["user"] = "";
+                $post2["own"] = 0;
+                if($userId == $data2->poster){
+                    $post2["own"] = 1;
+                }
                 $userObj = "";
                 // niche categorized in
                 $post2["niche"] = "";
@@ -117,7 +76,7 @@
                     }
                 }
                 $post2["pic"] = "";
-                $postPic2 = xDb::get("post_image", "post", $data2->id, "path");
+                $postPic2 = xDb::get("editor_post_image", "post", $data2->id, "path");
                 if(!empty($postPic2)){
                     $post2["pic"] = $postPic2->path;
                 }
@@ -131,6 +90,7 @@
                 $responseData2[$ct2] = $post2;
                 $ct2 += 1;
             }
+            
             shuffle($responseData2);
             echo json_encode($responseData2);
         // }
@@ -140,7 +100,7 @@
         $postId = $_SESSION["post_id"];
         $starting = $request->POST["starting"];
         $amount = $request->POST["amount"];
-        $comments = xDb::find("post_comment", "*", "where post = $postId", "", "LIMIT $starting, $amount");
+        $comments = xDb::find("post_comment", "*", "where post = $postId", "ORDER BY id DESC", "LIMIT $starting, $amount");
         // replies
         if(!empty($comments)){
             foreach ($comments as $comment) {

@@ -12,8 +12,11 @@
             render($request, "index.html");
        }
    };
-   
+   $questSearch = function($request){
+    echo "quest";
+   };
    $searchEngine = function($request){
+    header("Location:/quest?action=dan");
     if($request->method == "GET"){
         if(!$request->is_authenticated){
             // query has to be sent but content type is optional
@@ -112,9 +115,11 @@
         
     }
 };
-    $about = function($request){
-        render($request, "about.html");
-    };
+
+
+$about = function($request){
+    render($request, "about.html");
+};
     $logout = function($request){
         $_SESSION["user"] = null;
         header("Location:/");
@@ -232,6 +237,8 @@
                     
                     if(!empty($result)){
                         $responseData["state"] = 1;
+                        // let the new account be a member of the default niche : @worldwide
+                        
                     }
                     else{
                         $responseData["error"] = "Something went wrong...try again later";

@@ -50,18 +50,42 @@ body {
 }
 
 .msg-paths {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     border-bottom: 1px solid rgb(240, 240, 240);
 }
 
-.incoming-messages-section {
+.msg-paths .control {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.msg-paths .search-my-people-con {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    display: none;
+}
+
+.msg-paths .search-my-people-con #my-person-box {
+    margin-right: 5%;
     border: 1px solid rgb(240, 240, 240);
+    margin-bottom: 5px;
+}
+
+.msg-paths input:focus,
+button:focus,
+textarea:focus {
+    border-color: rgb(224, 223, 223);
+    box-shadow: 1px 1px 3px rgb(240, 240, 240);
+}
+
+.incoming-messages-section {
     padding: 4% 0.5%;
     border-radius: 5px;
     position: fixed;
-    top: 70px;
+    top: 95px;
     height: 100%;
     width: 98.5%;
     overflow-y: scroll;
@@ -70,30 +94,35 @@ body {
 }
 
 .incoming-messages {
-    padding: 0.5%;
+    padding: 0;
 }
 
 .incoming-messages .incoming-msg {
     border: 1px solid rgb(240, 240, 240);
-    padding: 1%;
+    padding: 1% 0.5%;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     border-radius: 5px;
     margin-top: 10px;
     transition: 0.5s;
+    width: 99%;
+    color: black;
+    background-color: white;
+    box-shadow: 2px 2px 3px rgb(240, 240, 240);
 }
 
 .incoming-messages .incoming-msg:hover {
-    background-color: grey;
-    color: white;
+    background-color: rgb(240, 240, 240);
+    color: black;
 }
 
 .incoming-messages .incoming-msg .sender-photo {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
-    padding: 1%;
+    padding: 0.5%;
+    margin: 5px auto;
     margin-right: 5px;
     border: 1px solid rgb(240, 240, 240);
 }
@@ -123,12 +152,16 @@ body {
     border-radius: 50% 25% 70% 20%;
     margin: 20% auto;
     padding: 6%;
-    box-shadow: 5px 5px 30px rgb(196, 195, 195);
+    box-shadow: 5px 5px 30px rgb(253, 230, 242);
     display: none;
+    transition: 0.5s;
+    color: white;
+    background-color: rgb(13, 139, 77);
 }
 
 .default-text:hover {
-    background-color: grey;
+    background-color: white;
+    color: black;
 }
 
 .chat-board {
@@ -154,33 +187,30 @@ body {
     border-radius: 40px;
     margin: 20px 0;
     padding: 4%;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     box-shadow: 3px 3px 10px rgb(204, 203, 203);
 }
 
 .chat-board .chat .date {
     font-size: 0.8rem;
-    color: grey;
+    color: gray;
 }
 
-.chat-board .chat:hover {
-    background-color: ghostwhite;
-}
+.chat-board .chat:hover {}
 
 .chat-board .sender {
     margin-left: 30%;
-    background-color: rgb(253, 229, 241);
-    transition: 0.5s;
+    background-color: rgb(250, 150, 203);
+    transition: 1s;
 }
 
 .chat-board .sender:hover {
     background-color: rgb(224, 18, 128);
-    color: white;
 }
 
 .chat-board .receiver {
-    background-color: rgb(232, 250, 241);
-    transition: 0.5s;
+    background-color: #dcf8c6;
+    transition: 1s;
 }
 
 .chat-board .receiver:hover {
@@ -191,7 +221,7 @@ body {
 .chat-board .msg-send-form {
     width: 100%;
     position: fixed;
-    bottom: 50px;
+    bottom: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -211,14 +241,21 @@ textarea:focus {
     box-shadow: 1px 1px 3px 3px rgb(229, 245, 238);
 }
 
+.my-people-section {
+    margin-bottom: 100px;
+    width: 100%;
+    display: none;
+}
+
 .rp-container {
     width: 100%;
+    display: block;
 }
 
 .rp-container .scroller {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -228,14 +265,16 @@ textarea:focus {
     text-align: center;
     margin-top: 5px;
     padding: 1% 3px;
-    width: 45%;
+    width: 46%;
+    margin-right: 10px;
     margin-bottom: 10px;
-    border: 1px solid rgb(240, 240, 240);
+    transition: 1s;
     border-radius: 5px;
+    box-shadow: 2px 2px 3px rgb(240, 240, 240);
 }
 
 .scroller .person:hover {
-    background-color: ghostwhite;
+    background-color: rgb(240, 240, 240);
 }
 
 .scroller .person .userlink {
@@ -251,8 +290,8 @@ textarea:focus {
 
 .scroller .person .image {
     border-radius: 50%;
-    width: 85px;
-    height: 85px;
+    width: 88px;
+    height: 88px;
     padding: 2px;
     display: block;
     margin: 5px auto;
@@ -260,8 +299,8 @@ textarea:focus {
 }
 
 .scroller .person .name {
-    font-size: 0.8rem;
-    margin: 5px 0;
+    font-size: 0.9rem;
+    margin: 10px 0;
     display: block;
     padding-bottom: 1%;
 }
@@ -383,89 +422,6 @@ textarea:focus {
     border-bottom: 1px solid rgb(240, 240, 240);
 }
 
-.niches-section {
-    margin-bottom: 70px;
-    position: fixed;
-    width: 23%;
-}
-
-.niches {}
-
-.niches .niche {
-    border: 1px solid rgb(240, 240, 240);
-    padding: 0 1%;
-    margin: 10px auto;
-    border-radius: 5px;
-    width: 100%;
-}
-
-.niches .niche:hover {
-    background-color: ghostwhite;
-}
-
-.niches .niche .name {
-    font-size: 1rem;
-    font-weight: 500;
-    text-decoration: none;
-    color: black;
-}
-
-.niches .niche .foot {
-    margin-top: 2%;
-    border-top: 1px solid rgb(240, 240, 240);
-    padding: 1%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.niches .niche .foot:hover {
-    border-top: 1px solid rgb(216, 215, 215);
-}
-
-.niches .niche .foot .info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.niches .niche .foot .info .banner {
-    width: 30px;
-    height: 30px;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-
-.niches .niche .alias {
-    font-size: 0.9rem;
-    padding: 1% 0;
-    color: gray;
-    display: block;
-    text-align: start;
-}
-
-.niches .niche .foot .mem {
-    font-size: 0.9rem;
-}
-
-.niches .niche .foot .post {
-    margin-left: 10px;
-    font-size: 0.9rem;
-}
-
-.niches .niche .foot .membership {
-    padding: 0% 2%;
-}
-
-.niches .niche .foot .more {
-    padding: 1% 2%;
-    margin-left: 10px;
-}
-
-.niches .niche .foot .join {
-    padding: 1% 2%;
-}
-
 @media screen and (min-width:576px) {
     .dcol:nth-child(2) {
         padding-left: 10%;
@@ -547,6 +503,7 @@ textarea:focus {
         padding: 1.5% 1%;
     }
     .incoming-messages-section {
+        border: 1px solid rgb(240, 240, 240);
         margin-left: 0;
         margin-top: 0px;
         width: 24%;
@@ -556,7 +513,7 @@ textarea:focus {
         padding-bottom: 150px;
     }
     .scroller .person {
-        width: 24%;
+        width: 45%;
     }
     .niches-section {
         display: block;
