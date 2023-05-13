@@ -337,7 +337,7 @@ setTimeout(() => {
         footBtns.setAttribute("class", "controllers");
         footer.appendChild(footBtns);
         let updateBtn = document.createElement("button");
-        updateBtn.setAttribute("class", " update-btn ");
+        updateBtn.setAttribute("class", " update-btn");
         updateBtn.addEventListener("click", (updateE) => {
             // for mobile screen
             if (getDeviceWidth() < 992) {

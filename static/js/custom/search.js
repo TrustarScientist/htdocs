@@ -27,8 +27,8 @@ function postAggregator(url, dataset = "", nextResultBtn = "") {
         url,
         dataset,
         function(data, status) {
-            //alert(data)
-            // check for empty response data
+            alert(data)
+                // check for empty response data
             if (data != "[]") {
                 // convert data to Js object
                 let responseData = JSON.parse(data);

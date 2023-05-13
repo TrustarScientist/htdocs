@@ -23,3 +23,15 @@ $(".site-nav .head .bi-search").click(function(e) {
         navSearchBtnState = 0;
     }
 });
+// website current info
+$.get("/wsinfo", (data, status) => {
+    //alert(data);
+    try {
+        let dataObject = JSON.parse(data);
+        document.querySelector(".site-info .ws-users").textContent = dataObject.users;
+        document.querySelector(".site-info .ws-posts").textContent = dataObject.posts;
+        document.querySelector(".site-info .ws-niches").textContent = dataObject.niches;
+    } catch (error) {
+
+    }
+});

@@ -220,7 +220,11 @@
                     $post["comments"] = xDb::getCount("post_comment", "*", "post", $data->id);
                     // check whether d current user has followed this post or not
                     $post["c_user_has_followed"] = 0;
-                    $post["c_user_has_followed"] = count(xDb::find("post_followership", "*", "WHERE post = $data->id AND follower = $request->userid"));
+                    try {
+                      $post["c_user_has_followed"] = count(xDb::find("post_followership", "*", "WHERE post = $data->id AND follower = $request->userid"));
+                    } catch (\Throwable $th) {
+                      //throw $th;
+                    }
                     // aggregate
                     $responseData[$ct] = $post;
                     $ct += 1;

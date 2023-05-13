@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/pvt/pvt-site-wide.css">
-    <link rel="stylesheet" href="/static/css/pvt/newsfeed.css">
+    <link rel="stylesheet" href="/static/css/pvt/pvt-search.css">
     <script defer src="/static/bootstrap/js/bootstrap.bundle.js"></script>
     <script defer src="/static/js/jQuery.min.js"></script>
     <script defer src="/static/js/custom/pvt/pvt-site-wide.js"></script>
-    <script defer src="/static/js/custom/pvt/newsfeed.js"></script>
-    <title>Newsfeed</title>
+    <script defer src="/static/js/custom/pvt/pvt-search.js"></script>
+    <title>Search Results Page</title>
 </head>
 
 <body>
@@ -92,17 +92,31 @@
                     </a>
                 </aside>
             </div>
-            <div class="dcol col-md-8 col-lg-6 pt-1 " style="display: none;">
-                <header class="pn-con ">
-                    <section class="popular-niches mt-2 mb-2 ">
-                        <!-- <a href=" " class="pniche ">@google</a> -->
+            <div class="dcol col-md-8 col-lg-6 pt-1 " style="display: block;">
+                <section class="ts-results-container">
 
+                    <h3 class="mt-5 mb-4">Search Results : "<span class="the-query "></span>" </h3>
+                    <header class="result-scopes">
+                        <b class="posts-btn" style="border-bottom: 2px solid  2px solid rgb(13, 139, 77);">Posts</b>
+
+                        <b class="people-btn">People</b>
+
+                        <b class="niches-btn">Niches</b>
+                    </header>
+
+                    <section class="people-results-section rp-container">
+                        <section class="people scroller">
+                            <!-- <article class="person">
+                            <img class="image" src="/static/images/download (4).jpg" alt="person photo">
+                            <a href="/user/Username" class="name">TrustarScientist</a>
+                        </article> -->
+
+                        </section>
+                        <button class="btn btn-light more-searched-people mb-3 mt-2 " data-pos="0 " style="text-align: start;font-size: 0.9rem; margin-bottom: 10px; display: none;">More People...</button>
                     </section>
-                </header>
-                <section class="userposts-section ">
-
-                    <div class="userposts pb-2 ">
-                        <!-- <article class="userpost ">
+                    <section class="posts-results-section">
+                        <div class="userposts">
+                            <!-- <article class="userpost ">
                             <header class="head">
                                 <a href="#" class="niche-name ">Question</a>
                                 <a href="#" class="content-type">@nichename</a>
@@ -148,33 +162,54 @@
                                 </section>
                             </footer>
                         </article> -->
-                    </div>
-
-                    <button class="btn btn-light more-p-posts mb-3 mt-2 " data-next-ppos="0 " style="text-align: start;font-size: 0.8rem; margin-bottom: 10px; display: none;">More Posts</button>
-                    <!-- modal for all posts starts here -->
-                    <section class="modal" id="postModal" style="z-index: 33893480439263037; ">
-                        <div class="modal-dialog modal-dialog-centered ">
-                            <article class="modal-content p-3">
-                                <p class="block-user btn">Blockage State...</p>
-                                <a href="#" class="edit-post btn">Edit This Post...</a>
-                            </article>
                         </div>
+                        <button class="btn btn-light more-searched-posts mb-3 mt-2 " data-pos="0 " style="text-align: start;font-size: 0.8rem; margin-bottom: 10px; display: none;">More Posts...</button>
+                        <!-- modal for all posts starts here -->
+                        <section class="modal" id="postModal" style="z-index: 33893480439263037; ">
+                            <div class="modal-dialog modal-dialog-centered ">
+                                <article class="modal-content p-3">
+                                    <p class="block-user btn">Blockage State...</p>
+                                    <a href="#" class="edit-post btn">Edit This Post...</a>
+                                </article>
+                            </div>
+                        </section>
+                        <!-- modal for all posts ends here -->
                     </section>
-                    <!-- modal for all posts ends here -->
+                    <section class="niches-results-section">
+                        <section class="niches">
+                            <!-- 
+                        <article class="niche ">
+                            <a href="/niche/@alias" class="name ">THE EFFECTIVE PARENTING COMMUNITY</a>
+                            <span class="alias btn text-success">@efp</span>
+                            <footer class="foot ">
+                                <div class="info">
+                                    <img class="banner" src="/static/images/images (3).jpg" alt="">
+                                    <header class="mem"><b class="mem-count">58557</b> <span>Members</span></header>
+                                    <header class="post"><b class="mem-count">32002</b> <span>Posts</span></header>
+                                </div>
+                                <button class="membership-action btn btn-outline-secondary" style="padding:0.5% 1%">menu</button>
+                            </footer>
+                        </article> -->
+                        </section>
+                        <button class="more-searched-niches btn btn-light " data-next-pos="0" style="text-align: start;font-size: 0.9rem; display: none;">More Niches...</button>
+                        <!-- modal for all niches starts here -->
+                        <footer class="modal" id="nicheModal" style="z-index: 33893480439263037;">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <article class="modal-content">
+                                    <p class="m-3 btn btn-light j_or_e">state</p>
+                                </article>
+                            </div>
+                        </footer>
+                        <!-- modal for all niches ends here -->
+                    </section>
+                </section>
+                <section class="cs-results-container mt-5" style="display: none;">
+                    hg <br> fifi <br> eriur <br> rieie <br> ekeiu
 
                 </section>
-
             </div>
-            <div class="dcol col-lg-3 mt-5 ">
-                <section class="content-types-section mt-4 ">
-                    <a href="/search?ct=News" class="btn ">News</a>
-                    <a href="/search?ct=Tutorial" class="btn ">Tutorials</a>
-                    <a href="/search?ct=Personal" class="btn">Personals</a>
-                    <a href="/search?ct=Comedy" class="btn ">Comedies</a>
-                    <a href="/search?ct=Question" class="btn ">Questions</a>
-                    <a href="/search?ct=Fact" class="btn ">Facts</a>
-                    <a href="/search?ct=Review" class="btn ">Reviews</a>
-                </section>
+            <div class="dcol col-lg-3 mt-5 pt-5">
+
             </div>
         </section>
     </main>

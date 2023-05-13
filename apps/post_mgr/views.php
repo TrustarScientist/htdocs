@@ -91,7 +91,7 @@
                         }
                     }
                     $post["pic"] = "";
-                    $postPic = xDb::get("post_image", "post", $data->id, "path");
+                    $postPic = xDb::get("editor_post_image", "post", $data->id, "path");
                     if(!empty($postPic)){
                         $post["pic"] = $postPic->path;
                     }
@@ -193,7 +193,7 @@
                 // format date
                 $postObject->date_updated = date("Y-M-d",strtotime($postObject->date_updated));
                 //photos attached to post
-                $photos = xDb::find("post_image", "path", "where post = $postId");
+                $photos = xDb::find("editor_post_image", "path", "where post = $postId");
                 $postObject->photos = $photos;
                 // update views count
                 $views = (int) $postObject->views;
@@ -205,11 +205,7 @@
                 ), "where id = $postId ");
                 $postObject->views += $result;
                 $_SESSION["is_viewed"] = 1;
-                // check attached videos
-                $postVideo = xDb::get("post_video", "post", $postId);
-                $postObject->video = $postVideo;
-                // prev and next
-                // stats of people following, comments
+               
                 $followings = xDb::getCount("post_followership", "*", "post", $postId);
                 $comments = xDb::getCount("post_comment", "*", "post", $postId);
                 $postObject->followings = $followings;

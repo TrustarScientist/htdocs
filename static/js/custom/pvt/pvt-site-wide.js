@@ -66,12 +66,12 @@ window.addEventListener("scroll", (e) => {
             // scroll up
             siteFoot.css("top", "0");
             siteHead.fadeOut("fast");
-            $(".dcol:nth-child(2)").css("margin-top", "25px")
+            $(".dcol:nth-child(2)").css("margin-top", "20%")
 
         } else {
             siteHead.fadeIn("fast", (e) => {
                 siteFoot.css("top", "50px");
-                $(".dcol:nth-child(2)").css("margin-top", "40px")
+                $(".dcol:nth-child(2)").css("margin-top", "17%")
             });
 
         }
@@ -92,6 +92,27 @@ function personCreator(person, peopleCon = []) {
     <a href="/user/${person.member[0].username}" class="name">${person.member[0].username}</a>
     `;
     peopleCon.appendChild(personObject);
+}
+// helper function
+function personBuilder(person, peopleCon = "") {
+    // let's build fR cards
+    let newFr = document.createElement("article");
+    newFr.setAttribute("class", "person");
+    // add friend request id to card
+    newFr.dataset.personId = person.id;
+    // sender photo
+    let frImage = document.createElement("img");
+    frImage.setAttribute("class", "image");
+    frImage.src = "/storage/profile/" + person.photo;
+    newFr.appendChild(frImage);
+    // sender profile link
+    let frSenderProfile = document.createElement("a");
+    frSenderProfile.setAttribute("class", "name");
+    frSenderProfile.href = "/user/" + person.username;
+    frSenderProfile.textContent = person.username;
+    newFr.appendChild(frSenderProfile);
+    // now add to the requests container
+    peopleCon.appendChild(newFr);
 }
 
 function postBuilder(post, userpostsCon = []) {

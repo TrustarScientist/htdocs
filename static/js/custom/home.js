@@ -45,7 +45,7 @@ $(document).ready(function() {
         let startingPoint = (e.target.dataset.next);
         postAggregator("/post/trending", {
             "starting": startingPoint,
-            "amount": 12
+            "amount": 7
         }, nextPostBtn, prevPostBtn);
     });
 
@@ -59,7 +59,7 @@ function postAggregator(url, dataset = "", nextPostBtn = "", prevPostBtn = "") {
         function(data, status) {
             //alert(data)
             // check for empty response data
-            if (data != []) {
+            if (data != '[]') {
                 // convert data to Js object
                 let responseData = JSON.parse(data);
 
@@ -154,7 +154,7 @@ function postAggregator(url, dataset = "", nextPostBtn = "", prevPostBtn = "") {
 
                 });
             } else {
-                alert("An error occurred...");
+                $(".more-posts-btns .next").css("display", "none");
             }
         }
     );

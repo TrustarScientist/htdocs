@@ -106,6 +106,57 @@
                 return  null;
             }
         }
+        public static function fulltextSearch($cols, $table,$query,$mathes, $starting=0, $amount=3){
+            $db  = new xDb();
+            if($db->connected){
+                $smt = ($db->connector)->prepare(" SELECT $cols FROM $table WHERE MATCH($mathes) AGAINST('$query') LIMIT $starting, $amount");
+                $smt->execute();
+                $dataset = array();
+                $ct = 0;
+                while($result = $smt->fetch()){
+                    $dataset[$ct] = $result;
+                    $ct += 1;
+                }
+                return $dataset;
+            }
+            else{
+                return  null;
+            }
+            
+        }
+        public static function multiSearch($table, $cols_and_scopes=array(),$joint="OR", $cols2return="*", $query="", $starting=0, $amount=1000, $order=""){
+            $sql = "SELECT $cols2return FROM $table WHERE (";
+            $terms = explode(" ",$query);
+            foreach ($cols_and_scopes as $col => $scope) {
+                
+                foreach ($terms as $term) {
+                    $sql .= "$col $scope '%$term%' OR " ; 
+                }
+                
+            }
+            
+            $sql = substr($sql, 0, (strlen($sql)-3));
+
+            $sql .= " ) ";
+            
+ 
+            $db  = new xDb();
+            if($db->connected){
+                $smt = ($db->connector)->prepare($sql. $order . " LIMIT $starting, $amount");
+                $smt->execute();
+                $dataset = array();
+                $ct = 0;
+                while($result = $smt->fetch()){
+                    $dataset[$ct] = $result;
+                    $ct += 1;
+                }
+                return $dataset;
+            }
+            else{
+                return  null;
+            }
+            return $sql;
+        }
         public static function create($table, $col_val_array=array(), $show_error=false){
             $sql  = "INSERT INTO $table ";
             $bit1 = "( ";

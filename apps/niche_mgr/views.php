@@ -130,12 +130,12 @@
       $random = rand(1, $total);
       $rankedNiches = xDb::find("niche", "alias", "", "ORDER BY rank DESC LIMIT $random,  $total");
       shuffle($rankedNiches);
-      if(count($rankedNiches) > 15){
-        echo json_encode(array_slice($rankedNiches, 0, 12));
-      }else if(count($rankedNiches) < 15){
+      if(count($rankedNiches) > 7){
+        echo json_encode(array_slice($rankedNiches, 0, 7));
+      }else if(count($rankedNiches) < 7){
         echo json_encode($rankedNiches);
       }else{
-        echo json_encode(array_slice($tmpNiches, 0, 12));
+        echo json_encode(array_slice($tmpNiches, 0, 7));
       }
       
     };
@@ -244,7 +244,7 @@
                     }
                     
                     $post["pic"] = "";
-                    $postPic = xDb::get("post_image", "post", $data->id, "path");
+                    $postPic = xDb::get("editor_post_image", "post", $data->id, "path");
                     if(!empty($postPic)){
                         $post["pic"] = $postPic->path;
                     }

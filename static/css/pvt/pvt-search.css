@@ -1,0 +1,120 @@
+.dcol:nth-child(2) {
+    padding: 5% 1%;
+    margin-top: 85px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(13, 139, 77);
+}
+
+.result-scopes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
+    padding: 2%;
+    margin-bottom: 10px;
+}
+
+.people-results-section {
+    display: none;
+}
+
+.posts-results-section {}
+
+.niches-results-section {
+    display: none;
+}
+
+.niches {}
+
+.niches .niche {
+    border: 1px solid rgb(240, 240, 240);
+    padding: 0 1%;
+    margin: 10px auto;
+    border-radius: 5px;
+    width: 100%;
+    box-shadow: 2px 2px 3px rgb(240, 240, 240);
+}
+
+.niches .niche:hover {
+    background-color: rgb(240, 240, 240);
+}
+
+.niches .niche .name {
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: black;
+    display: block;
+    margin-top: 2%;
+}
+
+.niches .niche .foot {
+    margin-top: 2%;
+    border-top: 1px solid rgb(240, 240, 240);
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.niches .niche .foot:hover {
+    border-top: 1px solid rgb(216, 215, 215);
+}
+
+.niches .niche .foot .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.niches .niche .foot .info .banner {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.niches .niche .alias {
+    font-size: 0.9rem;
+    padding: 1% 0;
+    color: gray;
+    display: block;
+    text-align: start;
+}
+
+.niches .niche .foot .mem {
+    font-size: 0.9rem;
+}
+
+.niches .niche .foot .mem span {
+    color: grey;
+}
+
+.niches .niche .foot .post {
+    margin-left: 10px;
+}
+
+.niches .niche .foot .post span {
+    color: grey;
+}
+
+.niches .niche .foot .membership {
+    padding: 0% 2%;
+}
+
+.niches .niche .foot .more {
+    padding: 1% 2%;
+    margin-left: 10px;
+}
+
+.niches .niche .foot .join {
+    padding: 1% 2%;
+}

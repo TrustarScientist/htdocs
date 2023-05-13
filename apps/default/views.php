@@ -13,107 +13,191 @@
        }
    };
    $questSearch = function($request){
-    echo "quest";
+    
    };
-   $searchEngine = function($request){
-    header("Location:/quest?action=dan");
-    if($request->method == "GET"){
-        if(!$request->is_authenticated){
-            // query has to be sent but content type is optional
-           if(isset($_GET["query"])){
-                $_SESSION["query"] = trim($_GET["query"]);
-           }
-           else{
-            $_SESSION["query"] = "";
-           }
-           // content type part
-            if(isset($_GET["ct"])){
-                $_SESSION["ct"] = trim($_GET["ct"]);
-            }
-            else{
-                $_SESSION["ct"] = "";
-            }
-            render($request, "search.html");
+   
+    /** website info */
+    $wsInfo = function($request){
+        $users = count(xDb::find("user", "id"));
+        $posts = count(xDb::find("post", "id"));
+        $niches = count(xDb::find("niche", "id"));
+        echo json_encode(array(
+            "users" => $users,
+            "posts" => $posts,
+            "niches" => $niches
+        ));
+    };
+    $contentTypeSearch = function($request){
+        // get post content type id
+        $type = strtolower($request->POST["ct"]);
+        $starting = $request->POST["starting"];
+        $amount = $request->POST["amount"];
+
+        $typeId = (xDb::get("contenttype",  "name", $type))->id;
+
+        $typedPosts = xDb::find("post", "*", " where    content_type = $typeId", "", "LIMIT $starting, $amount");
+        $aggregatePosts = array();
+        $postTemplate2 = array();
+        $ct22 = 0;
+        foreach($typedPosts as $rPost) {
+            $postTemplate2["poster_blocked"] = false;
+            $postTemplate2["cuser_is_member"] = false;
+            $postTemplate2["contenttype"] = (xDb::get("contenttype", "id", $rPost->content_type))->name;
+            $postTemplate2["postid"] = $rPost->id;
+            $postTemplate2["title"] = $rPost->title;
+            $postTemplate2["slug"] = $rPost->slug;
+            $postTemplate2["content"] = $rPost->content;
+            $postTemplate2["updated"] = date("Y-M-d",strtotime($rPost->date_updated));
+            $postTemplate2["views"] = $rPost->views;
+            // user who created
+            $postTemplate2["user"] = "";
+            $postTemplate2["own"] = 0;
             
-        }
-    }
-    else{
-        
-        // get search result thru POST request
-        if(!$request->is_authenticated){
-            $query = "";
-            $ct = "";
-            if(isset($_SESSION["query"])){
-                $query = $_SESSION["query"];
-            }
-            if(isset($_SESSION["ct"])){
-                $ct = (int) $_SESSION["ct"];
-            }
-            
-            $starting = "";
-            if(isset($request->POST["starting"])){
-                $starting = $request->POST["starting"];
-            }
-            $amount = "";
-            if(isset($request->POST["amount"])){
-                $amount = $request->POST["amount"];
-            }
-            // search database
-            $searchResults = xDb::postSearch("post", "title", $query, $starting, $amount);
-            // add  more info related to results
-        
-            $responseData =  array();
-            $pos = 0;
-            $post = array();
-            if(!empty($searchResults)){
-                
-                foreach ($searchResults as  $data) {
-                    # code...
-                    $post["postid"] = $data->id;
-                    $post["title"] = $data->title;
-                    $post["slug"] = $data->slug;
-                    $post["content"] = $data->content;
-                    $post["updated"] = date("Y-M-d h:i A",strtotime($data->date_updated));
-                    $post["views"] = $data->views;
-                    $post["query"] = $query;
-                    // user who created
-                    $post["user"] = "";
-                    $userObj = "";
-                    // niche categorized in
-                    $post["niche"] = "";
-                    $nicheObj = "";
-                    if(!empty($data->poster)){
-                        $userObj = xDb::get("user", "id", $data->poster, "id, username");
-                        if(!empty($userObj)){
-                            $post["user"] = $userObj;
-                        }
-                    }
-                    if(!empty($data->category)){
-                        $nicheObj = xDb::get("niche", "id", $data->category, "*");
-                        if(!empty($nicheObj)){
-                            $post["niche"] = $nicheObj;
-                        }
-                    }
-                    $post["pic"] = "";
-                    $postPic = xDb::get("post_image", "post", $data->id, "path");
-                    if(!empty($postPic)){
-                        $post["pic"] = $postPic->path;
-                    }
-                    //stats
-                    $post["following"] = xDb::getCount("post_followership", "*", "post", $data->id);
-                    $post["comments"] = xDb::getCount("post_comment", "*", "post", $data->id);
-                    // aggregate
-                    $responseData[$pos] = $post;
-                    $pos += 1;
+            $userObj = "";
+            // niche categorized in
+            $postTemplate2["niche"] = "";
+            $nicheObj = "";
+            if(!empty($rPost->poster)){
+                $userObj = xDb::get("user", "id", $rPost->poster, "id, username, photo");
+                if(!empty($userObj)){
+                    $postTemplate2["user"] = $userObj;
                 }
             }
-            echo json_encode($responseData);
-            
-            
+            if(!empty($rPost->category)){
+                $nicheObj = xDb::get("niche", "id", $rPost->category, "id, alias");
+                if(!empty($nicheObj)){
+                    $postTemplate2["niche"] = $nicheObj;
+                }
+            }
+            $postTemplate2["pic"] = "";
+            $postPic2 = xDb::get("editor_post_image", "post", $rPost->id, "path");
+            if(!empty($postPic2)){
+                $postTemplate2["pic"] = $postPic2->path;
+            }
+            //stats
+            $postTemplate2["following"] = xDb::getCount("post_followership", "*", "post", $rPost->id);
+            $postTemplate2["comments"] = xDb::getCount("post_comment", "*", "post", $rPost->id);
+            // check whether d current user has followed this post or not
+            $postTemplate2["c_user_has_followed"] = 0;
+            $postTemplate2["c_user_has_followed"] = count(xDb::find("post_followership", "*", "WHERE post = $rPost->id AND follower = $userId"));
+            // aggregate
+            $aggregatePosts[$ct22] = $postTemplate2;
+            $ct22 += 1;
         }
-            
-        
+
+        echo json_encode($aggregatePosts);
+    };
+   $searchEngine = function($request){
+    if(($request->method == "GET") && (!$request->is_authenticated)){
+        render($request, "search.html");
+    }else if(($request->method == "GET") && ($request->is_authenticated)){
+        render($request, "pvt/pvt-search.html");
+    }else if(($request->method == "POST") && (!$request->is_authenticated)){
+        echo "post request for public pages";
+    }else if(($request->method == "POST") && ($request->is_authenticated)){
+        $userId = $request->userid;
+        $query = $request->POST["query"];
+        $type = $request->POST["type"];
+        $starting =  $request->POST["starting"];
+        $amount = $request->POST["amount"];
+        switch ($type) {
+            case 'person':
+                $resultPeople = xDb::fulltextSearch("id, username, photo", "user", $query, "username, first_name, last_name, work_info, school_info, intro, hobbies", $starting, $amount);
+                echo json_encode($resultPeople);
+                break;
+            case 'post':
+                $resultPosts = xDb::fulltextSearch("*", "post", $query, "title, content", $starting, $amount);
+                // posts aggregation
+                $rpostsAggr = array();
+                // aggregate data
+                $postTemplate = array();
+                $ct2 = 0;
+                    
+                foreach($resultPosts as $rPost) {
+                    $postTemplate["poster_blocked"] = false;
+                    $blacklist = xDb::find("user_blacklist", "*", "WHERE blocked = $rPost->poster AND blocker = $userId");
+                    if(!empty($blacklist)){
+                        $postTemplate["poster_blocked"] = true;
+                    }
+                    $postTemplate["cuser_is_member"] = false;
+                    $membership = xDb::find("niche_membership", "*", "WHERE niche = $rPost->category AND member = $userId");
+                    if(!empty($membership)){
+                        $postTemplate["cuser_is_member"] = true;
+                    }
+                    $postTemplate["contenttype"] = (xDb::get("contenttype", "id", $rPost->content_type))->name;
+                    $postTemplate["postid"] = $rPost->id;
+                    $postTemplate["title"] = $rPost->title;
+                    $postTemplate["slug"] = $rPost->slug;
+                    $postTemplate["content"] = $rPost->content;
+                    $postTemplate["updated"] = date("Y-M-d",strtotime($rPost->date_updated));
+                    $postTemplate["views"] = $rPost->views;
+                    // user who created
+                    $postTemplate["user"] = "";
+                    $postTemplate["own"] = 0;
+                    if($userId == $rPost->poster){
+                        $postTemplate["own"] = 1;
+                    }
+                    $userObj = "";
+                    // niche categorized in
+                    $postTemplate["niche"] = "";
+                    $nicheObj = "";
+                    if(!empty($rPost->poster)){
+                        $userObj = xDb::get("user", "id", $rPost->poster, "id, username, photo");
+                        if(!empty($userObj)){
+                            $postTemplate["user"] = $userObj;
+                        }
+                    }
+                    if(!empty($rPost->category)){
+                        $nicheObj = xDb::get("niche", "id", $rPost->category, "id, alias");
+                        if(!empty($nicheObj)){
+                            $postTemplate["niche"] = $nicheObj;
+                        }
+                    }
+                    $postTemplate["pic"] = "";
+                    $postPic2 = xDb::get("editor_post_image", "post", $rPost->id, "path");
+                    if(!empty($postPic2)){
+                        $postTemplate["pic"] = $postPic2->path;
+                    }
+                    //stats
+                    $postTemplate["following"] = xDb::getCount("post_followership", "*", "post", $rPost->id);
+                    $postTemplate["comments"] = xDb::getCount("post_comment", "*", "post", $rPost->id);
+                    // check whether d current user has followed this post or not
+                    $postTemplate["c_user_has_followed"] = 0;
+                    $postTemplate["c_user_has_followed"] = count(xDb::find("post_followership", "*", "WHERE post = $rPost->id AND follower = $userId"));
+                    // aggregate
+                    $rpostsAggr[$ct2] = $postTemplate;
+                    $ct2 += 1;
+                }
+
+                echo json_encode($rpostsAggr);
+                break;
+            case 'niche':
+                $rnData = array();
+                $resultNiches = xDb::fulltextSearch("*", "niche", $query, "name, alias, description", $starting, $amount);
+                foreach ($resultNiches as $key => $resultNiche) {
+                    // check wether  the current user is a member or not
+                    $resultNiche->cuser_is_member = false;
+                    $cUserMembership = xDb::find("niche_membership", "*", "WHERE member = $request->userid AND niche = $resultNiche->id");
+                    if(!empty($cUserMembership)){
+                        $resultNiche->cuser_is_member = true;
+                    }
+                    // members count
+                    $resultNiche->members = xDb::getCount("niche_membership", "*", "niche", $resultNiche->id);
+                    // posts count
+                    $resultNiche->posts = xDb::getCount("post", "*", "category", $resultNiche->id);
+                    array_push($rnData, $resultNiche);
+                }
+                echo json_encode($rnData);
+                break;
+                
+
+            default:
+                # code...
+                break;
+        }
+
     }
+    
 };
 
 

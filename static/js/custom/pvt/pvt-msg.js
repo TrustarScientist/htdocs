@@ -4,12 +4,15 @@ $(".msg-paths .control .my-people-btn").click(function() {
     $(".msg-paths .search-my-people-con").css("display", "flex");
     $(".incoming-messages").css("display", "none");
     $(".my-people-section").css("display", "block");
+    $(".my-people-search-results").css("display", "block");
+
 })
 $(".msg-paths .my-people-cancel").click(function() {
     $(".msg-paths .control").css("display", "flex");
     $(".msg-paths .search-my-people-con").css("display", "none");
     $(".incoming-messages").css("display", "block");
     $(".my-people-section").css("display", "none");
+    $(".my-people-search-results").css("display", "none");
 })
 
 /**

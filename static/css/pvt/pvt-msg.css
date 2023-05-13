@@ -250,6 +250,7 @@ textarea:focus {
 .rp-container {
     width: 100%;
     display: block;
+    color: rgb(224, 18, 128);
 }
 
 .rp-container .scroller {

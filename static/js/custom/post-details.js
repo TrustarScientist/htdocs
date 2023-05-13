@@ -25,7 +25,7 @@ $(".comment-add-btn").click(function() {
 
 $(document).ready(function() {
     $.post("/post/details", {}, function(data, status) {
-        //alert(data);
+        alert(data);
         // convert to Js object
         let res = JSON.parse(data);
         if (res != {}) {
@@ -65,21 +65,11 @@ $(document).ready(function() {
             niche.textContent = res.category.alias;
             let postThumbnail = document.querySelector(".post-main-pic");
             // if the poster did not attach any photos, use the niche banner instead for the thumbnail
-            if (res.photos.length > 0) {
-                postThumbnail.src = `/storage/post/${res.photos[0].path}`;
-            } else {
-                postThumbnail.style.display = "none";
 
-            }
             // any video embedded into post
             let videoFrame = document.querySelector(".video-frame");
             let videoCaption = document.querySelector(".video-caption");
-            if (res.video != false) {
-                videoFrame.src = res.video.video_path;
-                videoCaption.textContent = res.video.caption;
-            } else {
-                videoFrame.style.display = "none";
-            }
+
 
             document.querySelector(".post-title").textContent = res.title;
             let postType = document.querySelector(".content-type");

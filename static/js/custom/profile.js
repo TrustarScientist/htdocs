@@ -47,7 +47,8 @@ function profilePosts(url, dataset = "", ctrlBtn = {}) {
             //alert(data)
             // check for empty response data
             if (data != []) {
-                // convert data to Js object
+                alert(data)
+                    // convert data to Js object
                 let responseData = JSON.parse(data);
 
                 responseData.forEach(postObject => {
