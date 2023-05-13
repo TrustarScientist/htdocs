@@ -79,7 +79,7 @@
             $postTemplate2["comments"] = xDb::getCount("post_comment", "*", "post", $rPost->id);
             // check whether d current user has followed this post or not
             $postTemplate2["c_user_has_followed"] = 0;
-            $postTemplate2["c_user_has_followed"] = count(xDb::find("post_followership", "*", "WHERE post = $rPost->id AND follower = $userId"));
+            $postTemplate2["c_user_has_followed"] = count(xDb::find("post_followership", "*", "WHERE post = $rPost->id AND follower = -1"));
             // aggregate
             $aggregatePosts[$ct22] = $postTemplate2;
             $ct22 += 1;
