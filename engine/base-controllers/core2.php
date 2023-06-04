@@ -15,6 +15,10 @@
         return $result;
         
     }
+    function slugger($data2slug){
+        
+        return trim(strtolower(str_ireplace(" ", "-", $data2slug)), "-.");
+    }
     function personalizedPost($userId, $starting="0", $amount="7"){
             /**
              *  check whether the current user is a member of any niche

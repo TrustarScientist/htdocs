@@ -116,13 +116,13 @@ body {
 }
 
 .userpost .head a:nth-child(2) {
-    background-color: #dcf8c6;
-    color: black;
+    background-color: white;
+    color: grey;
     margin-right: 2%;
     font-size: 0.9rem;
     padding: 0.5%;
-    border: 2px solid #dcf8c6;
-    box-shadow: 2px 2px 3px rgb(240, 240, 240);
+    border: 2px solid white;
+    box-shadow: 2px 2px 3px white;
 }
 
 .userposts .userpost {

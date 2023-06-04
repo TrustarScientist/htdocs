@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="rgb(13, 139, 77)" />
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/pvt/pvt-site-wide.css">
     <link rel="stylesheet" href="/static/css/pvt/newsfeed.css">
@@ -21,7 +22,7 @@
         <header class="head bg-success" style="z-index: 4567890;">
             <div class="brand">
                 <img src="/static/images/avatar-2.jpg" alt="brand logo" width="30px" height="30px">
-                <h1 class="name text-light">Knowisland</h1>
+                <h1 class="name text-light">Ksharer</h1>
             </div>
             <form id="form" action="/search" method="get">
                 <input class="form-control" type="search" name="query" id="term" placeholder="What do you wanna know?">
@@ -79,17 +80,16 @@
             <div class="dcol col-md-4 col-lg-3 pt-3 ">
                 <!-- to show events happening now in the form of notifications, messages, alerts -->
                 <aside class="events-menu" style="z-index: 232368386327977323032326832;">
-                    <div class="con">
-                        <header class="notifications bg-success text-light path notifications-tab">
-                            <a href="/notifications" class="text-light">Notifications</a>
-                            <span>0</span>
-                        </header>
-                        <button class="btn btn-light mb-2 mt-2">newkewbe ejewewiu weew ewjueew ewew ewee ege ewew euewue ewui732 32u32v</button>
+                    <a href="/logout" class="logout path text-danger ">
+                        Logout...
+                        </a>
+                    <div class="notes">
+                        <a href="#" class="btn btn-light mb-2 mt-2">David replied to your comment</a>
+                        <a href="#" class="btn btn-light mb-2 mt-2">David replied to your comment wi wwe ewjwehweiu wewooifr fr</a>
+
                     </div>
 
-                    <a href="/logout" class="logout path text-danger">
-                    Logout...
-                    </a>
+
                 </aside>
             </div>
             <div class="dcol col-md-8 col-lg-6 pt-1 " style="display: none;">
@@ -165,16 +165,17 @@
                 </section>
 
             </div>
-            <div class="dcol col-lg-3 mt-5 ">
+            <div class="dcol col-lg-3 ">
                 <section class="content-types-section mt-4 ">
-                    <a href="/search?ct=News" class="btn ">News</a>
-                    <a href="/search?ct=Tutorial" class="btn ">Tutorials</a>
-                    <a href="/search?ct=Personal" class="btn">Personals</a>
-                    <a href="/search?ct=Comedy" class="btn ">Comedies</a>
-                    <a href="/search?ct=Question" class="btn ">Questions</a>
-                    <a href="/search?ct=Fact" class="btn ">Facts</a>
-                    <a href="/search?ct=Review" class="btn ">Reviews</a>
+                    <a href="/search?ct=News" class="btn btn-outline-light">News</a>
+                    <a href="/search?ct=Tutorial" class="btn btn-outline-light">Tutorials</a>
+                    <a href="/search?ct=Personal" class="btn btn-outline-light">Personals</a>
+                    <a href="/search?ct=Comedy" class="btn btn-outline-light">Comedies</a>
+                    <a href="/search?ct=Question" class="btn btn-outline-light">Questions</a>
+                    <a href="/search?ct=Fact" class="btn btn-outline-light">Facts</a>
+                    <a href="/search?ct=Review" class="btn btn-outline-light">Reviews</a>
                 </section>
+
             </div>
         </section>
     </main>

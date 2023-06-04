@@ -134,7 +134,7 @@ setTimeout(() => {
             document.querySelector(".profile-metadata-con .send-friend-request").style.display = "inline";
         } else if (profileDetails.friend_request_allowed == 2) {
             let connectionExists = document.createElement("p");
-            connectionExists.innerHTML = "You have already sent friend request...";
+            connectionExists.innerHTML = `<span class="text-danger">You have already sent friend request...<span>`;
             document.querySelector(".profile-metadata-con").appendChild(connectionExists);
         }
 

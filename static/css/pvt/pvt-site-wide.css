@@ -50,7 +50,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #128c7e;
+    background-color: white;
 }
 
 .pvt-nav .head .brand {
@@ -70,11 +70,16 @@
 
 .pvt-nav .head .brand .name {
     margin-top: 7px;
+    font-family: cursive;
 }
 
 .pvt-nav .head form {
     display: none;
     width: 90%;
+}
+
+.pvt-nav .head #form input {
+    border: 0;
 }
 
 .pvt-nav .commons {
@@ -123,7 +128,7 @@
 .pvt-nav .foot {
     text-align: center;
     padding: 2% 3%;
-    height: 50px;
+    height: 40px;
     width: 100%;
     position: fixed;
     top: 50px;
@@ -136,8 +141,8 @@
 }
 
 .pvt-nav .foot svg {
-    width: 25px;
-    height: 25px;
+    width: 23px;
+    height: 23px;
     fill: white;
     padding-bottom: 3px;
 }
@@ -211,8 +216,9 @@
     color: white;
 }
 
-.events-menu button {
+.events-menu .notes a {
     background-color: #dcf8c6;
+    font-size: 0.9rem;
 }
 
 .events-menu .path {
@@ -260,12 +266,12 @@
 }
 
 .userpost .head a:nth-child(2) {
-    background-color: #dcf8c6;
-    color: black;
+    background-color: white;
+    color: gray;
     margin-right: 2%;
     font-size: 0.9rem;
     padding: 0.5%;
-    border: 2px solid #dcf8c6;
+    border: 2px solid white;
     box-shadow: 2px 2px 3px rgb(240, 240, 240);
 }
 
@@ -460,6 +466,10 @@
     .pvt-nav .foot {
         padding: 2% 10%;
     }
+    .pvt-nav .foot {
+        padding-top: 0;
+        padding-bottom: 3px;
+    }
     .events-menu {
         width: 80%;
         left: 11%;
@@ -493,7 +503,7 @@
         display: block;
     }
     .pvt-nav .foot {
-        padding: 2% 1%;
+        padding: 3px 1%;
         top: 50px;
         bottom: auto;
         border-top: 0;
@@ -522,6 +532,25 @@
     .userpost {
         border: 1px solid rgb(240, 240, 240);
     }
+}
+
+.ads-section {
+    margin-top: 100px;
+    position: fixed;
+    height: 100%;
+    width: 23%;
+    display: none;
+}
+
+.ads-section a {
+    display: block;
+    margin-bottom: 50px;
+}
+
+.ads-section img {
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid rgb(221, 220, 220);
 }
 
 @media screen and (min-width:992px) {
@@ -599,6 +628,9 @@
     .userpost .middle .post-thumbnail {
         width: 200px;
         height: 200px;
+    }
+    .ads-section {
+        display: block;
     }
 }
 

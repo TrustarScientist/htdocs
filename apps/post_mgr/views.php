@@ -386,12 +386,14 @@
     $specialChars = ["@", "#", "*", "$","%", "&", "^", "!", "_", "=", "~", "?"];
     $token = $specialChars[rand(0, (count($specialChars)-1))] . $specialChars[rand(0, (count($specialChars)-1))] . $postTitle . $specialChars[rand(0, (count($specialChars)-1))] . $specialChars[rand(0, (count($specialChars)-1))];
     // attempt post storage
+    $postTitleSlug = slugger($postTitle);
     $state = xDb::create("post", array(
         "visibility" => $postVisibility,
         "content_type" => $postType,
         "category" => $postNiche,
         "poster" => $acctId,
         "title" => $postTitle,
+        "slug" => $postTitleSlug,
         "date_created" => $date_created,
         "date_updated" => $date_updated,
         "content" => $content,
@@ -455,13 +457,14 @@
             $uPostImages = $matches2[1];
         }
         
-
+        $postTitleSlug = slugger($postTitle);
         $state = xDb::update("post", array(
             "visibility" => $postVisibility,
             "content_type" => $postType,
             "category" => $postNiche,
             "poster" => $acctId,
             "title" => $postTitle,
+            "slug" => $postTitleSlug,
             "date_updated" => $date_updated,
             "content" => $content
 

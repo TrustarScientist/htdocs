@@ -58,26 +58,26 @@ let siteHead = $(".pvt-nav .head");
 let siteFoot = $(".pvt-nav .foot");
 
 // scroll direction detector
-let oldScrollY = window.screenY;
-window.addEventListener("scroll", (e) => {
-    if (getWidth() < 768) {
-        let newScrollY = window.scrollY;
-        if (newScrollY > oldScrollY) {
-            // scroll up
-            siteFoot.css("top", "0");
-            siteHead.fadeOut("fast");
-            $(".dcol:nth-child(2)").css("margin-top", "20%")
+// let oldScrollY = window.screenY;
+// window.addEventListener("scroll", (e) => {
+//     if (getWidth() < 768) {
+//         let newScrollY = window.scrollY;
+//         if (newScrollY > oldScrollY) {
+//             // scroll up
+//             siteFoot.css("top", "0");
+//             siteHead.fadeOut("fast");
+//             $(".dcol:nth-child(2)").css("margin-top", "20%")
 
-        } else {
-            siteHead.fadeIn("fast", (e) => {
-                siteFoot.css("top", "50px");
-                $(".dcol:nth-child(2)").css("margin-top", "17%")
-            });
+//         } else {
+//             siteHead.fadeIn("fast", (e) => {
+//                 siteFoot.css("top", "50px");
+//                 $(".dcol:nth-child(2)").css("margin-top", "17%")
+//             });
 
-        }
-        oldScrollY = newScrollY;
-    }
-})
+//         }
+//         oldScrollY = newScrollY;
+//     }
+// })
 
 function getWidth() {
     return window.innerWidth;
@@ -149,7 +149,7 @@ function postBuilder(post, userpostsCon = []) {
             </section>
             <section class="stats ">
                 <div class="following-con ">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="" class="bi bi-heart" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="green" class="bi bi-heart" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                     </svg>
                     <aside class="count ">${post.following}</aside>
@@ -304,7 +304,7 @@ function nicheMaker2(niche, nichesCon = '') {
     } else {
         menuBtnCon.dataset.state = "Join";
     }
-    menuBtnCon.innerHTML = `<svg xmlns="http://www.w3.org/­2000/svg" data-bs-toggle="modal" data-bs-target="#nicheModal" width="20" height="20" fill="currentColor" class="bi bi-three-dots-vertic­al" viewBox="0 0 16 16"> <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/> </svg>`;
+    menuBtnCon.innerHTML = `<svg xmlns="http://www.w3.org/­2000/svg" data-bs-toggle="modal" data-bs-target="#nicheModal" width="20" height="20" fill="grey" class="bi bi-three-dots-vertic­al" viewBox="0 0 16 16"> <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/> </svg>`;
     nFoot.appendChild(menuBtnCon);
     // add data attributes 4 later use on clicking the menuBtnCon to necessary buttons
     menuBtnCon.addEventListener("click", function(e) {

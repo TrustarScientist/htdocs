@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="rgb(13, 139, 77)" />
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/pvt/pvt-site-wide.css">
     <link rel="stylesheet" href="/static/css/pvt/pvt-profile.css">
@@ -20,10 +21,10 @@
         <header class="head bg-success" style="z-index: 4567890;">
             <div class="brand">
                 <img src="/static/images/avatar-2.jpg" alt="brand logo" width="30px" height="30px">
-                <h1 class="name text-light">Knowisland</h1>
+                <h1 class="name text-light">Ksharer</h1>
             </div>
-            <form id="form" action="/search" method="post">
-                <input class="form-control" type="search" name="qeury" id="term" placeholder="What do you wanna know?">
+            <form id="form" action="/search" method="get">
+                <input class="form-control" type="search" name="query" id="term" placeholder="What do you wanna know?">
             </form>
             <div class="commons">
                 <svg xmlns="http://www.w3.org/2000/svg" id="search-icon" width="25" height="25" fill="" class="bi bi-search" viewBox="0 0 16 16">
@@ -77,17 +78,16 @@
             <div class="dcol col-md-4 col-lg-3 pt-3">
                 <!-- to show events happening now in the form of notifications, messages, alerts -->
                 <aside class="events-menu" style="z-index: 232368386327977323032326832;">
-                    <div class="con">
-                        <header class="notifications path notifications-tab">
-                            <a href="/notifications" class="">Notifications</a>
-                            <span>0</span>
-                        </header>
+                    <a href="/logout" class="logout path text-danger ">
+                        Logout...
+                        </a>
+                    <div class="notes">
+                        <a href="#" class="btn btn-light mb-2 mt-2">David replied to your comment</a>
+                        <a href="#" class="btn btn-light mb-2 mt-2">David replied to your comment wi wwe ewjwehweiu wewooifr fr</a>
 
                     </div>
 
-                    <a href="/logout" class="logout path text-danger">
-                    Logout...
-                    </a>
+
                 </aside>
             </div>
             <div class="dcol col-md-8 col-lg-6 pt-1" style="display: none;">
@@ -256,7 +256,7 @@
                         <label for="number">Phone Number</label>
                         <input type="number" name="phone_number" id="number" class="form-control" placeholder="phone number">
                         <label for="username">Username----</label>
-                        <input type="text" name="username" class="form-control" id="username" placeholder="username">
+                        <input type="text" name="username" class="form-control" id="username" disabled="disabled" placeholder="username">
                         <label for="fname">First Name</label>
                         <input type="text" name="fname" class="form-control" id="fname" placeholder="first name">
                         <label for="lname">Last Name----</label>
@@ -301,9 +301,8 @@
                     </form>
                     <aside class="p-1 other-info">
                         <h4 class=" text-light p-1" style="border-radius: 5px;background-color: rgb(13, 139, 77);">In case you like this Ad...</h4>
-                        <img class="ad" src="/static/images/pexels-pixabay-2150.jpg" style="width: 100%;border-radius: 5px;border: 1px solid rgb(240, 240, 240);" alt="">
-                        <p class="ad-summary pt-2">Ad: Don't let the 'noise' of the universe silent your inner voice</p>
-                        <a href="/user/TrustarScientist" class="advertiser-link btn btn-outline-secondary">TrustarScientist</a>
+                        <a href="#"><img class="ad ad-banner" src="/static/images/images (4).jpg" style="width: 100%;border-radius: 5px;border: 1px solid rgb(240, 240, 240);" alt=""></a>
+
                     </aside>
                 </section>
             </div>

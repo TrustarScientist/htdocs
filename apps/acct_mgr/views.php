@@ -290,7 +290,7 @@
   };
 
   $selfInfo = function($request){
-      $self = xDb::get("user", "id", $request->userid, "username, photo");
+      $self = xDb::get("user", "id", $request->userid, "id,username, photo");
       echo json_encode($self);
   };
 

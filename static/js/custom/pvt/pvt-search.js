@@ -48,7 +48,9 @@ setTimeout(() => {
     let url = new URL(window.location.href);
     let query = url.searchParams.get("query");
     let contentType = url.searchParams.get("ct");
+    let typedPostsCon = document.querySelector(".cs-results-container");
     if (contentType == null) {
+        document.querySelector(".dcol:nth-child(2)").style.visibility = "visible";
         document.querySelector(".ts-results-container").style.display = "block";
         document.querySelector(".the-query").textContent = query;
         //
@@ -64,6 +66,7 @@ setTimeout(() => {
          *  site wide search code
          */
         // person search...
+
         $.post("/search", {
             "type": "person",
             "query": query,
@@ -197,10 +200,15 @@ setTimeout(() => {
         $.post("/ct_search", {
             "ct": contentType,
             "starting": 0,
-            "amount": 2
+            "amount": 25
 
         }, (data, status) => {
-            alert(data)
+            //alert(data);
+            let typedPosts = JSON.parse(data);
+            typedPosts.forEach(tPost => {
+                postBuilder(tPost, typedPostsCon);
+            });
+            document.querySelector(".dcol:nth-child(2)").style.visibility = "visible";
         });
     }
 

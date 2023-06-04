@@ -444,6 +444,10 @@ body {
     margin-right: 10px;
 }
 
+.niche svg {
+    fill: gray;
+}
+
 .niches .niche .alias {
     font-size: 0.9rem;
     padding: 1% 0;

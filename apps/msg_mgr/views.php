@@ -10,17 +10,23 @@
         if($request->method == "GET"){
           render($request, "pvt/pvt-msg.html");
         }else{
-          // return json data on POST request...latest messages
-          $messages = xDb::find("user_msg", "*", "WHERE receiver = $request->userid AND sender != $request->userid AND `is_read` = '0' ", "ORDER BY datetime DESC", "LIMIT 0, 1000");
-          if(!empty($messages)){
-          // add related data
-            foreach ($messages as $key => $msg) {
-              $msg->sender = xDb::get("user", "id", $msg->sender, "id, username, photo");
-              $msg->pretty_date = date("Y-M-d h:i A",strtotime($msg->datetime));
-            }
+          // return json data on POST request...
+          $filteredMessages = array();
+          
+          $messages = xDb::find("user_msg", "*", "WHERE receiver = $request->userid AND sender != $request->userid AND `is_read` = '0' ", "ORDER BY datetime DESC", "LIMIT 0, 100");
+          // people who sent message currently
+          $senders = array();
+          foreach ($messages as $msg) {
             
           }
-          echo json_encode($messages);
+
+          function filta($data){
+            echo json_encode($data);
+          }
+          array_filter($messages, "filta");
+          //echo json_encode($messages);
+         
+          
         }
         
       }
@@ -45,7 +51,15 @@
     };
 
     $conversation = function($request){
-      // conversations from last session
+      // conversations 
+      $sender = $request->POST["sender"];
+      $receiver = isset($request->POST["receiver"]) ? $request->POST["receiver"] : $request->userid;
+      $starting = $request->POST["starting"];
+      $amount = $request->POST["amount"];
+      // echo $sender;
+      $conversation = xDb::find("user_msg", "*", "WHERE (sender = '$sender' AND receiver = '$receiver') OR (sender = '$receiver' AND receiver = '$sender') ", " ORDER BY datetime DESC", "LIMIT $starting, $amount");
+      
+      echo json_encode($conversation);
 
     };
     

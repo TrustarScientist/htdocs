@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="rgb(13, 139, 77)" />
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/pvt/pvt-site-wide.css">
     <link rel="stylesheet" href="/static/css/pvt/pvt-editor.css">
@@ -22,10 +23,10 @@
         <header class="head bg-success" style="z-index: 4567890;">
             <div class="brand">
                 <img src="/static/images/avatar-2.jpg" alt="brand logo" width="30px" height="30px">
-                <h1 class="name text-light">Knowisland</h1>
+                <h1 class="name text-light">Ksharer</h1>
             </div>
-            <form id="form" action="/search" method="post">
-                <input class="form-control" type="search" name="qeury" id="term" placeholder="What do you wanna know?">
+            <form id="form" action="/search" method="get">
+                <input class="form-control" type="search" name="query" id="term" placeholder="What do you wanna know?">
             </form>
             <div class="commons">
                 <svg xmlns="http://www.w3.org/2000/svg" id="search-icon" width="25" height="25" fill="" class="bi bi-search" viewBox="0 0 16 16">
@@ -79,18 +80,16 @@
             <div class="dcol col-md-4 col-lg-3 pt-3">
                 <!-- to show events happening now in the form of notifications, messages, alerts -->
                 <aside class="events-menu" style="z-index: 232368386327977323032326832;">
-                    <div class="con">
-                        <header class="notifications bg-success path notifications-tab">
-                            <a href="/notifications" class="text-light">Notifications</a>
-                            <span>0</span>
-                        </header>
-                        <button class="btn btn-light mb-2 mt-2">newkewbe ejewewiu weew ewjueew ewew ewee ege ewew euewue ewui732 32u32v</button>
+                    <a href="/logout" class="logout path text-danger ">
+                        Logout...
+                        </a>
+                    <div class="notes">
+                        <a href="#" class="btn btn-light mb-2 mt-2">David replied to your comment</a>
+                        <a href="#" class="btn btn-light mb-2 mt-2">David replied to your comment wi wwe ewjwehweiu wewooifr fr</a>
 
                     </div>
 
-                    <a href="/logout" class="logout path text-danger">
-                    Logout...
-                    </a>
+
                 </aside>
 
             </div>

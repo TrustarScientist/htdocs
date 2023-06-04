@@ -1,6 +1,10 @@
 .dcol:nth-child(2) {
     padding: 5% 1%;
-    margin-top: 85px;
+    margin-top: 40px;
+}
+
+.events-menu {
+    left: 1%;
 }
 
 a {
@@ -30,6 +34,12 @@ a:hover {
 
 .niches-results-section {
     display: none;
+}
+
+.cs-results-container .userpost {
+    border: 1px solid rgb(243, 241, 241);
+    margin-bottom: 20px;
+    border-radius: 5px;
 }
 
 .niches {}
@@ -117,4 +127,29 @@ a:hover {
 
 .niches .niche .foot .join {
     padding: 1% 2%;
+}
+
+.dcol:nth-child(2) {
+    visibility: hidden;
+}
+
+@media screen and (min-width:575px) {
+    .dcol:nth-child(2) {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+    .events-menu {
+        left: 11%;
+    }
+}
+
+@media screen and (min-width:768px) {
+    .dcol:nth-child(2) {
+        margin-top: 50px;
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+    .events-menu {
+        left: 2%;
+    }
 }

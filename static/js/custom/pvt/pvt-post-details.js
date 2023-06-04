@@ -46,6 +46,7 @@ setTimeout(() => {
             document.querySelector(".poster .more .username").href = `/user/${pdetailsObj.poster.username}`;
             document.querySelector(".poster .more .date").textContent = pdetailsObj.date_updated;
             document.querySelector(".ctype").textContent = pdetailsObj.content_type.name;
+            document.querySelector(".ctype").href = `/search?ct=${pdetailsObj.content_type.name}`;
             document.querySelector(".post-stats .views b").textContent = pdetailsObj.views;
             document.querySelector(".post-stats .following b").textContent = pdetailsObj.following;
             document.querySelector(".post-stats .comments b").textContent = pdetailsObj.comments;
