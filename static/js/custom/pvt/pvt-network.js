@@ -1,274 +1,250 @@
 setTimeout(() => {
     $(document).ready(function() {
-        /**
-         *  code to manage friend requests
-         */
-        $(".dcol:nth-child(2)").fadeIn("slow");
-        $(".dcol:nth-child(3)").fadeIn("slow");
-        $(".sitewide-loader").fadeOut("slow");
-        let friendRequestsContainer = document.querySelector(".friend-requests");
-        let moreFrPositonBtn = document.querySelector(".more-fr");
-
-        $.post("/user/friend-requests", {
-            "starting": 0,
-            "amount": 5
-        }, function(data, status) {
-            //alert(data)
-            // convert to Js Object
-            let friendRequests = JSON.parse(data);
-            if (friendRequests.length > 0) {
-                // hide default text
-                friendRequests.forEach(fR => {
-
-                    frCardMaker(fR);
-                    // update next fr fetch position
-                    moreFrPositonBtn.dataset.frPos = Number(moreFrPositonBtn.dataset.frPos) + 1;
-                });
-            } else {
-                // no friend requests
-                friendRequestsContainer.innerHTML = `<h6 class="p-3 ps-3"> No Friend Requests...Yet</h1>`;
-                moreFrPositonBtn.style.display = "none";
-            }
-        });
-        // more friend requests on click
-        moreFrPositonBtn.addEventListener("click", function(e) {
+            /**
+             *  code to manage friend requests
+             */
+            $(".dcol:nth-child(2)").fadeIn("slow");
+            $(".dcol:nth-child(3)").fadeIn("slow");
+            $(".sitewide-loader").fadeOut("slow");
+            let friendRequestsContainer = document.querySelector(".friend-requests");
+            let moreFrPositonBtn = document.querySelector(".more-fr");
 
             $.post("/user/friend-requests", {
-                "starting": this.dataset.frPos,
+                "starting": 0,
                 "amount": 5
-            }, function(data2, status) {
-                //alert(data2);
-                // convert
-                let nextFrs = JSON.parse(data2);
-                if (nextFrs.length > 0) {
+            }, function(data, status) {
+                //alert(data)
+                // convert to Js Object
+                let friendRequests = JSON.parse(data);
+                if (friendRequests.length > 0) {
+                    // hide default text
+                    friendRequests.forEach(fR => {
 
-                    nextFrs.forEach(nFr => {
-                        frCardMaker(nFr);
+                        frCardMaker(fR);
+                        // update next fr fetch position
                         moreFrPositonBtn.dataset.frPos = Number(moreFrPositonBtn.dataset.frPos) + 1;
                     });
                 } else {
-                    // no more friend requests
+                    // no friend requests
+                    friendRequestsContainer.innerHTML = `<h6 class="p-3 ps-3"> No Friend Requests...Yet</h1>`;
                     moreFrPositonBtn.style.display = "none";
                 }
             });
-        });
+            // more friend requests on click
+            moreFrPositonBtn.addEventListener("click", function(e) {
 
-        function frCardMaker(fR) {
-            // let's build fR cards
-            let newFr = document.createElement("article");
-            newFr.setAttribute("class", "person");
-            // add friend request id to card
-            newFr.dataset.frId = fR.id;
-            // like icon container
-            let likeIcon = document.createElement("header");
-            likeIcon.setAttribute("class", "like-icon");
-            likeIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" data-bs-toggle="modal" data-bs-target="#request-options" width="20" height="20" data-state="0" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+                $.post("/user/friend-requests", {
+                    "starting": this.dataset.frPos,
+                    "amount": 5
+                }, function(data2, status) {
+                    //alert(data2);
+                    // convert
+                    let nextFrs = JSON.parse(data2);
+                    if (nextFrs.length > 0) {
+
+                        nextFrs.forEach(nFr => {
+                            frCardMaker(nFr);
+                            moreFrPositonBtn.dataset.frPos = Number(moreFrPositonBtn.dataset.frPos) + 1;
+                        });
+                    } else {
+                        // no more friend requests
+                        moreFrPositonBtn.style.display = "none";
+                    }
+                });
+            });
+
+            function frCardMaker(fR) {
+                // let's build fR cards
+                let newFr = document.createElement("article");
+                newFr.setAttribute("class", "person");
+                // add friend request id to card
+                newFr.dataset.frId = fR.id;
+                // like icon container
+                let likeIcon = document.createElement("header");
+                likeIcon.setAttribute("class", "like-icon");
+                likeIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" data-bs-toggle="modal" data-bs-target="#request-options" width="20" height="20" data-state="0" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
             </svg>`;
-            /**
-             *  add listener to trigger request options in modal
-             */
-            likeIcon.addEventListener("click", function(e) {
-                    // request acceptance code
-                    let acceptBtn = document.querySelector("#request-options .accept");
-                    acceptBtn.textContent = "Accept";
-                    acceptBtn.dataset.frId = fR.id;
-                    acceptBtn.dataset.senderId = fR.sender.id;
-                    acceptBtn.onclick = function(e) {
-                            if (acceptBtn.dataset.state == "0") {
-                                $.post("/user/connection/accept", {
-                                    "fr-id": this.dataset.frId,
-                                    "sender-id": this.dataset.senderId
-                                }, function(data, status) {
-                                    // alert(data)
-                                    /**
-                                     *  if the acceptance is a success, we need to display:none that appropriate friend request card
-                                     *  
-                                     */
-                                    if (data == 1) {
-                                        //alert("wanna dn it");
-                                        let allFrCards = document.querySelectorAll(".friend-requests .person");
-                                        if (allFrCards.length > 0) {
-                                            allFrCards.forEach(frCard => {
-                                                if (frCard.dataset.frId == acceptBtn.dataset.frId) {
-                                                    frCard.style.display = "none";
-                                                }
-                                            });
-                                        }
-                                        acceptBtn.textContent = "Friend Request Accepted";
-                                        acceptBtn.dataset.state = "1";
-                                    }
-                                });
-                            } else {
-                                acceptBtn.textContent = "What?";
-                            }
-                        }
-                        // request rejection code
-                    let rejectBtn = document.querySelector("#request-options .reject");
-                    rejectBtn.textContent = "Reject";
-                    rejectBtn.dataset.frId = fR.id;
-                    rejectBtn.dataset.senderId = fR.sender.id;
-                    rejectBtn.onclick = function() {
-                        $.post("/user/connection/rejection", {
-                            "fr-id": rejectBtn.dataset.frId,
-                            "sender-id": rejectBtn.dataset.senderId
-                        }, function(data, status) {
-                            //alert(data);
-                            if (data == 1) {
-
-                                let allFrCards = document.querySelectorAll(".friend-requests .person");
-                                if (allFrCards.length > 0) {
-                                    allFrCards.forEach(frCard => {
-                                        if (frCard.dataset.frId == rejectBtn.dataset.frId) {
-                                            frCard.style.display = "none";
+                /**
+                 *  add listener to trigger request options in modal
+                 */
+                likeIcon.addEventListener("click", function(e) {
+                        // request acceptance code
+                        let acceptBtn = document.querySelector("#request-options .accept");
+                        acceptBtn.textContent = "Accept";
+                        acceptBtn.dataset.frId = fR.id;
+                        acceptBtn.dataset.senderId = fR.sender.id;
+                        acceptBtn.onclick = function(e) {
+                                if (acceptBtn.dataset.state == "0") {
+                                    $.post("/user/connection/accept", {
+                                        "fr-id": this.dataset.frId,
+                                        "sender-id": this.dataset.senderId
+                                    }, function(data, status) {
+                                        // alert(data)
+                                        /**
+                                         *  if the acceptance is a success, we need to display:none that appropriate friend request card
+                                         *  
+                                         */
+                                        if (data == 1) {
+                                            //alert("wanna dn it");
+                                            let allFrCards = document.querySelectorAll(".friend-requests .person");
+                                            if (allFrCards.length > 0) {
+                                                allFrCards.forEach(frCard => {
+                                                    if (frCard.dataset.frId == acceptBtn.dataset.frId) {
+                                                        frCard.style.display = "none";
+                                                    }
+                                                });
+                                            }
+                                            acceptBtn.textContent = "Friend Request Accepted";
+                                            acceptBtn.dataset.state = "1";
                                         }
                                     });
+                                } else {
+                                    acceptBtn.textContent = "What?";
                                 }
-                                rejectBtn.textContent = "Friend Request Rejected";
                             }
-                        });
-                    };
+                            // request rejection code
+                        let rejectBtn = document.querySelector("#request-options .reject");
+                        rejectBtn.textContent = "Reject";
+                        rejectBtn.dataset.frId = fR.id;
+                        rejectBtn.dataset.senderId = fR.sender.id;
+                        rejectBtn.onclick = function() {
+                            $.post("/user/connection/rejection", {
+                                "fr-id": rejectBtn.dataset.frId,
+                                "sender-id": rejectBtn.dataset.senderId
+                            }, function(data, status) {
+                                //alert(data);
+                                if (data == 1) {
 
-                })
-                // append to list
-            newFr.appendChild(likeIcon);
-            // sender photo
-            let frImage = document.createElement("img");
-            frImage.setAttribute("class", "image");
-            frImage.src = "/storage/profile/" + fR.sender.photo;
-            newFr.appendChild(frImage);
-            // sender profile link
-            let frSenderProfile = document.createElement("a");
-            frSenderProfile.setAttribute("class", "name");
-            frSenderProfile.href = "/user/" + fR.sender.username;
-            frSenderProfile.textContent = fR.sender.username;
-            newFr.appendChild(frSenderProfile);
-            // now add to the requests container
-            friendRequestsContainer.appendChild(newFr);
-        }
+                                    let allFrCards = document.querySelectorAll(".friend-requests .person");
+                                    if (allFrCards.length > 0) {
+                                        allFrCards.forEach(frCard => {
+                                            if (frCard.dataset.frId == rejectBtn.dataset.frId) {
+                                                frCard.style.display = "none";
+                                            }
+                                        });
+                                    }
+                                    rejectBtn.textContent = "Friend Request Rejected";
+                                }
+                            });
+                        };
 
-        /**
-         *  code for fetching recommended people
-         */
-
-        let recommendedPeopleContainer = document.querySelector(".recommended-people");
-        $.post("/user/recommended-people", {}, function(data, status) {
-            //alert(data);
-            let recPeople = JSON.parse(data);
-            if (recPeople.length > 0) {
-                recPeople.forEach(rPerson => {
-                    recPersonMaker(rPerson);
-                });
+                    })
+                    // append to list
+                newFr.appendChild(likeIcon);
+                // sender photo
+                let frImage = document.createElement("img");
+                frImage.setAttribute("class", "image");
+                frImage.src = "/storage/profile/" + fR.sender.photo;
+                newFr.appendChild(frImage);
+                // sender profile link
+                let frSenderProfile = document.createElement("a");
+                frSenderProfile.setAttribute("class", "name");
+                frSenderProfile.href = "/user/" + fR.sender.username;
+                frSenderProfile.textContent = fR.sender.username;
+                newFr.appendChild(frSenderProfile);
+                // now add to the requests container
+                friendRequestsContainer.appendChild(newFr);
             }
-        })
+
+            /**
+             *  code for fetching recommended people
+             */
+
+            let recommendedPeopleContainer = document.querySelector(".recommended-people");
+            $.post("/user/recommended-people", {}, function(data, status) {
+                //alert(data);
+                let recPeople = JSON.parse(data);
+                if (recPeople.length > 0) {
+                    recPeople.forEach(rPerson => {
+                        recPersonMaker(rPerson);
+                    });
+                }
+            })
 
 
 
 
-        // helper function
-        function recPersonMaker(person) {
-            // let's build fR cards
-            let newFr = document.createElement("article");
-            newFr.setAttribute("class", "person");
-            // add friend request id to card
-            newFr.dataset.personId = person.id;
-            // like icon container
-            let sendFrIcon = document.createElement("header");
-            sendFrIcon.setAttribute("class", "like-icon");
-            sendFrIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" data-bs-toggle="modal" data-bs-target="#connection-options" width="20" height="20" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+            // helper function
+            function recPersonMaker(person) {
+                // let's build fR cards
+                let newFr = document.createElement("article");
+                newFr.setAttribute("class", "person");
+                // add friend request id to card
+                newFr.dataset.personId = person.id;
+                // like icon container
+                let sendFrIcon = document.createElement("header");
+                sendFrIcon.setAttribute("class", "like-icon");
+                sendFrIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" data-bs-toggle="modal" data-bs-target="#connection-options" width="20" height="20" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
             </svg>`;
-            /**
-             *  add listener to trigger request options in modal
-             */
-            sendFrIcon.addEventListener("click", function(e) {
-                    /**
-                     *  let's manage the friend request thing Niga!!!
-                     */
-                    let frBtn = document.querySelector("#connection-options .send-fr");
-                    frBtn.textContent = "Send Friend Request";
-                    frBtn.dataset.personId = person.id;
-                    frBtn.onclick = function(e) {
-                        $.post("/user/friend-request/send", {
-                            "person-id": frBtn.dataset.personId
-                        }, function(data, status) {
-                            //alert(data);
-                            if (data == 1) {
-                                newFr.style.display = "none";
-                                frBtn.textContent = "Friend Request Sent...";
-                            } else if (data == 0) {
-                                frBtn.textContent = "Connection probably pending...";
-                            } else {
-                                frBtn.textContent = "Something went wrong...";
-                            }
+                /**
+                 *  add listener to trigger request options in modal
+                 */
+                sendFrIcon.addEventListener("click", function(e) {
+                        /**
+                         *  let's manage the friend request thing Niga!!!
+                         */
+                        let frBtn = document.querySelector("#connection-options .send-fr");
+                        frBtn.textContent = "Send Friend Request";
+                        frBtn.dataset.personId = person.id;
+                        frBtn.onclick = function(e) {
+                            $.post("/user/friend-request/send", {
+                                "person-id": frBtn.dataset.personId
+                            }, function(data, status) {
+                                //alert(data);
+                                if (data == 1) {
+                                    newFr.style.display = "none";
+                                    frBtn.textContent = "Friend Request Sent...";
+                                } else if (data == 0) {
+                                    frBtn.textContent = "Connection probably pending...";
+                                } else {
+                                    frBtn.textContent = "Something went wrong...";
+                                }
 
-                        });
-                    };
+                            });
+                        };
 
-                })
-                // append to list
-            newFr.appendChild(sendFrIcon);
-            // sender photo
-            let frImage = document.createElement("img");
-            frImage.setAttribute("class", "image");
-            frImage.src = "/storage/profile/" + person.photo;
-            newFr.appendChild(frImage);
-            // sender profile link
-            let frSenderProfile = document.createElement("a");
-            frSenderProfile.setAttribute("class", "name");
-            frSenderProfile.href = "/user/" + person.username;
-            frSenderProfile.textContent = person.username;
-            newFr.appendChild(frSenderProfile);
-            // now add to the requests container
-            recommendedPeopleContainer.appendChild(newFr);
-        }
-        /**
-         *  display known people...in series
-         */
-        let yourPeopleCon = document.querySelector(".your-people");
-        let moreOfYourPeople = document.querySelector(".your-people-more");
-        moreOfYourPeople.dataset.ypMore = "0";
-
-        $.post("/user/people-networked-to", {
-            "starting": 0,
-            "amount": 5
-        }, function(data, status) {
-            //alert(data);
-            let yourPeople = JSON.parse(data);
-
-            if (yourPeople.length > 0) {
-                yourPeople.forEach(yourPerson => {
-                    yourPersonMaker(yourPerson);
-                });
-                //update moreYourPeople
-                moreOfYourPeople.dataset.ypMore = Number(moreOfYourPeople.dataset.ypMore) + yourPeople.length;
-            } else {
-                // hidden next Your People BTN
-                yourPeopleCon.innerHTML = `<h6 class="p-3"> You Do NoT Have Any Network...Yet </h>`;
-                moreOfYourPeople.style.display = "none";
+                    })
+                    // append to list
+                newFr.appendChild(sendFrIcon);
+                // sender photo
+                let frImage = document.createElement("img");
+                frImage.setAttribute("class", "image");
+                frImage.src = "/storage/profile/" + person.photo;
+                newFr.appendChild(frImage);
+                // sender profile link
+                let frSenderProfile = document.createElement("a");
+                frSenderProfile.setAttribute("class", "name");
+                frSenderProfile.href = "/user/" + person.username;
+                frSenderProfile.textContent = person.username;
+                newFr.appendChild(frSenderProfile);
+                // now add to the requests container
+                recommendedPeopleContainer.appendChild(newFr);
             }
+            /**
+             *  display known people...in series
+             */
+            let yourPeopleCon = document.querySelector(".your-people");
+            let moreOfYourPeople = document.querySelector(".your-people-more");
+            moreOfYourPeople.dataset.ypMore = "0";
 
-
-
-
-        });
-        // more of your people button in action
-        moreOfYourPeople.addEventListener("click", function(e) {
             $.post("/user/people-networked-to", {
-                "starting": this.dataset.ypMore,
+                "starting": 0,
                 "amount": 5
             }, function(data, status) {
                 //alert(data);
-                let yourPeople2 = JSON.parse(data);
+                let yourPeople = JSON.parse(data);
 
-                if (yourPeople2.length > 0) {
-                    yourPeople2.forEach(yourPerson2 => {
-                        yourPersonMaker(yourPerson2);
+                if (yourPeople.length > 0) {
+                    yourPeople.forEach(yourPerson => {
+                        yourPersonMaker(yourPerson);
                     });
                     //update moreYourPeople
-                    moreOfYourPeople.dataset.ypMore = Number(moreOfYourPeople.dataset.ypMore) + yourPeople2.length;
+                    moreOfYourPeople.dataset.ypMore = Number(moreOfYourPeople.dataset.ypMore) + yourPeople.length;
                 } else {
                     // hidden next Your People BTN
+                    yourPeopleCon.innerHTML = `<h6 class="p-3"> You Do NoT Have Any Network...Yet </h>`;
                     moreOfYourPeople.style.display = "none";
                 }
 
@@ -276,72 +252,162 @@ setTimeout(() => {
 
 
             });
-        })
+            // more of your people button in action
+            moreOfYourPeople.addEventListener("click", function(e) {
+                $.post("/user/people-networked-to", {
+                    "starting": this.dataset.ypMore,
+                    "amount": 5
+                }, function(data, status) {
+                    //alert(data);
+                    let yourPeople2 = JSON.parse(data);
+
+                    if (yourPeople2.length > 0) {
+                        yourPeople2.forEach(yourPerson2 => {
+                            yourPersonMaker(yourPerson2);
+                        });
+                        //update moreYourPeople
+                        moreOfYourPeople.dataset.ypMore = Number(moreOfYourPeople.dataset.ypMore) + yourPeople2.length;
+                    } else {
+                        // hidden next Your People BTN
+                        moreOfYourPeople.style.display = "none";
+                    }
 
 
-        // helper function
-        function yourPersonMaker(person) {
 
-            // let's build fR cards
-            let newP = document.createElement("article");
-            newP.setAttribute("class", "person");
-            // add friend request id to card
-            newP.dataset.personId = person.id;
-            // your person option
-            let option = document.createElement("header");
-            option.dataset.personStopped = person.id;
-            option.setAttribute("class", "like-icon");
-            option.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" data-bs-toggle="modal" data-bs-target="#network-options" width="20" height="20" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+
+                });
+            })
+
+
+            // helper function
+            function yourPersonMaker(person) {
+
+                // let's build fR cards
+                let newP = document.createElement("article");
+                newP.setAttribute("class", "person");
+                // add friend request id to card
+                newP.dataset.personId = person.id;
+                // your person option
+                let option = document.createElement("header");
+                option.dataset.personStopped = person.id;
+                option.setAttribute("class", "like-icon");
+                option.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" data-bs-toggle="modal" data-bs-target="#network-options" width="20" height="20" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
                 </svg>`;
+                /**
+                 *  add listener to trigger request options in modal
+                 */
+                option.addEventListener("click", function(e) {
+                        /**
+                         *  code for options such as stopping relationship
+                         * 
+                         */
+                        let stopConnectionBtn = document.querySelector(".stop-connection");
+                        stopConnectionBtn.addEventListener("click", function(e) {
+                            stopConnectionBtn.textContent = "Stop Friendship";
+                            $.post("/user/friendship/stop", {
+                                "person-2-stop-id": option.dataset.personStopped
+                            }, function(data, status) {
+                                //alert(data);
+                                if (data == 1) {
+                                    stopConnectionBtn.textContent = "Friendship Stopped...";
+                                    newP.style.display = "none";
+                                } else {
+                                    stopConnectionBtn.textContent = "Something Went Wrong...";
+                                }
+                            })
+                        });
+                    })
+                    // append to list
+                newP.appendChild(option);
+                // person's photo
+                let frImage = document.createElement("img");
+                frImage.setAttribute("class", "image");
+                frImage.src = "/storage/profile/" + person.photo;
+                newP.appendChild(frImage);
+                // sender profile link
+                let frSenderProfile = document.createElement("a");
+                frSenderProfile.setAttribute("class", "name");
+                frSenderProfile.href = "/user/" + person.username;
+                frSenderProfile.textContent = person.username;
+                newP.appendChild(frSenderProfile);
+                // now add to the requests container
+                yourPeopleCon.appendChild(newP);
+            }
+
             /**
-             *  add listener to trigger request options in modal
+             *  code for recommended niches
              */
-            option.addEventListener("click", function(e) {
-                    /**
-                     *  code for options such as stopping relationship
-                     * 
-                     */
-                    let stopConnectionBtn = document.querySelector(".stop-connection");
-                    stopConnectionBtn.addEventListener("click", function(e) {
-                        stopConnectionBtn.textContent = "Stop Friendship";
-                        $.post("/user/friendship/stop", {
-                            "person-2-stop-id": option.dataset.personStopped
-                        }, function(data, status) {
-                            //alert(data);
-                            if (data == 1) {
-                                stopConnectionBtn.textContent = "Friendship Stopped...";
-                                newP.style.display = "none";
-                            } else {
-                                stopConnectionBtn.textContent = "Something Went Wrong...";
-                            }
-                        })
-                    });
-                })
-                // append to list
-            newP.appendChild(option);
-            // person's photo
-            let frImage = document.createElement("img");
-            frImage.setAttribute("class", "image");
-            frImage.src = "/storage/profile/" + person.photo;
-            newP.appendChild(frImage);
-            // sender profile link
-            let frSenderProfile = document.createElement("a");
-            frSenderProfile.setAttribute("class", "name");
-            frSenderProfile.href = "/user/" + person.username;
-            frSenderProfile.textContent = person.username;
-            newP.appendChild(frSenderProfile);
-            // now add to the requests container
-            yourPeopleCon.appendChild(newP);
-        }
+            //$.post("/user/recommended-niches", {}, function(data, status) {
+            //alert(data);
 
+        })
         /**
-         *  code for recommended niches
+         *  code for blocked users
          */
-        //$.post("/user/recommended-niches", {}, function(data, status) {
-        //alert(data);
+    let blockedUsersCon = document.querySelector(".blocked-people");
+    let nextBlockedPeople = document.querySelector(".blocked-people-more");
 
+    $.post("/user/blocked", {
+        "starting": 0,
+        "amount": 5
+    }, (data, status) => {
+        //alert(data);
+        let blockedUsers = JSON.parse(data);
+        blockedUsers.forEach(bu => {
+            buCreator(bu, blockedUsersCon);
+        });
+        nextBlockedPeople.dataset.pos = blockedUsers.length;
     })
+
+    // helper function
+    function buCreator(obj, mother) {
+        let newElem = document.createElement("article");
+        newElem.setAttribute("class", "person");
+        newElem.innerHTML = `
+            <header class="like-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+            </header>
+            <img class="image" src="/storage/profile/${obj.photo}" alt="person photo">
+            <a href="/user/${obj.username}" class="name">${obj.username}</a>
+            `;
+        newElem.childNodes[1].dataset.utob = obj.id;
+        newElem.childNodes[1].addEventListener("click", function(blockingEvent) {
+            // unblock the user
+            $.post("/user/blocked", {
+                "ot": "unblock",
+                "user2unblock": newElem.childNodes[1].dataset.utob
+            }, function(data, status) {
+                //alert(data)
+                if (data == "unblocked") {
+                    newElem.style.display = "none";
+                }
+            });
+
+        });
+        mother.appendChild(newElem);
+    }
+    // more people blocked
+    nextBlockedPeople.addEventListener("click", function(nbpEvent) {
+        $.post("/user/blocked", {
+            "starting": nextBlockedPeople.dataset.pos,
+            "amount": 5
+        }, function(data, status) {
+            let blockedUsers2 = JSON.parse(data);
+            if (blockedUsers2.length > 0) {
+                blockedUsers2.forEach(bu2 => {
+                    buCreator(bu2, blockedUsersCon);
+                    nextBlockedPeople.dataset.pos = Number(nextBlockedPeople.dataset.pos) + 1;
+                });
+            } else {
+                nextBlockedPeople.style.display = "none";
+            }
+
+        })
+    });
+
 
     /**
      *  code for recommended niches
@@ -355,7 +421,7 @@ setTimeout(() => {
         let rNiches = JSON.parse(data);
         if (rNiches.length > 0) {
             rNiches.forEach(rNiche => {
-                console.log(rNiche);
+                // console.log(rNiche);
                 recNicheMaker(rNiche);
 
             });

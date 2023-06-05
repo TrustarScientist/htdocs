@@ -10,6 +10,7 @@
       "/^connection\/rejection$/" => $rejection,
       "/^blacklist$/" => $blacklist,
       "/^likeness$/" => $likeness,
+      "/^blocked$/" => $blockedUsers,
       "/^profile\/self$/" => $selfInfo,
       "/^profile\/update$/" => $profileUpdate,
       "/^recommended-people$/" => $recommendedPeople4Self,

@@ -594,6 +594,33 @@
     echo json_encode($fRequests);
   };
 
+  $blockedUsers = function($request){
+    $operationType = isset($request->POST["ot"])? $request->POST["ot"] : "fetch";
+    if($operationType == "fetch"){
+      $starting = isset($request->POST["starting"])? $request->POST["starting"]: 0;
+      $amount = isset($request->POST["amount"])? $request->POST["amount"]: 5;
+      // get some blocked users
+      $blockedUserIds = xDb::find("user_blacklist", "blocked", "WHERE blocker = $request->userid", "", "LIMIT $starting, $amount");
+      $buObjects = array();
+      foreach ($blockedUserIds as $key => $bu) {
+        $buObj = xDb::get("user", "id", $bu->blocked, "id, username, photo");
+        
+        array_push($buObjects, $buObj);
+      }
+      echo json_encode($buObjects);
+
+    }else{
+      // unblock a user
+      $user2Unblock = $request->POST["user2unblock"];
+      $unblockState = xDb::delete("user_blacklist", "WHERE blocker = $request->userid AND blocked = $user2Unblock ");
+      if($unblockState){
+        echo "unblocked";
+      }else{
+        echo "not-unblocked";
+      }
+    }
+  };
+
   $sendFriendRequest = function($request){
     $response = 0;
     $personId = $request->POST["person-id"];
